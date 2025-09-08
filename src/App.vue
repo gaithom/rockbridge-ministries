@@ -5,6 +5,12 @@
 </template>
 
 <script setup>
-import Hero from './components/Hero.vue';
+import Hero from './pages/Home/Hero.vue';
 import Navbar from './components/Navbar.vue'
 </script>
+
+<style>
+body {
+  font-family: 'Playfair Display', serif;
+}
+</style>
