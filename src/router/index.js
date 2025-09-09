@@ -2,19 +2,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 // Import all page components
-import Home from '../pages/Home/Home.vue'
+import Home from '../pages/Home.vue'
 import About from '../pages/About/About.vue'
-import BoardAndStaff from '../pages/About/Board and staff.vue'
+import BoardAndStaff from '../pages/About/Boardandstaff.vue'
 import History from '../pages/About/History.vue'
 import OurMinistries from '../pages/Our ministries/Our ministries.vue'
 import EducationScholarship from '../pages/Our ministries/Education Scholarship.vue'
 import SocialEnterprises from '../pages/Our ministries/Social Enterprises.vue'
 import WorkplaceEvangelism from '../pages/Our ministries/Workplace Evangelism.vue'
-import GetInvolved from '../pages/Get involved/Get involved.vue'
+import GetInvolved from '../pages/Get involved/GetInvolved.vue'
 import HowToSupport from '../pages/Get involved/How to support.vue'
 import PartnerWithUs from '../pages/Get involved/Partner with us.vue'
-import FundOurPrograms from '../pages/Get involved/Fund our programs.vue'
-import MediaAndResources from '../pages/Media and Resources/Media and Resources.vue'
+import FundOurPrograms from '../pages/Get involved/Fundourprograms.vue'
+import MediaAndResources from '../pages/Media and Resouces/Media and resources.vue'
 import Contact from '../pages/Contact.vue'
 
 const routes = [

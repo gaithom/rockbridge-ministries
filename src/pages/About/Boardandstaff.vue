@@ -5,7 +5,6 @@
           <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Team</h2>
           <p class="text-lg text-gray-600">Meet the dedicated leaders of R.O.C.K Bridge Ministries</p>
         </div>
-  
         <!-- Team Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
@@ -21,7 +20,7 @@
                 class="w-full h-64 object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-300"
               />
             </div>
-            
+
             <div class="p-6">
               <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
                 {{ member.name }}

@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto p-6">
-    <h1 class="text-2xl font-semibold">Workplace Evangelism</h1>
+    <h1 class="text-2xl font-semibold">Fund our Programs</h1>
   </div>
 </template>
 

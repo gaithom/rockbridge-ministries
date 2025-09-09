@@ -42,13 +42,9 @@
           </button>
 
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
-            <!-- About -->
-            <router-link 
-              to="/about" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
-            >
-              <i class="fas fa-info-circle mr-2 text-orange-400"></i>About
-            </router-link>
+           
+
+      
 
             <!-- Board and Staff -->
             <router-link 
@@ -75,13 +71,7 @@
             <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
           </button>
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
-            <!-- Our Ministries -->
-            <router-link 
-              to="/our-ministries" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
-            >
-              <i class="fas fa-church mr-2 text-orange-400"></i>Our Ministries
-            </router-link>
+          
             <!-- Education Scholarship -->
             <router-link 
               to="/our-ministries/education-scholarship" 
