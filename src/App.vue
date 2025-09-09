@@ -2,6 +2,7 @@
 <template>
   <Navbar />
   <Hero />
+  
   <Footer />
 </template>
 
