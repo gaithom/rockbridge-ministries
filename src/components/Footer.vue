@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-primary-brown text-primary-beige py-12 px-4 mt-20">
+    <footer class="bg-amber-100 text-primary-beige py-12 px-4 mt-20">
       <div class="container mx-auto max-w-6xl">
         <!-- Main Footer Content -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
@@ -7,12 +7,13 @@
           <div class="flex flex-col">
             <div class="flex items-center mb-6">
               <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center mr-3">
+                <img src="/images/logo.jpg" alt="Rock Bridge Ministries" class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" />
                 <i class="fas fa-church text-primary-brown text-xl"></i>
               </div>
               <h3 class="text-2xl font-serif font-bold">Rock Bridge Ministries</h3>
             </div>
             <p class="text-primary-beige/90 mb-4 leading-relaxed">
-              Serving the community of Nakuru, Kenya with love and compassion through Christ-centered ministries.
+              Reaching out to communities in kenya for christ
             </p>
             <div class="flex space-x-4 mt-2">
               <a href="#" class="text-primary-beige/80 hover:text-primary-light transition-colors duration-300">
@@ -95,15 +96,15 @@
             <ul class="space-y-4">
               <li class="flex items-start">
                 <i class="fas fa-map-marker-alt text-primary-light mt-1 mr-3"></i>
-                <span class="text-primary-beige/90">P.O. Box 123-20100<br>Nakuru, Kenya</span>
+                <span class="text-primary-beige/90">P.O. BOX 10271 - Gibcon House,<br/> Nakuru, Kenya, 20100</span>
               </li>
               <li class="flex items-center">
                 <i class="fas fa-phone text-primary-light mr-3"></i>
-                <span class="text-primary-beige/90">+254 712 345 678</span>
+                <span class="text-primary-beige/90">+254 720 422945</span>
               </li>
               <li class="flex items-center">
                 <i class="fas fa-envelope text-primary-light mr-3"></i>
-                <span class="text-primary-beige/90">info@rockbridgeministries.org</span>
+                <span class="text-primary-beige/90">rockbridgeministries@gmail.com</span>
               </li>
               <li class="flex items-center mt-4">
                 <i class="fas fa-clock text-primary-light mr-3"></i>
@@ -112,27 +113,8 @@
             </ul>
           </div>
         </div>
-  
-        <!-- Newsletter Subscription -->
-        <div class="bg-primary-brown/80 rounded-lg p-6 mb-8 border border-primary-light/20">
-          <div class="flex flex-col md:flex-row md:items-center justify-between">
-            <div class="mb-4 md:mb-0">
-              <h4 class="text-xl font-serif font-bold mb-2">Stay Updated</h4>
-              <p class="text-primary-beige/90">Subscribe to our newsletter for updates on our ministries</p>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-2">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                class="px-4 py-3 rounded-lg bg-primary-beige/10 border border-primary-light/30 text-primary-beige placeholder-primary-beige/70 focus:outline-none focus:ring-2 focus:ring-primary-light"
-              >
-              <button class="bg-primary-light text-primary-brown px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors duration-300">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-  
+
+
         <!-- Bottom Bar -->
         <div class="border-t border-primary-light/30 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p class="text-primary-beige/80 text-sm mb-4 md:mb-0">
