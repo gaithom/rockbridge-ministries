@@ -1,8 +1,8 @@
 <template>
   <nav
     :class="['fixed w-full z-50 transition-all duration-300', 
-            scrolledUp ? 'bg-opacity-100' : 'bg-amber-50/90 shadow-md']"
-    @mouseover="makeOpaque"
+            scrolledUp ? 'bg-opacity-10' : 'bg-gray-900 shadow-md']"
+
     @mouseleave="restoreTransparency"
   >
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -13,7 +13,7 @@
           <div class="relative">
             <img src="/images/logo.jpg" alt="Rock Bridge Ministries" class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm" />
           </div>
-          <div class="text-amber-500 hidden sm:block">
+          <div class="text-white hidden sm:block">
             <h1 class="text-2xl font-bold leading-tight">R.O.C.K. Bridge</h1>
             <h2 class="text-2xl font-bold leading-tight">Ministries</h2>
           </div>
