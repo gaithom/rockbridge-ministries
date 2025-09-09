@@ -1,150 +1,169 @@
 <template>
-  <nav 
+  <nav
     :class="['fixed w-full z-50 transition-all duration-300', 
-            scrolledUp ? 'bg-opacity-100 shadow-lg' : 'bg-white/10 shadow-md']"
+            scrolledUp ? 'bg-opacity-100' : 'bg-amber-50/90 shadow-md']"
     @mouseover="makeOpaque"
     @mouseleave="restoreTransparency"
   >
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      
+
       <!-- Logo and Brand -->
       <div class="flex items-center space-x-3">
         <router-link to="/" class="flex items-center space-x-3">
           <div class="relative">
-            <img src="/images/logo.jpg" alt="Rock Bridge Ministries" class="w-12 h-12 rounded-full object-cover border-2 border-orange-500" />
+            <img src="/images/logo.jpg" alt="Rock Bridge Ministries" class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm" />
           </div>
-          
+          <div class="text-amber-500 hidden sm:block">
+            <h1 class="text-2xl font-bold leading-tight">R.O.C.K. Bridge</h1>
+            <h2 class="text-2xl font-bold leading-tight">Ministries</h2>
+          </div>
         </router-link>
       </div>
-      
+
       <!-- Desktop Navigation -->
       <div class="hidden lg:flex items-center space-x-2">
-        
+
         <!-- Home -->
-        <router-link 
-          to="/" 
-          class="flex items-center text-slate-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300"
+        <router-link
+          to="/"
+          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300"
           active-class="bg-white/10"
         >
           <i class="fas fa-home mr-2 text-slate-500"></i> 
           <span class="font-medium">Home</span>
         </router-link>
-        
+
         <!-- About Dropdown -->
-       <!-- About Dropdown -->
-<div class="relative group">
-  <button class="flex items-center text-slate-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
-    <i class="fas fa-info-circle mr-2 text-slate-500"></i> 
-    <span class="font-medium">About</span>
-    <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
-  </button>
+        <div class="relative group">
+          <button class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
+            <i class="fas fa-info-circle mr-2 text-slate-500"></i> 
+            <span class="font-medium">About</span>
+            <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
+          </button>
 
-  <div class="absolute top-full left-0 hidden group-hover:block bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200">
-    <!-- Board and Staff -->
-    <router-link 
-      to="/about/board-staff" 
-      class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
-    >
-      <i class="fas fa-users mr-2 text-orange-400"></i>Board and Staff
-    </router-link>
+          <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
+            <!-- About -->
+            <router-link 
+              to="/about" 
+              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+            >
+              <i class="fas fa-info-circle mr-2 text-orange-400"></i>About
+            </router-link>
 
-    <!-- History -->
-    <router-link 
-      to="/about/history" 
-      class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
-    >
-      <i class="fas fa-history mr-2 text-orange-400"></i>History
-    </router-link>
-  </div>
-</div>
+            <!-- Board and Staff -->
+            <router-link 
+              to="/about/board-and-staff" 
+              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200">
+              <i class="fas fa-users mr-2 text-orange-400"></i>Board and Staff
+            </router-link>
 
+            <!-- History -->
+            <router-link 
+              to="/about/history" 
+              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+            >
+              <i class="fas fa-history mr-2 text-orange-400"></i>History
+            </router-link>
+          </div>
+        </div>
         
         <!-- Our Ministries Dropdown -->
         <div class="relative group">
-          <button class="flex items-center text-slate-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
+          <button class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
             <i class="fas fa-church mr-2 text-slate-500"></i> 
             <span class="font-medium">Our Ministries</span>
             <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
           </button>
-          <div class="absolute top-full left-0 hidden group-hover:block bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200">
+          <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
+            <!-- Our Ministries -->
             <router-link 
-              to="/ministries/children" 
+              to="/our-ministries" 
               class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
             >
-              <i class="fas fa-child mr-2 text-orange-400"></i>Children's Ministry
+              <i class="fas fa-church mr-2 text-orange-400"></i>Our Ministries
             </router-link>
+            <!-- Education Scholarship -->
             <router-link 
-              to="/ministries/youth" 
+              to="/our-ministries/education-scholarship" 
               class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
             >
-              <i class="fas fa-graduation-cap mr-2 text-orange-400"></i>Youth Ministry
+              <i class="fas fa-graduation-cap mr-2 text-orange-400"></i>Education Scholarship
             </router-link>
+            <!-- Social Enterprises -->
             <router-link 
-              to="/ministries/community" 
+              to="/our-ministries/social-enterprises" 
               class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
             >
-              <i class="fas fa-heart mr-2 text-orange-400"></i>Community Outreach
+              <i class="fas fa-building mr-2 text-orange-400"></i>Social Enterprises
+            </router-link>
+            <!-- Workplace Evangelism -->
+            <router-link 
+              to="/our-ministries/workplace-evangelism" 
+              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+            >
+              <i class="fas fa-briefcase mr-2 text-orange-400"></i>Workplace Evangelism
             </router-link>
           </div>
         </div>
         
         <!-- Get Involved Dropdown -->
         <div class="relative group">
-          <button class="flex items-center text-slate-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
+          <button class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
             <i class="fas fa-hands-helping mr-2 text-slate-500"></i> 
             <span class="font-medium">Get Involved</span>
             <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
           </button>
-          <div class="absolute top-full left-0 hidden group-hover:block bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200">
+          <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
+            <!-- Get Involved -->
             <router-link 
-              to="/get-involved/volunteer" 
+              to="/get-involved" 
               class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
             >
-              <i class="fas fa-hand-holding-heart mr-2 text-orange-400"></i>Volunteer
+              <i class="fas fa-hands-helping mr-2 text-orange-400"></i>Get Involved
             </router-link>
+            <!-- How to Support -->
             <router-link 
-              to="/get-involved/donate" 
+              to="/get-involved/how-to-support" 
               class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
             >
-              <i class="fas fa-donate mr-2 text-orange-400"></i>Donate
+              <i class="fas fa-question-circle mr-2 text-orange-400"></i>How to Support
             </router-link>
+            <!-- Partner with Us -->
             <router-link 
-              to="/get-involved/partner" 
+              to="/get-involved/partner-with-us" 
               class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
             >
-              <i class="fas fa-handshake mr-2 text-orange-400"></i>Partnership
+              <i class="fas fa-handshake mr-2 text-orange-400"></i>Partner with Us
+            </router-link>
+            <!-- Fund our Programs -->
+            <router-link 
+              to="/get-involved/fund-our-programs" 
+              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+            >
+              <i class="fas fa-donate mr-2 text-orange-400"></i>Fund our Programs
             </router-link>
           </div>
         </div>
         
-        <!-- Media & Resources -->
+        <!-- Media and Resources -->
         <router-link 
-          to="/media" 
-          class="flex items-center text-slate-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200"
+          to="/media-and-resources" 
+          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200"
         >
           <i class="fas fa-photo-video mr-2 text-slate-500"></i> 
-          <span class="font-medium">Media & Resources</span>
+          <span class="font-medium">Media and Resources</span>
         </router-link>
-        
+
         <!-- Contact -->
         <router-link 
           to="/contact" 
-          class="flex items-center text-slate-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200"
+          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200"
         >
           <i class="fas fa-envelope mr-2 text-slate-500"></i> 
           <span class="font-medium">Contact</span>
         </router-link>
-        
-        <!-- Visit Us Button -->
-        <router-link 
-          to="/visit" 
-          class="ml-4 bg-gradient-to-r from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center"
-        >
-          <i class="fas fa-map-marker-alt mr-2"></i>
-          Visit Us
-        </router-link>
       </div>
-      
+
       <!-- Mobile Menu Button -->
       <div class="lg:hidden">
         <button 
@@ -155,7 +174,7 @@
         </button>
       </div>
     </div>
-    
+
     <!-- Mobile Menu -->
     <div 
       v-if="mobileMenuOpen" 
@@ -179,7 +198,14 @@
           </div>
           <div class="ml-6 space-y-1">
             <router-link 
-              to="/about/board-staff" 
+              to="/about" 
+              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
+              @click="closeMobileMenu"
+            >
+              About
+            </router-link>
+            <router-link 
+              to="/about/board-and-staff" 
               class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
               @click="closeMobileMenu"
             >
@@ -192,13 +218,6 @@
             >
               History
             </router-link>
-            <router-link 
-              to="/about/mission-vision" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
-            >
-              Mission & Vision
-            </router-link>
           </div>
         </div>
         
@@ -209,25 +228,32 @@
           </div>
           <div class="ml-6 space-y-1">
             <router-link 
-              to="/ministries/children" 
+              to="/our-ministries" 
               class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
               @click="closeMobileMenu"
             >
-              Children's Ministry
+              Our Ministries
             </router-link>
             <router-link 
-              to="/ministries/youth" 
+              to="/our-ministries/education-scholarship" 
               class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
               @click="closeMobileMenu"
             >
-              Youth Ministry
+              Education Scholarship
             </router-link>
             <router-link 
-              to="/ministries/community" 
+              to="/our-ministries/social-enterprises" 
               class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
               @click="closeMobileMenu"
             >
-              Community Outreach
+              Social Enterprises
+            </router-link>
+            <router-link 
+              to="/our-ministries/workplace-evangelism" 
+              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
+              @click="closeMobileMenu"
+            >
+              Workplace Evangelism
             </router-link>
           </div>
         </div>
@@ -239,36 +265,43 @@
           </div>
           <div class="ml-6 space-y-1">
             <router-link 
-              to="/get-involved/volunteer" 
+              to="/get-involved" 
               class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
               @click="closeMobileMenu"
             >
-              Volunteer
+              Get Involved
             </router-link>
             <router-link 
-              to="/get-involved/donate" 
+              to="/get-involved/how-to-support" 
               class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
               @click="closeMobileMenu"
             >
-              Donate
+              How to Support
             </router-link>
             <router-link 
-              to="/get-involved/partner" 
+              to="/get-involved/partner-with-us" 
               class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
               @click="closeMobileMenu"
             >
-              Partnership
+              Partner with Us
+            </router-link>
+            <router-link 
+              to="/get-involved/fund-our-programs" 
+              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
+              @click="closeMobileMenu"
+            >
+              Fund our Programs
             </router-link>
           </div>
         </div>
         
-        <!-- Mobile Media & Resources -->
+        <!-- Mobile Media and Resources -->
         <router-link 
-          to="/media" 
+          to="/media-and-resources" 
           class="flex items-center text-slate-500 hover:bg-orange-500 px-4 py-3 rounded-lg transition-all duration-200"
           @click="closeMobileMenu"
         >
-          <i class="fas fa-photo-video mr-3 text-orange-500"></i> Media & Resources
+          <i class="fas fa-photo-video mr-3 text-orange-500"></i> Media and Resources
         </router-link>
         
         <!-- Mobile Contact -->
@@ -278,15 +311,6 @@
           @click="closeMobileMenu"
         >
           <i class="fas fa-envelope mr-3 text-slate-500"></i> Contact
-        </router-link>
-        
-        <!-- Mobile Visit Us -->
-        <router-link 
-          to="/visit" 
-          class="flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 text-slate-500 font-bold py-4 mx-4 mt-4 rounded-lg shadow-lg"
-          @click="closeMobileMenu"
-        >
-          <i class="fas fa-map-marker-alt mr-2"></i> Visit Us
         </router-link>
         
       </div>

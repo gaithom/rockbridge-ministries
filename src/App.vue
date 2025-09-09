@@ -1,8 +1,11 @@
 
 <template>
-  <Navbar />
-  <Hero />
-  <Footer />
+  <div id="app">
+    <Navbar />
+    <router-view />
+    <Hero />
+    <Footer />
+  </div>
 </template>
 
 <script setup>
