@@ -35,11 +35,11 @@
 
         <!-- About Dropdown -->
         <div class="relative group">
-          <button class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
+          <router-link to="/about" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
             <i class="fas fa-info-circle mr-2 text-slate-500"></i> 
             <span class="font-medium">About</span>
             <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
-          </button>
+          </router-link>
 
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
            
@@ -65,11 +65,11 @@
         
         <!-- Our Ministries Dropdown -->
         <div class="relative group">
-          <button class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
+          <router-link to="/our-ministries" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
             <i class="fas fa-church mr-2 text-slate-500"></i> 
             <span class="font-medium">Our Ministries</span>
             <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
-          </button>
+          </router-link>
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
           
             <!-- Education Scholarship -->
@@ -98,19 +98,12 @@
         
         <!-- Get Involved Dropdown -->
         <div class="relative group">
-          <button class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
+          <router-link to="/get-involved" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
             <i class="fas fa-hands-helping mr-2 text-slate-500"></i> 
             <span class="font-medium">Get Involved</span>
             <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
-          </button>
+          </router-link>
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
-            <!-- Get Involved -->
-            <router-link 
-              to="/get-involved" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
-            >
-              <i class="fas fa-hands-helping mr-2 text-orange-400"></i>Get Involved
-            </router-link>
             <!-- How to Support -->
             <router-link 
               to="/get-involved/how-to-support" 
@@ -250,17 +243,14 @@
         
         <!-- Mobile Get Involved Section -->
         <div class="space-y-1">
-          <div class="flex items-center text-slate-500 px-4 py-3 font-medium">
+          <router-link 
+            to="/get-involved" 
+            class="flex items-center text-slate-500 px-4 py-3 font-medium hover:bg-orange-500 hover:text-white rounded-lg transition-all duration-200"
+            @click="closeMobileMenu"
+          >
             <i class="fas fa-hands-helping mr-3 text-slate-500"></i> Get Involved
-          </div>
+          </router-link>
           <div class="ml-6 space-y-1">
-            <router-link 
-              to="/get-involved" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
-            >
-              Get Involved
-            </router-link>
             <router-link 
               to="/get-involved/how-to-support" 
               class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"

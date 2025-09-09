@@ -122,7 +122,7 @@
       id: 1,
       name: "ZABLON KURIA",
       position: "Founder & Executive Director, R.O.C.K Bridge Ministries",
-      image: "/images/zablon-kuria.jpg",
+      image: "/images/Zablonkuria.jpg",
       shortBio: "Former insurance salesman turned missionary and ministry founder.",
       fullBio: [
         "Mr. Kuria was a successful insurance salesman until 1999 when he left his job to pursue a degree in Biblical Education and Leadership in the United States. After graduation in 2006, Mr. Kuria was commissioned by Roswell Presbyterian Church in Georgia to return to Kenya as a missionary. It was after coming back to his country that he started R.O.C.K. Bridge Ministries.",
@@ -133,7 +133,7 @@
       id: 2,
       name: "JANE MUTHONI MACHARIA",
       position: "Treasurer",
-      image: "/images/jane-macharia.jpg",
+      image: "/images/Janemuthoni.jpg",
       shortBio: "Former teacher turned charitable business leader with a passion for music ministry.",
       fullBio: [
         "A teacher by profession, Mrs. Macharia quit her career to join her husband in business shortly after they married. After he passed, she carried his legacy forward as a charitable business person with a heart for employee empowerment. However, with a passion for teaching music, she has continued instructing at her church, where she plays the keyboard as the music advisor.",
@@ -144,7 +144,7 @@
       id: 3,
       name: "PRISCA TUITOWEK",
       position: "Kenyan Board of Directors, Member at Large Africa Gospel Church: Ngata, Nakuru",
-      image: "/images/prisca-tuitowek.jpg",
+      image: "/images/Priscatuitowek.jpg",
       shortBio: "University lecturer and nutrition expert dedicated to empowering marginalized communities.",
       fullBio: [
         "Professor Tuitowek is a lecturer in Human Nutrition at Egerton University where she has been working for over 20 years, where she is also director of Quality Assurance. At her church, Professor Tuitowek serves as an elder in charge of the Protocol section. She is a board member in several institutions, including the Rift Valley Institute of Science and Technology, Kenya Highlands Evangelical University, and Moi High School in Kabarak.",
