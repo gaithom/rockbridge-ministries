@@ -8,7 +8,7 @@
             through faith-based initiatives. Our organization has grown over the years, but 
             our commitment to serving those in need remains unchanged.
           </p>
-          
+
           <div class="bg-amber-50 p-6 rounded-xl mt-8">
             <h2 class="text-2xl font-semibold text-amber-800 mb-4">Our Mission</h2>
             <p class="text-slate-700">
@@ -20,13 +20,13 @@
       </div>
     </div>
   </template>
-  
+
   <script>
   export default {
     name: 'AboutPage'
   }
   </script>
-  
+
   <style scoped>
   /* Component-specific styles */
   </style>
