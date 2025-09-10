@@ -1,6 +1,6 @@
 <template>
     <!-- Hero section -->
-    <section class="relative w-screen h-screen flex items-center justify-center overflow-hidden">
+        <section class="relative w-full h-screen flex items-center justify-center overflow-hidden"> 
         <img 
             :src="churchImg"
             class="absolute inset-0 w-full h-full object-cover"
