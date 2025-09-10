@@ -53,6 +53,47 @@
           </div>
         </div>
       </div>
+      
+      <!-- Staff Members -->
+      <div class="mb-16">
+        <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-8 text-center">Staff Members</h3>
+        <div class="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto mt-4 mb-5"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            v-for="member in staffMembers"
+            :key="member.id"
+            @click="handleCardClick(member)"
+            class="bg-white rounded-2xl shadow-md hover:shadow-xl border border-slate-100 transition-all duration-300 cursor-pointer transform hover:-translate-y-1.5 group overflow-hidden"
+          >
+            <div class="w-full h-64 overflow-hidden bg-slate-100">
+              <img
+                :src="member.image"
+                :alt="member.name"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-slate-900 mb-1 group-hover:text-amber-700 transition-colors duration-200">
+                {{ member.name }}
+              </h3>
+              <p class="text-xs inline-block bg-amber-50 text-amber-700 border border-amber-200 rounded-full px-3 py-1 font-medium mb-3">
+                {{ member.position }}
+              </p>
+              <p class="text-slate-600 text-sm line-clamp-3">
+                {{ member.shortBio }}
+              </p>
+              
+              <button type="button" class="mt-4 inline-flex items-center text-amber-700 hover:text-amber-800 font-medium text-sm">
+                <span>Learn more</span>
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div>
         <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-8 text-center">American Board of Directors</h3>
@@ -300,6 +341,60 @@ const teamMembers: TeamMember[] = [
     fullBio: [
       "Chris went to Kenya in 2009 with his family for the first time. He and his wife Angela have truly developed a heart for Kenya. They have returned at least once every year since that first visit. Both Chris and Angela have developed a passion for the church, medical facility and school at Upendo.",
       "They also have a love for the kids at Tumaini and Upendo and have sponsored children in the Tumaini orphan program. Chris is the owner of Sign Solutions in Conyers, GA."
+    ]
+  }
+];
+
+// Staff members from the screenshot
+const staffMembers: TeamMember[] = [
+  {
+    id: 13,
+    name: "MOSES KIHARA",
+    position: "Ministries Administrative Assistant",
+    image: "/images/Moseskihara.jpg",
+    shortBio: "Experienced manager with diverse background in hospitality and operations management.",
+    fullBio: [
+      "Moses Kihara is a seasoned professional with a diverse background in Hospitality Management and Operations Management in the service industry. He has made a record in both areas. With over a decade of managerial experience, Moses brings a wealth of knowledge and expertise to his role. His leadership style is rooted in precision, accountability, and innovation, making him a strategic and effective manager.",
+      "Known for his decisive decision-making, unwavering support to his team, and a dedicated and objective approach to every task, Moses has consistently delivered exceptional results and lead teams towards success. As a Born-Again Christian, he has completed pastoral training with Nairobi Chapel, showcasing not only his commitment to personal and spiritual growth but also his ability to integrate strong ethical values into his managerial approach.",
+      "Moses has successfully managed various aspects of services within the ministry as a Youth and Small Groups Pastor, displaying a focused and dedicated approach to spreading the message through his passion for prayer and evangelism. His managerial qualities extend beyond conventional boundaries, as he consistently demonstrates passion in his work. His innovative mindset and commitment to excellence make him a valuable asset in any managerial role.",
+      "A meticulous professional, Moses ensures that tasks are executed with precision and efficiency. Currently serving as the Ministries Administrative Assistant at R.O.C.K BRIDGE MINISTRIES, Moses continues to exhibit precise leadership and managerial skills that align seamlessly with his role. His blend of extensive experience, diverse background in operations management, and genuine passion for pastoral ministry sets him apart as a manager well-equipped to lead effectively and contribute to the success of the ministry."
+    ]
+  },
+  {
+    id: 14,
+    name: "FRANCIS KENJI",
+    position: "Workplace Ministry Evangelist, Teacher, Christ School of Ministries International",
+    image: "/images/Franciskenji.jpg",
+    shortBio: "Gospel teacher and evangelist passionate about workplace ministry and spiritual guidance.",
+    fullBio: [
+      "Kenji's role as a teacher of the gospel involves various activities, such as leading Bible studies, delivering sermons or talks, organizing spiritual retreats, and providing guidance and support to individuals seeking to deepen their understanding of their faith.",
+      "His passion inspires and motivates others to explore their spirituality, develop a stronger relationship with their beliefs, and live according to the principles of the gospel. In addition, Mr. Kenji also helps in running the clean water initiative and currently is doubling up as the marketeer.",
+      "Through his dedication to teaching and sharing the message of the gospel, Mr. Kenji plays a vital role in nurturing the spiritual growth and development of individuals within his community and helping them find meaning, purpose, and fulfillment in their faith journey."
+    ]
+  },
+  {
+    id: 15,
+    name: "MARTHA MURIRURI",
+    position: "Social Worker",
+    image: "/images/Marthamuiruri.jpg",
+    shortBio: "Passionate social worker dedicated to empowering vulnerable communities and children with special needs.",
+    fullBio: [
+      "Martha Muriruri is a passionate social worker with a deep commitment to empowering the vulnerable in her community. She has a wealth of experience working with children and families, both in the classroom and in the community. She began her career as a teacher, but she soon realized she wanted to do more to help children with special needs. She received a scholarship from ROCK Bridge Ministries to pursue a Bachelor of Special Education at the Kenya University.",
+      "She later pursued sign language at the University of Nairobi. After graduating, she worked as a sign language interpreter for Voluntary Service Overseas at a local community-based organization, as a social worker and program coordinator, giving back to the organization that supported her education.",
+      "Currently, Martha plays a pivotal role in identifying and supporting needy cases, assessing needs, conducting home visits, following up on college/university placement, and providing mentoring and counseling. She is passionate about making a difference in the lives of those she serves and is committed to helping individuals and families overcome challenges and achieve their full potential."
+    ]
+  },
+  {
+    id: 16,
+    name: "BENSON NJUGUNA",
+    position: "Media & Communication Specialist",
+    image: "/images/Bensonnjuguna.png",
+    shortBio: "Media specialist dedicated to empowering communities through digital content and technology solutions.",
+    fullBio: [
+      "Benson Njuguna, a member of R.O.C.K Bridge Ministries since 2021, serves as a part-time media and communications specialist. His journey to RBM began through a referral from Daniel 360, a community-based organization dedicated to empowering women, youths, and children to lead dignified and sustainable lives.",
+      "While Benson initially pursued a course in procurement at the Kenya Institute of Management Studies, his deep-rooted passion for technology sparked his interest in website development, content creation, and social media marketing. Benson's dedication and diverse skill set helps R.O.C.K Bridge Ministries drive its mission to reach and impact a wider audience.",
+      "Within R.O.C.K Bridge Ministries, Benson wears multiple hats. He is responsible for crafting engaging content for our website, managing social media platforms, and curating reports that capture the essence of our initiatives. His role involves producing reports, crafting proposals, and developing our newsletter.",
+      "Benson's dedication and diverse skill set helps R.O.C.K Bridge Ministries drive its mission to reach and impact a wider audience. His technical expertise, combined with his passion for community development, makes him an invaluable member of our team, contributing significantly to our outreach efforts and organizational growth."
     ]
   }
 ];

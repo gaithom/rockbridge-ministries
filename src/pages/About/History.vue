@@ -8,8 +8,8 @@
           Our History
         </h1>
         <p class="mt-4 text-lg md:text-xl text-amber-100 animate-fade-in-up" style="animation-delay: 0.3s;">
-          A journey of faith, impact, and community building.
-        </p>
+          “RELIGION THAT IS PURE AND UNDEFILED BEFORE GOD, THE FATHER, IS THIS: TO VISIT ORPHANS AND WIDOWS IN THEIR AFFLICTION, AND TO KEEP ONESELF UNSTAINED FROM THE WORLD.”
+          -JAMES 1:27 </p>
       </div>
     </section>
 
