@@ -1,4 +1,5 @@
 <template>
+  <!-- Top navigation bar: fixed, with dynamic background based on scroll/hover -->
   <nav
     :class="['fixed w-full z-50 transition-all duration-300', 
             scrolledUp ? 'bg-opacity-10' : 'bg-gray-900 shadow-md']"
@@ -7,7 +8,7 @@
   >
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
 
-      <!-- Logo and Brand -->
+      <!-- Logo and Brand linking back to home -->
       <div class="flex items-center space-x-3">
         <router-link to="/" class="flex items-center space-x-3">
           <div class="relative">
@@ -27,7 +28,7 @@
         <router-link
           to="/"
           class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300"
-          active-class="bg-white/10"
+          active-class="underline decoration-amber-500 decoration-2 underline-offset-8"
         >
           <i class="fas fa-home mr-2 text-slate-500"></i> 
           <span class="font-medium">Home</span>
@@ -35,13 +36,14 @@
 
         <!-- About Dropdown -->
         <div class="relative group">
-          <router-link to="/about" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
+          <router-link to="/about" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200" active-class="underline decoration-amber-500 decoration-2 underline-offset-8">
             <i class="fas fa-info-circle mr-2 text-slate-500"></i> 
             <span class="font-medium">About</span>
             <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
           </router-link>
 
-          <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
+          <!-- Hover dropdown menu for About section -->
+          <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-gray-900 rounded-lg shadow-xl mt-2 py-2 w-56 border border-gray-800 z-50">
            
 
       
@@ -49,14 +51,17 @@
             <!-- Board and Staff -->
             <router-link 
               to="/about/board-and-staff" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200">
+              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
+              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
+            >
               <i class="fas fa-users mr-2 text-orange-400"></i>Board and Staff
             </router-link>
 
             <!-- History -->
             <router-link 
               to="/about/history" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
+              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
             >
               <i class="fas fa-history mr-2 text-orange-400"></i>History
             </router-link>
@@ -65,31 +70,35 @@
         
         <!-- Our Ministries Dropdown -->
         <div class="relative group">
-          <router-link to="/our-ministries" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
+          <router-link to="/our-ministries" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200" active-class="underline decoration-amber-500 decoration-2 underline-offset-8">
             <i class="fas fa-church mr-2 text-slate-500"></i> 
             <span class="font-medium">Our Ministries</span>
             <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
           </router-link>
-          <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
+          <!-- Hover dropdown menu for Our Ministries -->
+          <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-gray-900 rounded-lg shadow-xl mt-2 py-2 w-56 border border-gray-800 z-50">
           
             <!-- Education Scholarship -->
             <router-link 
               to="/our-ministries/education-scholarship" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
+              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
             >
               <i class="fas fa-graduation-cap mr-2 text-orange-400"></i>Education Scholarship
             </router-link>
             <!-- Social Enterprises -->
             <router-link 
               to="/our-ministries/social-enterprises" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
+              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
             >
               <i class="fas fa-building mr-2 text-orange-400"></i>Social Enterprises
             </router-link>
             <!-- Workplace Evangelism -->
             <router-link 
               to="/our-ministries/workplace-evangelism" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
+              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
             >
               <i class="fas fa-briefcase mr-2 text-orange-400"></i>Workplace Evangelism
             </router-link>
@@ -98,30 +107,34 @@
         
         <!-- Get Involved Dropdown -->
         <div class="relative group">
-          <router-link to="/get-involved" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200">
+          <router-link to="/get-involved" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200" active-class="underline decoration-amber-500 decoration-2 underline-offset-8">
             <i class="fas fa-hands-helping mr-2 text-slate-500"></i> 
             <span class="font-medium">Get Involved</span>
             <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
           </router-link>
-          <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-orange-200 rounded-lg shadow-xl mt-2 py-2 w-56 border border-orange-200 z-50">
+          <!-- Hover dropdown menu for Get Involved -->
+          <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-gray-900 rounded-lg shadow-xl mt-2 py-2 w-56 border border-gray-800 z-50">
             <!-- How to Support -->
             <router-link 
               to="/get-involved/how-to-support" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
+              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
             >
               <i class="fas fa-question-circle mr-2 text-orange-400"></i>How to Support
             </router-link>
             <!-- Partner with Us -->
             <router-link 
               to="/get-involved/partner-with-us" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
+              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
             >
               <i class="fas fa-handshake mr-2 text-orange-400"></i>Partner with Us
             </router-link>
             <!-- Fund our Programs -->
             <router-link 
               to="/get-involved/fund-our-programs" 
-              class="block px-4 py-3 text-slate-500 hover:bg-white hover:text-slate-500 transition-all duration-200"
+              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
+              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
             >
               <i class="fas fa-donate mr-2 text-orange-400"></i>Fund our Programs
             </router-link>
@@ -132,6 +145,7 @@
         <router-link 
           to="/media-and-resources" 
           class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200"
+          active-class="underline decoration-amber-500 decoration-2 underline-offset-8"
         >
           <i class="fas fa-photo-video mr-2 text-slate-500"></i> 
           <span class="font-medium">Media and Resources</span>
@@ -141,6 +155,7 @@
         <router-link 
           to="/contact" 
           class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200"
+          active-class="underline decoration-amber-500 decoration-2 underline-offset-8"
         >
           <i class="fas fa-envelope mr-2 text-slate-500"></i> 
           <span class="font-medium">Contact</span>
@@ -301,34 +316,39 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-// Whether the navbar should appear transparent (when at the very top and not hovered)
+// Whether the navbar should appear transparent (true at very top and not hovered)
 const scrolledUp = ref(true)
 
 // Track hover to force opacity while hovered
 const isHovered = ref(false)
 
-// Mobile menu toggle
+// Mobile menu open/close state
 const mobileMenuOpen = ref(false)
 
+// Toggle mobile menu open state
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
 }
 
+// Close mobile menu (called on link click)
 const closeMobileMenu = () => {
   mobileMenuOpen.value = false
 }
 
+// Force opaque background while hovered
 const makeOpaque = () => {
   isHovered.value = true
   scrolledUp.value = false
 }
 
+// Restore transparency if scrolled to very top and not hovered
 const restoreTransparency = () => {
   isHovered.value = false
   // Transparent only when scrolled to very top
   scrolledUp.value = window.scrollY === 0
 }
 
+// Update scrolledUp based on current scroll (unless hovered)
 const handleScroll = () => {
   // If not hovered, reflect scroll position; if hovered we keep it opaque
   if (!isHovered.value) {
@@ -337,7 +357,7 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
-  // Initialize state on mount and subscribe to scroll
+  // Initialize state on mount and subscribe to scroll listener
   handleScroll()
   window.addEventListener('scroll', handleScroll, { passive: true })
 })
