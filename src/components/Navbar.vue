@@ -162,23 +162,72 @@
         </router-link>
       </div>
 
-      <!-- Mobile Menu Button -->
-      <div class="lg:hidden">
+      <!-- Mobile Menu Button (Hamburger) -->
+      <div class="lg:hidden z-50">
         <button 
           @click="toggleMobileMenu" 
-          class="text-white focus:outline-none hover:bg-white/10 p-2 rounded-lg transition-all duration-200"
+          class="relative w-10 h-10 flex flex-col justify-center items-center focus:outline-none group"
+          :aria-expanded="mobileMenuOpen"
+          aria-label="Toggle navigation menu"
         >
-          <i :class="['fas text-2xl transition-all duration-300', mobileMenuOpen ? 'fa-times' : 'fa-bars']"></i>
+          <span 
+            class="block absolute w-6 h-0.5 bg-white transform transition-all duration-300 ease-in-out"
+            :class="{'rotate-45 translate-y-0': mobileMenuOpen, '-translate-y-2': !mobileMenuOpen}"
+          ></span>
+          <span 
+            class="block absolute w-6 h-0.5 bg-white transform transition-all duration-300 ease-in-out"
+            :class="{'opacity-0': mobileMenuOpen, 'opacity-100': !mobileMenuOpen}"
+          ></span>
+          <span 
+            class="block absolute w-6 h-0.5 bg-white transform transition-all duration-300 ease-in-out"
+            :class="{'-rotate-45 translate-y-0': mobileMenuOpen, 'translate-y-2': !mobileMenuOpen}"
+          ></span>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <div 
-      v-if="mobileMenuOpen" 
-      class="lg:hidden bg-gray-900 border-t border-gray-700 shadow-xl"
+    <!-- Mobile Menu Overlay -->
+    <transition
+      enter-active-class="transition-opacity duration-300 ease-out"
+      leave-active-class="transition-opacity duration-200 ease-in"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
     >
-      <div class="px-6 py-4 space-y-2">
+      <div 
+        v-if="mobileMenuOpen" 
+        class="fixed inset-0 bg-black bg-opacity-75 z-40 lg:hidden"
+        @click="closeMobileMenu"
+      ></div>
+    </transition>
+
+    <!-- Mobile Menu Sidebar -->
+    <transition
+      enter-active-class="transition-transform duration-300 ease-out"
+      leave-active-class="transition-transform duration-200 ease-in"
+      enter-from-class="translate-x-full"
+      enter-to-class="translate-x-0"
+      leave-from-class="translate-x-0"
+      leave-to-class="translate-x-full"
+    >
+      <div 
+        v-if="mobileMenuOpen" 
+        class="fixed top-0 right-0 h-full w-4/5 max-w-md bg-gray-900 shadow-2xl z-50 overflow-y-auto"
+        @click.stop
+      >
+        <!-- Close button inside the menu -->
+        <div class="flex justify-end p-4">
+          <button 
+            @click="toggleMobileMenu" 
+            class="text-gray-400 hover:text-white focus:outline-none"
+          >
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Items -->
+        <div class="px-6 py-2 space-y-1">
         
         <!-- Mobile Home -->
         <router-link 
@@ -281,7 +330,7 @@
               Partner with Us
             </router-link>
             <router-link 
-              to="/get-involved/fund-our-programs" 
+              to="/get-involved/fund-our-programs"
               class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
               @click="closeMobileMenu"
             >
@@ -289,28 +338,28 @@
             </router-link>
           </div>
         </div>
-        
         <!-- Mobile Media and Resources -->
-        <router-link 
-          to="/media-and-resources" 
+        <router-link
+          to="/media-and-resources"
           class="flex items-center text-slate-500 hover:bg-orange-500 px-4 py-3 rounded-lg transition-all duration-200"
           @click="closeMobileMenu"
         >
           <i class="fas fa-photo-video mr-3 text-orange-500"></i> Media and Resources
         </router-link>
-        
+
         <!-- Mobile Contact -->
-        <router-link 
-          to="/contact" 
+        <router-link
+          to="/contact"
           class="flex items-center text-slate-500 hover:bg-orange-500 px-4 py-3 rounded-lg transition-all duration-200"
           @click="closeMobileMenu"
         >
           <i class="fas fa-envelope mr-3 text-slate-500"></i> Contact
         </router-link>
-        
+        </div>
       </div>
-    </div>
-  </nav>
+    </transition>
+
+</nav>
 </template>
 
 <script setup lang="ts">
@@ -328,11 +377,22 @@ const mobileMenuOpen = ref(false)
 // Toggle mobile menu open state
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
+  // Toggle body scroll
+  document.body.style.overflow = mobileMenuOpen.value ? 'hidden' : 'auto'
+  
+  // Update scrolled state when toggling menu
+  if (mobileMenuOpen.value) {
+    scrolledUp.value = false
+  } else {
+    handleScroll()
+  }
 }
 
 // Close mobile menu (called on link click)
 const closeMobileMenu = () => {
   mobileMenuOpen.value = false
+  // Re-enable body scroll
+  document.body.style.overflow = 'auto'
 }
 
 // Force opaque background while hovered
