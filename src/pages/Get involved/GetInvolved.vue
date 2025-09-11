@@ -53,7 +53,7 @@
             <p class="font-sans text-gray-600 mb-6">
               Your donation will help us continue our work in Nakuru. We use donations to fund our programs, such as our scholarship program, our clean water initiative, and our community development projects.
             </p>
-            <router-link to="/get-involved/fundourprograms" class="block w-full">
+            <router-link :to="{ name: 'FundOurPrograms' }" class="block w-full">
               <button class="w-full bg-amber-100 hover:bg-amber-500 text-gray-900 font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
                 Make a Donation
               </button>
@@ -96,36 +96,39 @@
             </router-link>
           </div>
 
-          <!-- Pray -->
-          <div class="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-            <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-              </svg>
-            </div>
-            <h3 class="font-sans text-xl font-semibold text-gray-900 mb-4">Pray</h3>
-            <p class="font-sans text-gray-600 mb-6">
-              Prayer is our most powerful weapon. We would love for you to pray for us and for the people we serve.
-            </p>
-            <button class="w-full bg-gray-900 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
-              Join Prayer Team
-            </button>
-          </div>
+          <!-- Pray & Spread the Word (Combined) -->
+          <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 md:col-span-2 lg:col-span-3 lg:justify-self-center lg:max-w-3xl w-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 ">
+              <!-- Pray -->
+              <div>
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                  </div>
+                  <h3 class="font-sans text-xl font-semibold text-gray-900">Pray</h3>
+                </div>
+                <p class="font-sans text-gray-600">
+                  Prayer is our most powerful weapon. We would love for you to pray for us and for the people we serve.
+                </p>
+              </div>
 
-          <!-- Spread the Word -->
-          <div class="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 md:col-span-2 lg:col-span-1">
-            <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
-              </svg>
+              <!-- Spread the Word -->
+              <div class="md:pl-8">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                    </svg>
+                  </div>
+                  <h3 class="font-sans text-xl font-semibold text-gray-900">Spread the Word</h3>
+                </div>
+                <p class="font-sans text-gray-600">
+                  Tell your friends and family about R.O.C.K Bridge Ministries and encourage them to get involved.
+                </p>
+              </div>
             </div>
-            <h3 class="font-sans text-xl font-semibold text-gray-900 mb-4">Spread the Word</h3>
-            <p class="font-sans text-gray-600 mb-6">
-              Tell your friends and family about R.O.C.K Bridge Ministries and encourage them to get involved.
-            </p>
-            <button class="w-full bg-amber-100 hover:bg-amber-500 text-gray-900 font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
-              Share Our Mission
-            </button>
           </div>
         </div>
       </div>

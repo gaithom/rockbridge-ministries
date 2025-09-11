@@ -77,19 +77,19 @@
               <div class="flex items-start bg-amber-100 p-4 rounded-xl">
 
                 <svg class="h-6 w-6 text-slate-900 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                <p class="text-sm font-medium text-amber-800">Spiritual Discipleship</p>
+                <p class="text-sm font-medium text-gray-900">Spiritual Discipleship</p>
               </div>
               <div class="flex items-start bg-amber-100 p-4 rounded-xl">
                 <svg class="h-6 w-6 text-slate-900 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.468 9.563 5 8 5a4 4 0 000 8h2.167M12 6.253c1.168.174 2.437.53 4 1.247m-4-1.247C12 5.074 12 5 12 5s.074 0 .148.01c.219.034.428.093.633.178M12 6.253v13m-2.167 0h4.334m-4.334 0a9.923 9.923 0 01-1.464-.234" /></svg>
-                <p class="text-sm font-medium text-amber-800">Medical Clinics & Schools</p>
+                <p class="text-sm font-medium text-gray-900">Medical Clinics & Schools</p>
               </div>
               <div class="flex items-start bg-amber-100 p-4 rounded-xl">
                 <svg class="h-6 w-6 text-slate-900 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c1.657 0 3 1.343 3 3v2h2v2h-2v-2h-2v-2h-2v-2z" /></svg>
-                <p class="text-sm font-medium text-amber-800">Trade College & Retreat Centre</p>
+                <p class="text-sm font-medium text-gray-900">Trade College & Retreat Centre</p>
               </div>
               <div class="flex items-start bg-amber-100 p-4 rounded-xl">
                 <svg class="h-6 w-6 text-slate-900 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c1.657 0 3 1.343 3 3v2h2v2h-2v-2h-2v-2h-2v-2z" /></svg>
-                <p class="text-sm font-medium text-amber-800">Children's Homes</p>
+                <p class="text-sm font-medium text-gray-900">Children's Homes</p>
 
               </div>
             </div>

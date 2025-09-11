@@ -1,19 +1,19 @@
-// src/router/index.js
+// Alternate router config (kept for compatibility)
 
 import { createRouter, createWebHistory } from 'vue-router'
 
-// Import all page components
+// Import all page components (match actual file structure under src/pages)
 import About from '../src/pages/About/About.vue'
-import BoardAndStaff from '../src/pages/About/Board and staff.vue'
+import BoardAndStaff from '../src/pages/About/Boardandstaff.vue'
 import History from '../src/pages/About/History.vue'
-import OurMinistries from '../src/pages/ministries/OurMinistries.vue'
-import EducationScholarship from '../src/pages/ministries/Education Scholarship.vue'
-import SocialEnterprises from '../src/pages/ministries/Social Enterprises.vue'
-import WorkplaceEvangelism from '../src/pages/ministries/Workplace Evangelism.vue'
-import GetInvolved from '../src/pages/Involved/GetInvolved.vue'
-import HowToSupport from '../src/pages/Involved/HowToSupport.vue'
-import PartnerWithUs from '../src/pages/Involved/PartinerWithUs.vue'
-import FundOurPrograms from '../src/pages/Involved/FundOurPrograms.vue'
+import OurMinistries from '../src/pages/Our ministries/Our ministries.vue'
+import EducationScholarship from '../src/pages/Our ministries/Education Scholarship.vue'
+import SocialEnterprises from '../src/pages/Our ministries/Social Enterprises.vue'
+import WorkplaceEvangelism from '../src/pages/Our ministries/Workplace Evangelism.vue'
+import GetInvolved from '../src/pages/Get involved/GetInvolved.vue'
+import HowToSupport from '../src/pages/Get involved/HowToSupport.vue'
+import PartnerWithUs from '../src/pages/Get involved/PartnerWithUs.vue'
+import FundOurPrograms from '../src/pages/Get involved/Fundourprograms.vue'
 import MediaAndResources from '../src/pages/Media and Resouces/Media and resources.vue'
 import Contact from '../src/pages/Contact.vue'
 
