@@ -1,9 +1,11 @@
 <template>
 
+
   <div class="about-page bg-slate-50 min-h-screen antialiased text-slate-700">
     
     <!-- Hero section with video background and overlay -->
     <section class="relative min-h-screen bg-slate-900 overflow-hidden flex items-center justify-center">
+
       <div class="absolute inset-0 z-0 overflow-hidden">
         <iframe
           src="https://www.youtube.com/embed/82iipouWg5U?autoplay=1&mute=1&loop=1&playlist=82iipouWg5U&controls=0&showinfo=0&autohide=1"
@@ -15,15 +17,13 @@
       </div>
       <div class="absolute inset-0 bg-black opacity-50 z-10"></div>
 
-
-    
       <div class="container mx-auto px-6 relative z-30">
         <div class="max-w-4xl text-center mx-auto">
-          <h1 class="text-5xl md:text-6xl font-extrabold text-gray-500/90 leading-tight tracking-tight drop-shadow-lg animate-fade-in-up">
+          <h1
+            class="text-5xl md:text-6xl font-extrabold text-gray-500/90 leading-tight tracking-tight drop-shadow-lg animate-fade-in-up"
+          >
             About Us
           </h1>
-         
-
         </div>
       </div>
     </section>
@@ -32,12 +32,20 @@
     <main class="relative z-40 -mt-16">
       <section class="py-12 md:py-16">
         <div class="container mx-auto px-6">
-
           <!-- Who We Are section: centered content (image removed per request) -->
           <div class="grid gap-12 items-center justify-items-center">
-            <div class="space-y-6 text-center md:text-center max-w-3xl lg:max-w-4xl">
-              <span class="inline-block text-amber-600 font-semibold text-sm uppercase tracking-wider">Our Foundation</span>
-              <h2 class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">Who We Are</h2>
+            <div
+              class="space-y-6 text-center md:text-center max-w-3xl lg:max-w-4xl"
+            >
+              <span
+                class="inline-block text-amber-600 font-semibold text-sm uppercase tracking-wider"
+                >Our Foundation</span
+              >
+              <h2
+                class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight"
+              >
+                Who We Are
+              </h2>
 
               <p class="text-base md:text-lg leading-relaxed">
                 ROCKbridge Ministries is a Christian multi-denominational
@@ -52,30 +60,48 @@
                 through partnerships with local churches.
               </p>
             </div>
-
           </div>
         </div>
       </section>
-      
+
       <!-- Mission summary with value highlights (centered content) -->
       <section class="py-12 md:py-16 bg-white shadow-inner">
         <div class="container mx-auto px-6">
-          <div class="bg-white rounded-3xl p-8 md:p-12  transition-shadow duration-300 hover:shadow-xl text-center">
+          <div
+            class="bg-white rounded-3xl p-8 md:p-12 transition-shadow duration-300 hover:shadow-xl text-center"
+          >
             <!-- Center icon + heading row -->
             <div class="flex items-center justify-center mb-6">
-        <div>
-                <span class="inline-block text-amber-600 font-semibold text-sm uppercase tracking-wider">Our Guiding Light</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">Our Mission</h2>
+              <div>
+                <span
+                  class="inline-block text-amber-600 font-semibold text-sm uppercase tracking-wider"
+                  >Our Guiding Light</span
+                >
+                <h2
+                  class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight"
+                >
+                  Our Mission
+                </h2>
               </div>
             </div>
             <!-- Center the mission paragraph block -->
             <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-              ROCKbridge Ministries carries out its mission holistically, using the Gospel as the center from which a number of different ministries flow to comprehensively impact every area of a community. The individual ministries we operate and support are based on the core values of <span class="font-bold text-amber-800">Spiritual Development, Education, Sustainability,</span> and <span class="font-bold text-amber-800">Relationships.</span>
-
+              ROCKbridge Ministries carries out its mission holistically, using
+              the Gospel as the center from which a number of different
+              ministries flow to comprehensively impact every area of a
+              community. The individual ministries we operate and support are
+              based on the core values of
+              <span class="font-bold text-amber-800"
+                >Spiritual Development, Education, Sustainability,</span
+              >
+              and <span class="font-bold text-amber-800">Relationships.</span>
             </p>
             <!-- Center feature cards within the grid -->
-            <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+            <div
+              class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center"
+            >
               <div class="flex items-start bg-amber-100 p-4 rounded-xl">
+
 
                 <svg class="h-6 w-6 text-slate-900 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 <p class="text-sm font-medium text-gray-900">Spiritual Discipleship</p>
@@ -132,8 +158,6 @@
         </div>
       </section>
 
-
-      
       <!-- Leadership CTA section -->
 
       <section class="py-12 md:py-16">
