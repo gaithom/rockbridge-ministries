@@ -1,24 +1,19 @@
 <template>
-  <div class="bg-gray-50 min-h-screen font-sans antialiased text-gray-800">
-    <section
-      class="relative h-96 bg-cover bg-center overflow-hidden flex items-center justify-center"
-      style="
-        background-image: url('https://images.unsplash.com/photo-1549247775-654876b5d207?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2000&h=900&fit=crop');
-      "
-    >
-      <div class="absolute inset-0 bg-gray-900 opacity-70 z-10"></div>
-      <div class="container mx-auto px-6 text-center relative z-20">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-amber-200 mt-6">
-          Board and Staff
-        </h1>
-        <div
-          class="w-24 h-1 bg-gradient-to-r from-amber-100 to-orange-100 mx-auto mt-4 mb-5"
-        ></div>
-        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-          Meet the dedicated leaders of R.O.C.K Bridge Ministries.
-        </p>
-      </div>
-    </section>
+
+  <div class="bg-gray-50 min-h-screen antialiased text-gray-800">
+
+<section class="relative h-96 bg-cover bg-center overflow-hidden flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1549247775-654876b5d207?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2000&h=900&fit=crop');">
+  <div class="absolute inset-0 bg-gray-900 opacity-70 z-10"></div>
+  <div class="container mx-auto px-6 text-center relative z-20">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-amber-200 mt-6">Board and Staff</h1>
+    <div class="w-24 h-1 bg-gradient-to-r from-amber-100 to-orange-100 mx-auto mt-4 mb-5"></div>
+    <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+      Meet the dedicated leaders of R.O.C.K Bridge Ministries.
+    </p>
+  </div>
+</section>
+
+
 
     <div class="max-w-7xl mx-auto">
       <div class="mb-16">

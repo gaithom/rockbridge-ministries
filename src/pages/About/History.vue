@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-50 min-h-screen font-sans antialiased text-gray-800">
+  <div class="bg-gray-50 min-h-screen antialiased text-gray-800">
 
     <section class="relative h-96 bg-cover bg-center overflow-hidden flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1549247775-654876b5d207?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2000&h=900&fit=crop');">
       <div class="absolute inset-0 bg-gray-900 opacity-70 z-10"></div>
@@ -80,19 +80,19 @@
           <span class="inline-block text-amber-600 font-semibold text-sm uppercase tracking-wider">Our Impact</span>
           <h2 class="mt-2 text-3xl md:text-4xl font-bold text-gray-900 leading-tight">What We Do Today</h2>
           <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-amber-100 p-8 rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+            <div class="bg-amber-50 p-8 rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
               <h3 class="text-2xl font-bold text-gray-900 mb-2">Education</h3>
               <p class="text-gray-700 leading-relaxed">
                 We advance education through scholarships and actively work on the construction of schools and children's homes to provide a safe and nurturing environment for the young.
               </p>
             </div>
-            <div class="bg-amber-100 p-8 rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+            <div class="bg-amber-50 p-8 rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
               <h3 class="text-2xl font-bold text-gray-900 mb-2">Sustainability</h3>
               <p class="text-gray-700 leading-relaxed">
                 We create sustainable impact through social enterprises and community development initiatives, including clean water projects, to help communities thrive.
               </p>
             </div>
-            <div class="bg-amber-100 p-8 rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+            <div class="bg-amber-50 p-8 rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
               <h3 class="text-2xl font-bold text-gray-900 mb-2">Spiritual Guidance</h3>
               <p class="text-gray-700 leading-relaxed">
                 We nurture faith through evangelism and discipleship programs, building a strong spiritual foundation in the communities we serve.

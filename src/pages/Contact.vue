@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen font-sans text-gray-800">
+  <div class="min-h-screen text-gray-800">
     <!-- Hero Section -->
     <div class="bg-gray-900 text-gray-100 py-14 md:py-20 border-b border-gray-200">
       <div class="container mx-auto px-6">
