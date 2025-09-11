@@ -16,9 +16,15 @@ import PartnerWithUs from '../pages/Get involved/PartnerWithUs.vue'
 import FundOurPrograms from '../pages/Get involved/Fundourprograms.vue'
 import MediaAndResources from '../pages/Media and Resouces/Media and resources.vue'
 import Contact from '../pages/Contact.vue'
+import Home from '../pages/Home.vue'
 
 const routes = [
 
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
   {
     path: '/about',
     name: 'About',
