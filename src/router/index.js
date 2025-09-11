@@ -1,8 +1,8 @@
-// src/router/index.js
+// App Router
+
 import { createRouter, createWebHistory } from 'vue-router'
 
-// Import all page components
-import Home from '../pages/Home.vue'
+// Import all page components (match actual file structure under src/pages)
 import About from '../pages/About/About.vue'
 import BoardAndStaff from '../pages/About/Boardandstaff.vue'
 import History from '../pages/About/History.vue'
@@ -18,11 +18,7 @@ import MediaAndResources from '../pages/Media and Resouces/Media and resources.v
 import Contact from '../pages/Contact.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
+
   {
     path: '/about',
     name: 'About',
@@ -92,15 +88,8 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
-  scrollBehavior(to, from, savedPosition) {
-    // Use browser saved position when navigating back/forward
-    if (savedPosition) {
-      return savedPosition
-    }
-    // Always scroll to top for new navigations
-    return { left: 0, top: 0 }
-  }
+  routes
 })
 
-export default router
+export default router 
+
