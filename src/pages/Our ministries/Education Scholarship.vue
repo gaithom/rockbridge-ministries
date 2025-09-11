@@ -13,10 +13,10 @@
       <!-- Hero Content -->
       <div class="relative max-w-7xl mx-auto h-full flex items-center px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center">
-          <h1 class="font-sans text-4xl md:text-5xl font-extrabold text-white mb-3 leading-tight tracking-tight drop-shadow-lg">
+          <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-3 leading-tight tracking-tight drop-shadow-lg">
             Education Scholarship
           </h1>
-          <p class="font-sans text-base md:text-lg text-gray-200">
+          <p class="text-base md:text-lg text-gray-200">
             Empowering students with access to quality education and opportunities.
           </p>
         </div>

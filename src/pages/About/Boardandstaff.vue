@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-50 min-h-screen font-sans antialiased text-gray-800">
+  <div class="bg-gray-50 min-h-screen antialiased text-gray-800">
 
 <section class="relative h-96 bg-cover bg-center overflow-hidden flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1549247775-654876b5d207?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2000&h=900&fit=crop');">
   <div class="absolute inset-0 bg-gray-900 opacity-70 z-10"></div>

@@ -1,8 +1,9 @@
 <template>
 
-  <div class="about-page bg-slate-50 min-h-screen font-sans antialiased text-slate-700">
+  <div class="about-page bg-slate-50 min-h-screen antialiased text-slate-700">
+    
     <!-- Hero section with video background and overlay -->
-    <section class="relative py-28 md:py-36 min-h-[70vh] md:min-h-[80vh] bg-slate-900 overflow-hidden flex items-center justify-center">
+    <section class="relative min-h-screen bg-slate-900 overflow-hidden flex items-center justify-center">
       <div class="absolute inset-0 z-0 overflow-hidden">
         <iframe
           src="https://www.youtube.com/embed/82iipouWg5U?autoplay=1&mute=1&loop=1&playlist=82iipouWg5U&controls=0&showinfo=0&autohide=1"
