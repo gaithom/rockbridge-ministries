@@ -2,8 +2,7 @@
   <!-- Top navigation bar: fixed, with dynamic background based on scroll/hover -->
   <nav
     :class="['fixed w-full z-50 transition-all duration-300', 
-            scrolledUp ? 'bg-opacity-10' : 'bg-gray-900 shadow-md']"
-
+            (scrolledUp && !isBoardAndStaffPage) ? 'bg-opacity-10' : 'bg-gray-900 shadow-md']"
     @mouseleave="restoreTransparency"
   >
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -363,16 +362,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 // Whether the navbar should appear transparent (true at very top and not hovered)
+const route = useRoute()
 const scrolledUp = ref(true)
-
-// Track hover to force opacity while hovered
+const lastScrollY = ref(0)
+const mobileMenuOpen = ref(false)
 const isHovered = ref(false)
 
-// Mobile menu open/close state
-const mobileMenuOpen = ref(false)
+// Check if current route is the Board and Staff page
+const isBoardAndStaffPage = computed(() => {
+  return route.path.includes('board-and-staff')
+})
 
 // Toggle mobile menu open state
 const toggleMobileMenu = () => {

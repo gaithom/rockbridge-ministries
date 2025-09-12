@@ -4,7 +4,13 @@
     <div class="relative bg-gray-900 h-80 md:h-96">
       <div class="absolute inset-0 overflow-hidden">
         <!-- Background image placeholder - you can replace via inline style or <img> as done in other pages -->
-        <div class="w-full h-full bg-gray-800 opacity-40"></div>
+        <div class="absolute inset-0 overflow-hidden">
+        <img 
+          src="/images/partner.jpg" 
+          alt="Community coming together" 
+          class="w-full h-full object-cover opacity-40"
+        >
+      </div>
       </div>
 
       <!-- Hero Content -->

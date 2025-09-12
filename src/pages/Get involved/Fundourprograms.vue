@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="relative bg-cover bg-center min-h-screen flex items-center justify-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/give.webp');">
+    <header class="relative bg-cover bg-center min-h-screen flex items-center justify-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/give.jpg');">
       <div class="container mx-auto text-center px-4 py-24">
         
         <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 text-white">
@@ -45,7 +45,7 @@
               </blockquote>
               <div class="mt-auto pt-4">
                 <div class="flex flex-col space-y-2">
-                <button class="group relative inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-white rounded-full font-semibold text-sm shadow-md hover:bg-amber-700 transition transform hover:-translate-y-1 hover:shadow-xl w-full">
+                <button @click="openDonationModal('Holiday Homes')" class="group relative inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-white rounded-full font-semibold text-sm shadow-md hover:bg-amber-700 transition transform hover:-translate-y-1 hover:shadow-xl w-full">
                   <span class="mr-2">DONATE</span>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -72,7 +72,7 @@
               </p>
               <div class="mt-auto pt-4">
                 <div class="flex flex-col space-y-2">
-                <button class="group relative inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-white rounded-full font-semibold text-sm shadow-md hover:bg-amber-700 transition transform hover:-translate-y-1 hover:shadow-xl w-full">
+                <button @click="openDonationModal('Clean Water Initiative')" class="group relative inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-white rounded-full font-semibold text-sm shadow-md hover:bg-amber-700 transition transform hover:-translate-y-1 hover:shadow-xl w-full">
                   <span class="mr-2">DONATE</span>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -99,7 +99,7 @@
               </p>
               <div class="mt-auto pt-4">
                 <div class="flex flex-col space-y-2">
-                <button class="group relative inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-white rounded-full font-semibold text-sm shadow-md hover:bg-amber-700 transition transform hover:-translate-y-1 hover:shadow-xl w-full">
+                <button @click="openDonationModal('Workplace Ministry')" class="group relative inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-white rounded-full font-semibold text-sm shadow-md hover:bg-amber-700 transition transform hover:-translate-y-1 hover:shadow-xl w-full">
                   <span class="mr-2">DONATE</span>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -123,7 +123,7 @@
               </p>
               <div class="mt-auto pt-4">
                 <div class="flex flex-col space-y-2">
-                <button class="group relative inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-white rounded-full font-semibold text-sm shadow-md hover:bg-amber-700 transition transform hover:-translate-y-1 hover:shadow-xl w-full">
+                <button @click="openDonationModal('Lish AI Labs')" class="group relative inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-white rounded-full font-semibold text-sm shadow-md hover:bg-amber-700 transition transform hover:-translate-y-1 hover:shadow-xl w-full">
                   <span class="mr-2">DONATE</span>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -147,7 +147,7 @@
               </p>
               <div class="mt-auto pt-4">
                 <div class="flex flex-col space-y-2">
-                <button class="group relative inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-white rounded-full font-semibold text-sm shadow-md hover:bg-amber-700 transition transform hover:-translate-y-1 hover:shadow-xl w-full">
+                <button @click="openDonationModal('Upendo Academy')" class="group relative inline-flex items-center justify-center px-8 py-4 bg-gray-700 text-white rounded-full font-semibold text-sm shadow-md hover:bg-amber-700 transition transform hover:-translate-y-1 hover:shadow-xl w-full">
                   <span class="mr-2">DONATE</span>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -214,11 +214,193 @@
           </div>
         </div>
       </section>
+    </main>
+    </div>
+  
 
-  </main>
+  <!-- Donation Form Modal - Clean White Design -->
+  <div v-if="showDonationModal" class="fixed inset-0 bg-white/95 backdrop-blur-sm flex items-center justify-center z-50 p-4" @click.self="closeModal">
+    <div class="bg-white rounded-2xl max-w-md w-full shadow-xl border border-gray-100 overflow-hidden">
+      <!-- Header -->
+      <div class="p-6 border-b border-gray-100">
+        <div class="flex justify-between items-center">
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-900">Support {{ selectedInitiative }}</h3>
+            <p class="text-gray-500 text-sm mt-1">Your generous contribution makes a difference</p>
+          </div>
+          <button @click="closeModal" class="text-gray-400 hover:text-gray-600 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        
+      <!-- Form Content -->
+      <div class="p-6 space-y-6">
+        <form @submit.prevent="handleDonation" class="space-y-6">
+          <!-- Donation Amount -->
+          <div class="space-y-3">
+            <label class="block text-sm font-medium text-gray-700">Donation Amount (USD)</label>
+            <div class="grid grid-cols-2 gap-3">
+              <button type="button" 
+                      v-for="amount in [25, 50, 100, 500]" 
+                      :key="amount"
+                      @click="donation.amount = amount"
+                      :class="[
+                        donation.amount === amount 
+                          ? 'bg-gray-900 text-white' 
+                          : 'bg-white text-gray-700 border border-gray-200',
+                        'py-3 px-4 rounded-lg font-medium transition-all hover:bg-gray-50'
+                      ]">
+                ${{ amount }}
+              </button>
+            </div>
+            <div class="relative mt-2">
+              <input type="number" 
+                     v-model.number="donation.amount"
+                     class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                     placeholder="Other amount"
+                     min="1"
+                     step="1">
+            </div>
+          </div>
+          
+          <!-- Personal Information -->
+          <div class="space-y-5">
+            <div class="space-y-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-1">
+                  <label for="firstName" class="block text-sm font-medium text-gray-700">First Name *</label>
+                  <input type="text" id="firstName" v-model="donation.firstName" required
+                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400">
+                </div>
+                <div class="space-y-1">
+                  <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name *</label>
+                  <input type="text" id="lastName" v-model="donation.lastName" required
+                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400">
+                </div>
+              </div>
+              
+              <div class="space-y-1">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Address *</label>
+                <input type="email" id="email" v-model="donation.email" required
+                      class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400">
+              </div>
+              
+              <div class="space-y-1">
+                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input type="tel" id="phone" v-model="donation.phone"
+                      class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400">
+              </div>
+            </div>
+            
+            <!-- Payment Information -->
+            <div class="pt-4 border-t border-gray-100">
+              <h4 class="text-sm font-medium text-gray-700 mb-4">Payment Information</h4>
+              
+              <div class="space-y-4">
+                <div class="space-y-1">
+                  <label for="cardNumber" class="block text-sm font-medium text-gray-700">Card Number *</label>
+                  <input type="text" id="cardNumber" v-model="donation.cardNumber" required
+                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                        placeholder="1234 5678 9012 3456">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="space-y-1">
+                    <label for="expiry" class="block text-sm font-medium text-gray-700">Expiry Date *</label>
+                    <input type="text" id="expiry" v-model="donation.expiry" required
+                          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                          placeholder="MM/YY">
+                  </div>
+                  <div class="space-y-1">
+                    <label for="cvv" class="block text-sm font-medium text-gray-700">CVV *</label>
+                    <input type="text" id="cvv" v-model="donation.cvv" required
+                          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                          placeholder="123">
+                  </div>
+                </div>
+                
+                <div class="space-y-1">
+                  <label for="zipCode" class="block text-sm font-medium text-gray-700">ZIP/Postal Code *</label>
+                  <input type="text" id="zipCode" v-model="donation.zipCode" required
+                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400">
+                </div>
+              </div>
+            </div>
+            
+            <div class="pt-2">
+              <button type="submit" 
+                      class="w-full bg-gray-900 text-white py-3.5 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
+                Donate ${{ donation.amount || '0' }}
+              </button>
+              <p class="mt-3 text-xs text-gray-500 text-center">
+                <svg class="w-4 h-4 inline-block mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Secure and encrypted donation
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
 <script setup>
-// No script needed for this static page layout
+import { ref, reactive } from 'vue';
+
+const showDonationModal = ref(false);
+const selectedInitiative = ref('');
+
+const donation = reactive({
+  amount: 25,
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  cardNumber: '',
+  expiry: '',
+  cvv: '',
+  zipCode: '',
+  initiative: ''
+});
+
+const openDonationModal = (initiative) => {
+  selectedInitiative.value = initiative;
+  donation.initiative = initiative;
+  showDonationModal.value = true;
+  // Prevent body scroll when modal is open
+  document.body.style.overflow = 'hidden';
+};
+
+const closeModal = () => {
+  showDonationModal.value = false;
+  // Re-enable body scroll
+  document.body.style.overflow = '';
+};
+
+const handleDonation = () => {
+  // Here you would typically send the donation data to your payment processor
+  console.log('Processing donation:', donation);
+  // For demo purposes, we'll just show an alert and close the modal
+  alert(`Thank you for your donation of $${donation.amount} to ${donation.initiative}!`);
+  closeModal();
+  
+  // Reset form
+  Object.assign(donation, {
+    amount: 25,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    cardNumber: '',
+    expiry: '',
+    cvv: '',
+    zipCode: '',
+    initiative: ''
+  });
+};
 </script>
