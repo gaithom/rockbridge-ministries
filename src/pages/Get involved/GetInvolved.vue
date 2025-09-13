@@ -5,7 +5,7 @@
       <!-- Background Image with Overlay -->
       <div class="absolute inset-0 overflow-hidden">
         <img 
-          src="/images/ourimpact1.jpg" 
+          src="/images/getinvolved.jpg" 
           alt="Community coming together" 
           class="w-full h-full object-cover opacity-40"
         >
@@ -37,93 +37,111 @@
 
       <!-- Ways to Get Involved -->
       <div class="mb-20">
-        <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-900 text-center mb-12" data-aos="fade-up">
           Ways You Can Make a Difference
         </h2>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <!-- Donate -->
-          <div class="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col h-full">
-            <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-              </svg>
+          <div 
+            class="bg-white rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="mb-6 flex justify-center">
+              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                </svg>
+              </div>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">Donate</h3>
-            <p class="text-gray-600 mb-6 flex-grow">
+            <h3 class="text-2xl text-center font-bold text-gray-900 mb-4">Donate</h3>
+            <p class="text-gray-600 mb-6 text-center flex-grow">
               Your donation will help us continue our work in Nakuru. We use donations to fund our programs, such as our scholarship program, our clean water initiative, and our community development projects.
             </p>
-            <router-link :to="{ name: 'FundOurPrograms' }" class="block w-full">
-              <button class="w-full bg-amber-100 hover:bg-amber-500 text-gray-900 font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+            <router-link :to="{ name: 'FundOurPrograms' }" class="block w-full mt-auto">
+              <button class="w-full bg-amber-100 hover:bg-amber-500 text-gray-900 font-semibold py-3 px-6 rounded-md transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
                 Make a Donation
               </button>
             </router-link>
           </div>
 
           <!-- Partner -->
-          <div class="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col h-full">
-            <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-              </svg>
+          <div 
+            class="bg-white rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="mb-6 flex justify-center">
+              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">Partner</h3>
-            <p class="text-gray-600 mb-6 flex-grow">
+            <h3 class="text-2xl text-center font-bold text-gray-900 mb-4">Partner</h3>
+            <p class="text-gray-600 mb-6 text-center flex-grow">
               At R.O.C.K Bridge ministries we believe in partnerships and collaborations that pools resources together for the betterment of our community.
             </p>
-            <router-link to="/get-involved/partner-with-us" class="block w-full">
-              <button class="w-full bg-gray-900 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+            <router-link to="/get-involved/partner-with-us" class="block w-full mt-auto">
+              <button class="w-full bg-gray-900 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded-md transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
                 Become a Partner
               </button>
             </router-link>
           </div>
 
           <!-- Volunteer -->
-          <div class="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col h-full">
-            <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
-              </svg>
+          <div 
+            class="bg-white rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="mb-6 flex justify-center">
+              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+              </div>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">Volunteer</h3>
-            <p class="text-gray-600 mb-6 flex-grow">
+            <h3 class="text-2xl text-center font-bold text-gray-900 mb-4">Volunteer</h3>
+            <p class="text-gray-600 mb-6 text-center flex-grow">
               We are always looking for volunteers to help us with our work. You can volunteer your time in a variety of ways, professional consultant or working on our construction projects.
             </p>
-            <router-link to="/get-involved/how-to-support" class="block w-full">
-              <button class="w-full bg-amber-100 hover:bg-amber-500 text-gray-900 font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+            <router-link to="/get-involved/how-to-support" class="block w-full mt-auto">
+              <button class="w-full bg-amber-100 hover:bg-amber-500 text-gray-900 font-semibold py-3 px-6 rounded-md transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
                 Join as Volunteer
               </button>
             </router-link>
           </div>
 
           <!-- Pray & Spread the Word (Combined) -->
-          <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 md:col-span-2 lg:col-span-3 lg:justify-self-center lg:max-w-3xl w-full">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div 
+            class="bg-white rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 md:col-span-2 lg:col-span-3 lg:justify-self-center lg:max-w-3xl w-full"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <!-- Pray -->
-              <div>
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                  </div>
-                  <h3 class="text-xl font-semibold text-gray-900">Pray</h3>
+              <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                  </svg>
                 </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Pray</h3>
                 <p class="text-gray-600">
                   Prayer is our most powerful weapon. We would love for you to pray for us and for the people we serve.
                 </p>
               </div>
 
               <!-- Spread the Word -->
-              <div class="md:pl-8">
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
-                    </svg>
-                  </div>
-                  <h3 class="text-xl font-semibold text-gray-900">Spread the Word</h3>
+              <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                  </svg>
                 </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Spread the Word</h3>
                 <p class="text-gray-600">
                   Tell your friends and family about R.O.C.K Bridge Ministries and encourage them to get involved.
                 </p>
@@ -138,7 +156,6 @@
         <h2 class="text-3xl font-bold text-white text-center mb-12">
           Our Impact Areas
         </h2>
-        
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Workplace Evangelism -->
           <router-link to="/our-ministries/workplace-evangelism" class="block text-center group">
@@ -197,7 +214,7 @@
         </div>
         <p class="text-sm text-gray-500 mt-6">
           To learn more about how you can get involved, please visit our website or 
-          <router-link to="/contact" class="text-amber-600 font-semibold hover:text-amber-700 transition-colors duration-200">contact us</router-link>!
+          <router-link to="/contact" class="text-green-600 font-semibold hover:text-amber-700 transition-colors duration-200">contact us</router-link>!
         </p>
       </div>
     </div>
@@ -205,5 +222,16 @@
 </template>
 
 <script setup>
-// Page scaffold - Get Involved section for R.O.C.K Bridge Ministries
+import { onMounted } from 'vue';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+onMounted(() => {
+  AOS.init({
+    duration: 800,
+    once: true,
+    easing: 'ease-in-out',
+    offset: 100
+  });
+});
 </script>

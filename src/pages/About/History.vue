@@ -1,8 +1,25 @@
 <template>
   <div class="bg-gray-50 min-h-screen antialiased text-gray-800">
 
-    <section class="relative h-96 bg-cover bg-center overflow-hidden flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1549247775-654876b5d207?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2000&h=900&fit=crop');">
-      <div class="absolute inset-0 bg-gray-900 opacity-70 z-10"></div>
+    <section class="relative h-[32rem] overflow-hidden flex items-center justify-center">
+      <!-- Debug background -->
+      <div v-if="!imageLoaded" class="absolute inset-0 bg-blue-500/20 flex items-center justify-center">
+        <p class="text-white text-lg">Loading image...</p>
+      </div>
+      
+      <!-- Background Image -->
+      <div class="absolute inset-0">
+        <img 
+          :src="imageSrc" 
+          alt="Our History"
+          class="w-full h-full object-cover"
+          @load="imageLoaded = true"
+          @error="handleImageError"
+        />
+      </div>
+      
+      <!-- Subtle dark overlay -->
+      <div class="absolute inset-0 bg-black/40 z-10"></div>
       <div class="container mx-auto px-6 text-center relative z-20">
         <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight tracking-tight drop-shadow-lg animate-fade-in-up">
           Our History
@@ -16,7 +33,7 @@
     <main class="relative z-20 -mt-16">
 
 
-      <!-- New detailed section from screenshot -->
+      <!--main section -->
       <section class="py-16 md:py-24 bg-white rounded-t-3xl shadow-xl">
         <div class="container mx-auto px-6">
           <div class="grid md:grid-cols-5 items-right">
@@ -102,7 +119,7 @@
         </div>
       </section>
 
-      <section class="py-16 md:py-24 bg-gray-900 text-center">
+      <section class="py-16 md:py-24 bg-gray-800 text-center">
         <div class="container mx-auto px-6">
           <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-amber-100 leading-tight">
@@ -123,7 +140,27 @@
 </template>
 
 <script setup>
-// No script logic needed for this component.
+import { ref, onMounted } from 'vue';
+
+const imageLoaded = ref(false);
+const imageSrc = ref('/images/ourhistory.jpg');
+
+const handleImageError = (e) => {
+  console.error('Failed to load image:', e.target.src);
+  // Fallback to a different image or show an error state
+  imageSrc.value = 'https://images.unsplash.com/photo-1549247775-654876b5d207?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2000&h=900&fit=crop';
+};
+
+// Check if image exists
+onMounted(() => {
+  const img = new Image();
+  img.onload = () => imageLoaded.value = true;
+  img.onerror = () => {
+    console.error('Image not found at:', imageSrc.value);
+    handleImageError({ target: { src: imageSrc.value } });
+  };
+  img.src = imageSrc.value;
+});
 </script>
 
 <style scoped>

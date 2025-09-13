@@ -178,12 +178,11 @@
             </p>
             
             <div class="flex items-center space-x-2 flex-wrap">
-              <img src="https://rockbridgeministries.org/wp-content/plugins/stripe-payments/includes/gateway-images/visa.png" alt="Visa" class="h-8">
-              <img src="https://rockbridgeministries.org/wp-content/plugins/stripe-payments/includes/gateway-images/mastercard.png" alt="Mastercard" class="h-8">
-              <img src="https://rockbridgeministries.org/wp-content/plugins/stripe-payments/includes/gateway-images/discover.png" alt="Discover" class="h-8">
-              <img src="https://rockbridgeministries.org/wp-content/plugins/stripe-payments/includes/gateway-images/amex.png" alt="American Express" class="h-8">
-              <img src="https://rockbridgeministries.org/wp-content/plugins/stripe-payments/includes/gateway-images/jcb.png" alt="JCB" class="h-8">
-              <img src="https://rockbridgeministries.org/wp-content/plugins/stripe-payments/includes/gateway-images/diners.png" alt="Diners Club" class="h-8">
+              <img src="/images/visa.png" alt="Visa" class="h-8">
+              <img src="/images/mastercard.png" alt="Mastercard" class="h-8">
+              <img src="/images/discover.png" alt="Discover" class="h-8">
+              <img src="/images/amex.png" alt="American Express" class="h-8">
+              <img src="/images/jcb.png" alt="JCB" class="h-8">
             </div>
           </div>
 
@@ -207,7 +206,7 @@
                   <img src="/images/gofundme.jpg" alt="GoFundMe" class="h-12 w-auto">
                 </a>
                 <a href="#" class="block">
-                  <img src="https://rockbridgeministries.org/wp-content/themes/rockbridge/images/amazon-smile-logo.png" alt="Amazon Smile" class="h-12 w-auto">
+                  <img src="/images/amazon-smile-logo.png">
                 </a>
               </div>
             </div>
@@ -218,15 +217,15 @@
     </div>
   
 
-  <!-- Donation Form Modal - Clean White Design -->
-  <div v-if="showDonationModal" class="fixed inset-0 bg-white/95 backdrop-blur-sm flex items-center justify-center z-50 p-4" @click.self="closeModal">
-    <div class="bg-white rounded-2xl max-w-md w-full shadow-xl border border-gray-100 overflow-hidden">
+  <!-- Donation Form Modal - Fits Screen -->
+  <div v-if="showDonationModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" @click.self="closeModal">
+    <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-gray-200 overflow-hidden">
       <!-- Header -->
-      <div class="p-6 border-b border-gray-100">
+      <div class="sticky top-0 bg-white z-10 p-4 border-b border-gray-100">
         <div class="flex justify-between items-center">
           <div>
-            <h3 class="text-2xl font-semibold text-gray-900">Support {{ selectedInitiative }}</h3>
-            <p class="text-gray-500 text-sm mt-1">Your generous contribution makes a difference</p>
+            <h3 class="text-xl font-semibold text-gray-900">Support {{ selectedInitiative }}</h3>
+            <p class="text-gray-500 text-xs">Your generous contribution makes a difference</p>
           </div>
           <button @click="closeModal" class="text-gray-400 hover:text-gray-600 transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -234,119 +233,102 @@
             </svg>
           </button>
         </div>
-        
+      </div>
+      
       <!-- Form Content -->
-      <div class="p-6 space-y-6">
-        <form @submit.prevent="handleDonation" class="space-y-6">
+      <div class="p-4 sm:p-6">
+        <form @submit.prevent="handleDonation" class="space-y-4">
           <!-- Donation Amount -->
-          <div class="space-y-3">
+          <div class="space-y-2">
             <label class="block text-sm font-medium text-gray-700">Donation Amount (USD)</label>
-            <div class="grid grid-cols-2 gap-3">
-              <button type="button" 
-                      v-for="amount in [25, 50, 100, 500]" 
-                      :key="amount"
-                      @click="donation.amount = amount"
-                      :class="[
-                        donation.amount === amount 
-                          ? 'bg-gray-900 text-white' 
-                          : 'bg-white text-gray-700 border border-gray-200',
-                        'py-3 px-4 rounded-lg font-medium transition-all hover:bg-gray-50'
-                      ]">
-                ${{ amount }}
-              </button>
-            </div>
-            <div class="relative mt-2">
-              <input type="number" 
-                     v-model.number="donation.amount"
-                     class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
-                     placeholder="Other amount"
-                     min="1"
-                     step="1">
-            </div>
+            <input type="number" 
+                   v-model.number="donation.amount"
+                   class="w-full px-4 py-3 text-base border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
+                   placeholder="Enter amount"
+                   min="1"
+                   step="1"
+                   required>
           </div>
           
           <!-- Personal Information -->
-          <div class="space-y-5">
-            <div class="space-y-4">
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-1">
-                  <label for="firstName" class="block text-sm font-medium text-gray-700">First Name *</label>
-                  <input type="text" id="firstName" v-model="donation.firstName" required
-                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400">
-                </div>
-                <div class="space-y-1">
-                  <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name *</label>
-                  <input type="text" id="lastName" v-model="donation.lastName" required
-                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400">
-                </div>
-              </div>
-              
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-3">
               <div class="space-y-1">
-                <label for="email" class="block text-sm font-medium text-gray-700">Email Address *</label>
-                <input type="email" id="email" v-model="donation.email" required
-                      class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400">
+                <label for="firstName" class="block text-xs font-medium text-gray-700">First Name *</label>
+                <input type="text" id="firstName" v-model="donation.firstName" required
+                      class="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400">
               </div>
-              
               <div class="space-y-1">
-                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                <input type="tel" id="phone" v-model="donation.phone"
-                      class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400">
+                <label for="lastName" class="block text-xs font-medium text-gray-700">Last Name *</label>
+                <input type="text" id="lastName" v-model="donation.lastName" required
+                      class="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400">
               </div>
+            </div>
+            
+            <div class="space-y-1">
+              <label for="email" class="block text-xs font-medium text-gray-700">Email Address *</label>
+              <input type="email" id="email" v-model="donation.email" required
+                    class="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400">
+            </div>
+            
+            <div class="space-y-1">
+              <label for="phone" class="block text-xs font-medium text-gray-700">Phone Number</label>
+              <input type="tel" id="phone" v-model="donation.phone"
+                    class="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400">
             </div>
             
             <!-- Payment Information -->
             <div class="pt-4 border-t border-gray-100">
-              <h4 class="text-sm font-medium text-gray-700 mb-4">Payment Information</h4>
+              <h4 class="text-xs font-medium text-gray-700 mb-3">PAYMENT INFORMATION</h4>
               
-              <div class="space-y-4">
+              <div class="space-y-3">
                 <div class="space-y-1">
-                  <label for="cardNumber" class="block text-sm font-medium text-gray-700">Card Number *</label>
+                  <label for="cardNumber" class="block text-xs font-medium text-gray-700">Card Number *</label>
                   <input type="text" id="cardNumber" v-model="donation.cardNumber" required
-                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                        class="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
                         placeholder="1234 5678 9012 3456">
                 </div>
                 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 gap-3">
                   <div class="space-y-1">
-                    <label for="expiry" class="block text-sm font-medium text-gray-700">Expiry Date *</label>
+                    <label for="expiry" class="block text-xs font-medium text-gray-700">Expiry Date *</label>
                     <input type="text" id="expiry" v-model="donation.expiry" required
-                          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                          class="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
                           placeholder="MM/YY">
                   </div>
                   <div class="space-y-1">
-                    <label for="cvv" class="block text-sm font-medium text-gray-700">CVV *</label>
+                    <label for="cvv" class="block text-xs font-medium text-gray-700">CVV *</label>
                     <input type="text" id="cvv" v-model="donation.cvv" required
-                          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                          class="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
                           placeholder="123">
                   </div>
                 </div>
                 
                 <div class="space-y-1">
-                  <label for="zipCode" class="block text-sm font-medium text-gray-700">ZIP/Postal Code *</label>
+                  <label for="zipCode" class="block text-xs font-medium text-gray-700">ZIP/Postal Code *</label>
                   <input type="text" id="zipCode" v-model="donation.zipCode" required
-                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400">
+                        class="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400">
                 </div>
               </div>
             </div>
             
             <div class="pt-2">
               <button type="submit" 
-                      class="w-full bg-gray-900 text-white py-3.5 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
-                Donate ${{ donation.amount || '0' }}
+                      class="w-full bg-amber-600 text-white py-2.5 px-4 rounded-lg font-semibold text-sm hover:bg-amber-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 shadow-md hover:shadow-lg">
+                Donate ${{ donation.amount || '' }}
               </button>
-              <p class="mt-3 text-xs text-gray-500 text-center">
-                <svg class="w-4 h-4 inline-block mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              <div class="mt-2 flex items-center justify-center space-x-2 text-gray-500">
+                <svg class="w-3.5 h-3.5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
-                Secure and encrypted donation
-              </p>
+                <span class="text-[11px]">Secure and encrypted donation</span>
+              </div>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script setup>
@@ -356,7 +338,7 @@ const showDonationModal = ref(false);
 const selectedInitiative = ref('');
 
 const donation = reactive({
-  amount: 25,
+  amount: null,
   firstName: '',
   lastName: '',
   email: '',
@@ -391,7 +373,7 @@ const handleDonation = () => {
   
   // Reset form
   Object.assign(donation, {
-    amount: 25,
+    amount: null,
     firstName: '',
     lastName: '',
     email: '',

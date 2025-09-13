@@ -129,7 +129,7 @@
           <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="relative group order-2 md:order-1">
               <img
-                src="https://images.unsplash.com/photo-1594121405103-60f1b299e57e?q=80&w=2787&auto=format&fit=crop"
+                src="/images/whatwedo.jpg"
                 alt="Group of diverse people working together"
                 class="rounded-3xl shadow-2xl transform transition-transform duration-500 ease-in-out group-hover:scale-105"
               />

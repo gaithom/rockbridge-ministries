@@ -94,7 +94,20 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  // Add scroll behavior to ensure pages start from the top
+  scrollBehavior(to, from, savedPosition) {
+    // If there's a hash, scroll to that element
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+        top: 100 // Offset for fixed header if needed
+      }
+    }
+    // Always scroll to top when navigating to a new route
+    return { top: 0, behavior: 'smooth' }
+  }
 })
 
 export default router 

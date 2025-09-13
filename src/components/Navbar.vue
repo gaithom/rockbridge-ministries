@@ -1,21 +1,29 @@
 <template>
   <!-- Top navigation bar: fixed, with dynamic background based on scroll/hover -->
   <nav
-    :class="['fixed w-full z-50 transition-all duration-300', 
-            (scrolledUp && !isBoardAndStaffPage) ? 'bg-opacity-10' : 'bg-gray-900 shadow-md']"
+    :class="['fixed w-full z-50 transition-all duration-100 ease-linear',]"
+    :style="{
+      backgroundColor: scrolledUp && !isBoardAndStaffPage ? '' : 'rgb(17, 24, 39)',
+      backdropFilter: scrolledUp && !isBoardAndStaffPage ? 'none' : 'blur(8px)'
+    }"
     @mouseleave="restoreTransparency"
   >
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
 
       <!-- Logo and Brand linking back to home -->
       <div class="flex items-center space-x-3">
-        <router-link to="/" class="flex items-center space-x-3">
-          <div class="relative">
-            <img src="/images/logo.jpg" alt="Rock Bridge Ministries" class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm" />
+        <router-link to="/" class="flex items-center space-x-3 group">
+          <div class="relative transform transition-all duration-500 group-hover:rotate-6 group-hover:scale-105">
+            <img 
+              src="/images/logo.jpg" 
+              alt="Rock Bridge Ministries" 
+              class="w-16 h-16 rounded-full object-cover border-2 border-amber-300/80 shadow-md transition-all duration-300 group-hover:border-amber-200 group-hover:shadow-lg" 
+            />
+            <div class="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-amber-200 group-hover:animate-ping-slow opacity-0 group-hover:opacity-50"></div>
           </div>
-          <div class="text-white hidden sm:block">
-            <h1 class="text-2xl font-bold leading-tight">R.O.C.K. Bridge</h1>
-            <h2 class="text-2xl font-bold leading-tight">Ministries</h2>
+          <div class="text-amber-50 hidden sm:block transition-all duration-300 group-hover:text-amber-200">
+            <h1 class="text-2xl font-bold leading-tight transform transition-all duration-200 group-hover:translate-x-0.5">R.O.C.K. Bridge</h1>
+            <h2 class="text-2xl font-bold leading-tight transform transition-all duration-200 group-hover:translate-x-0.5">Ministries</h2>
           </div>
         </router-link>
       </div>
@@ -26,19 +34,22 @@
         <!-- Home -->
         <router-link
           to="/"
-          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300"
+          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group relative overflow-hidden"
           active-class="underline decoration-amber-500 decoration-2 underline-offset-8"
+          @click="handleNavigation"
         >
-          <i class="fas fa-home mr-2 text-slate-500"></i> 
-          <span class="font-medium">Home</span>
+          <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-full group-hover:translate-x-0"></span>
+          <i class="fas fa-home mr-2 text-slate-500 group-hover:text-amber-400 transition-transform duration-300 group-hover:scale-110"></i> 
+          <span class="font-medium relative group-hover:text-white transition-all duration-300">Home</span>
         </router-link>
 
         <!-- About Dropdown -->
-        <div class="relative group">
-          <router-link to="/about" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200" active-class="underline decoration-amber-500 decoration-2 underline-offset-8">
-            <i class="fas fa-info-circle mr-2 text-slate-500"></i> 
-            <span class="font-medium">About</span>
-            <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
+        <div class="relative group" v-motion-slide-visible-once-bottom>
+          <router-link to="/about" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden" active-class="underline decoration-amber-500 decoration-2 underline-offset-8" @click="handleNavigation">
+            <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover/nav-item:opacity-100 transition-all duration-300 transform -translate-x-full group-hover/nav-item:translate-x-0"></span>
+            <i class="fas fa-info-circle mr-2 text-slate-500 group-hover/nav-item:text-amber-400 transition-transform duration-300 group-hover/nav-item:scale-110"></i> 
+            <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">About</span>
+            <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-300"></i>
           </router-link>
 
           <!-- Hover dropdown menu for About section -->
@@ -68,11 +79,12 @@
         </div>
         
         <!-- Our Ministries Dropdown -->
-        <div class="relative group">
-          <router-link to="/our-ministries" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200" active-class="underline decoration-amber-500 decoration-2 underline-offset-8">
-            <i class="fas fa-church mr-2 text-slate-500"></i> 
-            <span class="font-medium">Our Ministries</span>
-            <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
+        <div class="relative group" v-motion-slide-visible-once-bottom :delay="100">
+          <router-link to="/our-ministries" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden" active-class="underline decoration-amber-500 decoration-2 underline-offset-8" @click="handleNavigation">
+            <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover/nav-item:opacity-100 transition-all duration-300 transform -translate-x-full group-hover/nav-item:translate-x-0"></span>
+            <i class="fas fa-church mr-2 text-slate-500 group-hover/nav-item:text-amber-400 transition-transform duration-300 group-hover/nav-item:scale-110"></i> 
+            <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">Our Ministries</span>
+            <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-300"></i>
           </router-link>
           <!-- Hover dropdown menu for Our Ministries -->
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-gray-900 rounded-lg shadow-xl mt-2 py-2 w-56 border border-gray-800 z-50">
@@ -105,11 +117,12 @@
         </div>
         
         <!-- Get Involved Dropdown -->
-        <div class="relative group">
-          <router-link to="/get-involved" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200" active-class="underline decoration-amber-500 decoration-2 underline-offset-8">
-            <i class="fas fa-hands-helping mr-2 text-slate-500"></i> 
-            <span class="font-medium">Get Involved</span>
-            <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-200"></i>
+        <div class="relative group" v-motion-slide-visible-once-bottom :delay="200">
+          <router-link to="/get-involved" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden" active-class="underline decoration-amber-500 decoration-2 underline-offset-8" @click="handleNavigation">
+            <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover/nav-item:opacity-100 transition-all duration-300 transform -translate-x-full group-hover/nav-item:translate-x-0"></span>
+            <i class="fas fa-hands-helping mr-2 text-slate-500 group-hover/nav-item:text-amber-400 transition-transform duration-300 group-hover/nav-item:scale-110"></i> 
+            <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">Get Involved</span>
+            <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-300"></i>
           </router-link>
           <!-- Hover dropdown menu for Get Involved -->
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-gray-900 rounded-lg shadow-xl mt-2 py-2 w-56 border border-gray-800 z-50">
@@ -143,21 +156,27 @@
         <!-- Media and Resources -->
         <router-link 
           to="/media-and-resources" 
-          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200"
+          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group relative overflow-hidden"
           active-class="underline decoration-amber-500 decoration-2 underline-offset-8"
+          v-motion-slide-visible-once-bottom :delay="300"
+          @click="handleNavigation"
         >
-          <i class="fas fa-photo-video mr-2 text-slate-500"></i> 
-          <span class="font-medium">Media and Resources</span>
+          <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-full group-hover:translate-x-0"></span>
+          <i class="fas fa-photo-video mr-2 text-slate-500 group-hover:text-amber-400 transition-transform duration-300 group-hover:scale-110"></i> 
+          <span class="font-medium relative group-hover:text-white transition-all duration-300">Media and Resources</span>
         </router-link>
 
         <!-- Contact -->
         <router-link 
           to="/contact" 
-          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-200"
+          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group relative overflow-hidden"
           active-class="underline decoration-amber-500 decoration-2 underline-offset-8"
+          v-motion-slide-visible-once-bottom :delay="400"
+          @click="handleNavigation"
         >
-          <i class="fas fa-envelope mr-2 text-slate-500"></i> 
-          <span class="font-medium">Contact</span>
+          <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-full group-hover:translate-x-0"></span>
+          <i class="fas fa-envelope mr-2 text-slate-500 group-hover:text-amber-400 transition-transform duration-300 group-hover:scale-110"></i> 
+          <span class="font-medium relative group-hover:text-white transition-all duration-300">Contact</span>
         </router-link>
       </div>
 
@@ -170,199 +189,217 @@
           aria-label="Toggle navigation menu"
         >
           <span 
-            class="block absolute w-6 h-0.5 bg-white transform transition-all duration-300 ease-in-out"
-            :class="{'rotate-45 translate-y-0': mobileMenuOpen, '-translate-y-2': !mobileMenuOpen}"
+            :class="[
+              'block w-6 h-0.5 bg-amber-300 rounded-full transition-all duration-300',
+              mobileMenuOpen ? 'rotate-45 translate-y-1.5 bg-amber-200' : 'mb-1.5 bg-amber-300 group-hover:bg-amber-200'
+            ]"
           ></span>
           <span 
-            class="block absolute w-6 h-0.5 bg-white transform transition-all duration-300 ease-in-out"
-            :class="{'opacity-0': mobileMenuOpen, 'opacity-100': !mobileMenuOpen}"
+            :class="[
+              'block w-6 h-0.5 bg-amber-300 rounded-full transition-all duration-300',
+              mobileMenuOpen ? 'opacity-0' : 'opacity-100 mb-1.5 bg-amber-300 group-hover:bg-amber-200'
+            ]"
           ></span>
           <span 
-            class="block absolute w-6 h-0.5 bg-white transform transition-all duration-300 ease-in-out"
-            :class="{'-rotate-45 translate-y-0': mobileMenuOpen, 'translate-y-2': !mobileMenuOpen}"
+            :class="[
+              'block w-6 h-0.5 bg-amber-300 rounded-full transition-all duration-300',
+              mobileMenuOpen ? '-rotate-45 -translate-y-1.5 bg-amber-200' : 'bg-amber-300 group-hover:bg-amber-200'
+            ]"
           ></span>
         </button>
       </div>
     </div>
 
     <!-- Mobile Menu Overlay -->
-    <transition
-      enter-active-class="transition-opacity duration-300 ease-out"
-      leave-active-class="transition-opacity duration-200 ease-in"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div 
-        v-if="mobileMenuOpen" 
-        class="fixed inset-0 bg-black bg-opacity-75 z-40 lg:hidden"
-        @click="closeMobileMenu"
-      ></div>
-    </transition>
+    <div 
+      v-if="mobileMenuOpen" 
+      class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300"
+      @click="closeMobileMenu"
+    ></div>
 
     <!-- Mobile Menu Sidebar -->
-    <transition
-      enter-active-class="transition-transform duration-300 ease-out"
-      leave-active-class="transition-transform duration-200 ease-in"
-      enter-from-class="translate-x-full"
-      enter-to-class="translate-x-0"
-      leave-from-class="translate-x-0"
-      leave-to-class="translate-x-full"
+    <div 
+      :class="[
+        'fixed top-0 right-0 h-full w-4/5 max-w-sm bg-gradient-to-b from-gray-800 to-gray-900 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto',
+        mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      ]"
+      @click.stop
     >
-      <div 
-        v-if="mobileMenuOpen" 
-        class="fixed top-0 right-0 h-full w-4/5 max-w-md bg-gray-900 shadow-2xl z-50 overflow-y-auto"
-        @click.stop
-      >
-        <!-- Close button inside the menu -->
-        <div class="flex justify-end p-4">
-          <button 
-            @click="toggleMobileMenu" 
-            class="text-gray-400 hover:text-white focus:outline-none"
-          >
-            <i class="fas fa-times text-2xl"></i>
-          </button>
-        </div>
+      <!-- Close button inside the menu -->
+      <div class="flex justify-end p-4">
+        <button 
+          @click="toggleMobileMenu" 
+          class="text-amber-300 hover:text-amber-200 focus:outline-none"
+        >
+          <i class="fas fa-times text-2xl"></i>
+        </button>
+      </div>
 
-        <!-- Mobile Menu Items -->
-        <div class="px-6 py-2 space-y-1">
-        
+      <!-- Mobile Menu Items -->
+      <div class="px-4 py-2 space-y-1">
         <!-- Mobile Home -->
         <router-link 
           to="/" 
-          class="flex items-center text-slate-500 hover:bg-slate-500/10 px-4 py-3 rounded-lg transition-all duration-200"
-          @click="closeMobileMenu"
+          class="flex items-center text-amber-50 hover:bg-gray-700/50 px-4 py-3 rounded-lg transition-all duration-200 group"
+          :class="{'bg-gray-700/50': $route.path === '/'}"
+          @click="handleNavigation"
         >
-          <i class="fas fa-home mr-3 text-slate-500"></i> Home
+          <i class="fas fa-home mr-3 text-amber-300 group-hover:text-amber-200"></i>
+          <span>Home</span>
         </router-link>
         
         <!-- Mobile About Section -->
         <div class="space-y-1">
-          <div class="flex items-center text-slate-500 px-4 py-3 font-medium">
-            <i class="fas fa-info-circle mr-3 text-slate-500"></i> About
+          <div class="flex items-center text-amber-100 px-4 py-3 font-medium">
+            <i class="fas fa-info-circle mr-3 text-amber-300"></i> About
           </div>
           <div class="ml-6 space-y-1">
             <router-link 
               to="/about" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
+              class="block text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200"
+              :class="{'bg-gray-700/50': $route.path === '/about'}"
+              @click="handleNavigation"
             >
-              About
+              About Us
             </router-link>
             <router-link 
               to="/about/board-and-staff" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
+              class="block text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200"
+              :class="{'bg-gray-700/50': $route.path === '/about/board-and-staff'}"
+              @click="handleNavigation"
             >
               Board and Staff
             </router-link>
             <router-link 
               to="/about/history" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
+              class="block text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200"
+              :class="{'bg-gray-700/50': $route.path === '/about/history'}"
+              @click="handleNavigation"
             >
-              History
+              Our History
             </router-link>
           </div>
-        </div>
-        
-        <!-- Mobile Ministries Section -->
-        <div class="space-y-1">
-          <div class="flex items-center text-slate-500 px-4 py-3 font-medium">
-            <i class="fas fa-church mr-3 text-slate-500"></i> Our Ministries
-          </div>
-          <div class="ml-6 space-y-1">
-            <router-link 
-              to="/our-ministries" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
-            >
-              Our Ministries
-            </router-link>
-            <router-link 
-              to="/our-ministries/education-scholarship" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
-            >
-              Education Scholarship
-            </router-link>
-            <router-link 
-              to="/our-ministries/social-enterprises" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
-            >
-              Social Enterprises
-            </router-link>
-            <router-link 
-              to="/our-ministries/workplace-evangelism" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
-            >
-              Workplace Evangelism
-            </router-link>
-          </div>
-        </div>
-        
-        <!-- Mobile Get Involved Section -->
-        <div class="space-y-1">
-          <router-link 
-            to="/get-involved" 
-            class="flex items-center text-slate-500 px-4 py-3 font-medium hover:bg-orange-500 hover:text-white rounded-lg transition-all duration-200"
-            @click="closeMobileMenu"
-          >
-            <i class="fas fa-hands-helping mr-3 text-slate-500"></i> Get Involved
-          </router-link>
-          <div class="ml-6 space-y-1">
-            <router-link 
-              to="/get-involved/how-to-support" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
-            >
-              How to Support
-            </router-link>
-            <router-link 
-              to="/get-involved/partner-with-us" 
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
-            >
-              Partner with Us
-            </router-link>
-            <router-link 
-              to="/get-involved/fund-our-programs"
-              class="block text-gray-300 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-200"
-              @click="closeMobileMenu"
-            >
-              Fund our Programs
-            </router-link>
-          </div>
-        </div>
-        <!-- Mobile Media and Resources -->
-        <router-link
-          to="/media-and-resources"
-          class="flex items-center text-slate-500 hover:bg-orange-500 px-4 py-3 rounded-lg transition-all duration-200"
-          @click="closeMobileMenu"
-        >
-          <i class="fas fa-photo-video mr-3 text-orange-500"></i> Media and Resources
-        </router-link>
-
-        <!-- Mobile Contact -->
-        <router-link
-          to="/contact"
-          class="flex items-center text-slate-500 hover:bg-orange-500 px-4 py-3 rounded-lg transition-all duration-200"
-          @click="closeMobileMenu"
-        >
-          <i class="fas fa-envelope mr-3 text-slate-500"></i> Contact
-        </router-link>
         </div>
       </div>
-    </transition>
+      
+      <!-- Mobile Get Involved Section -->
+      <div class="space-y-1">
+        <div class="flex items-center text-amber-100 px-4 py-3 font-medium">
+          <i class="fas fa-hands-helping mr-3 text-amber-300"></i> Get Involved
+        </div>
+        <div class="ml-6 space-y-1">
+          <router-link 
+            to="/get-involved/how-to-support" 
+            class="block text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200"
+            :class="{'bg-gray-700/50': $route.path === '/get-involved/how-to-support'}"
+            @click="handleNavigation"
+          >
+            How to Support
+          </router-link>
+          <router-link 
+            to="/get-involved/volunteer" 
+            class="block text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200"
+            :class="{'bg-gray-700/50': $route.path === '/get-involved/volunteer'}"
+            @click="handleNavigation"
+          >
+            Volunteer
+          </router-link>
+          <router-link 
+            to="/get-involved/fund-our-programs" 
+            class="block text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200"
+            :class="{'bg-gray-700/50': $route.path === '/get-involved/fund-our-programs'}"
+            @click="handleNavigation"
+          >
+            Fund our Programs
+          </router-link>
+        </div>
+      </div>
+      
+      <!-- Mobile Ministries Section -->
+      <div class="space-y-1">
+        <div class="flex items-center text-amber-100 px-4 py-3 font-medium">
+          <i class="fas fa-church mr-3 text-amber-300"></i> Our Ministries
+        </div>
+        <div class="ml-6 space-y-1">
+          <router-link 
+            to="/our-ministries/education-scholarship" 
+            class="block text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200"
+            :class="{'bg-gray-700/50': $route.path === '/our-ministries/education-scholarship'}"
+            @click="handleNavigation"
+          >
+            Education Scholarship
+          </router-link>
+          <router-link 
+            to="/our-ministries/evangelism" 
+            class="block text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200"
+            :class="{'bg-gray-700/50': $route.path === '/our-ministries/evangelism'}"
+            @click="handleNavigation"
+          >
+            Evangelism
+          </router-link>
+          <router-link 
+            to="/our-ministries/mentorship" 
+            class="block text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200"
+            :class="{'bg-gray-700/50': $route.path === '/our-ministries/mentorship'}"
+            @click="closeMobileMenu"
+          >
+            Mentorship
+          </router-link>
+          <router-link 
+            to="/our-ministries/workplace-evangelism" 
+            class="block text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200"
+            :class="{'bg-gray-700/50': $route.path === '/our-ministries/workplace-evangelism'}"
+            @click="handleNavigation"
+          >
+            Workplace Evangelism
+          </router-link>
+        </div>
+      </div>
+      <!-- Mobile Media & Resources -->
+      <router-link 
+        to="/media-and-resources" 
+        class="flex items-center text-amber-50 hover:bg-gray-700/50 px-4 py-3 rounded-lg transition-all duration-200 group"
+        :class="{'bg-gray-700/50': $route.path.startsWith('/media-and-resources')}"
+        @click="handleNavigation"
+      >
+        <i class="fas fa-photo-video mr-3 text-amber-300 group-hover:text-amber-200"></i> 
+        <span>Media & Resources</span>
+      </router-link>
 
+      <!-- Mobile Contact -->
+      <router-link 
+        to="/contact" 
+        class="flex items-center text-amber-50 hover:bg-gray-700/50 px-4 py-3 rounded-lg transition-all duration-200 group"
+        :class="{'bg-gray-700/50': $route.path === '/contact'}"
+        @click="handleNavigation"
+      >
+        <i class="fas fa-envelope mr-3 text-amber-300 group-hover:text-amber-200"></i> 
+        <span>Contact Us</span>
+      </router-link>
+    </div>
 </nav>
 </template>
 
+<!-- ... -->
+@keyframes ping-slow {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.animate-ping-slow {
+  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+// VueUse Motion directives are auto-imported and available globally
 import { useRoute } from 'vue-router'
 
 // Whether the navbar should appear transparent (true at very top and not hovered)
@@ -371,10 +408,11 @@ const scrolledUp = ref(true)
 const lastScrollY = ref(0)
 const mobileMenuOpen = ref(false)
 const isHovered = ref(false)
+let ticking = false
 
-// Check if current route is the Board and Staff page
+// Check if current route should maintain solid navbar background
 const isBoardAndStaffPage = computed(() => {
-  return route.path.includes('board-and-staff')
+  return route.path.includes('board-and-staff') || route.path.includes('how-to-support')
 })
 
 // Toggle mobile menu open state
@@ -391,11 +429,28 @@ const toggleMobileMenu = () => {
   }
 }
 
-// Close mobile menu (called on link click)
+// Close mobile menu and scroll to top (called on link click)
 const closeMobileMenu = () => {
   mobileMenuOpen.value = false
+  // Smooth scroll to top after a small delay to allow menu to close
+  setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }, 100)
   // Re-enable body scroll
   document.body.style.overflow = 'auto'
+}
+
+// Handle navigation with scroll to top
+const handleNavigation = () => {
+  closeMobileMenu()
+  // Additional scroll to top to ensure it happens even if menu was already closed
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
 }
 
 // Force opaque background while hovered
@@ -413,10 +468,11 @@ const restoreTransparency = () => {
 
 // Update scrolledUp based on current scroll (unless hovered)
 const handleScroll = () => {
-  // If not hovered, reflect scroll position; if hovered we keep it opaque
-  if (!isHovered.value) {
-    scrolledUp.value = window.scrollY === 0
-  }
+  if (isHovered.value) return
+  // Use requestAnimationFrame for smoother updates
+  window.requestAnimationFrame(() => {
+    scrolledUp.value = window.scrollY < 10
+  })
 }
 
 onMounted(() => {

@@ -17,7 +17,7 @@
       <div class="relative max-w-7xl mx-auto h-full flex items-center px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center">
           <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight tracking-tight drop-shadow-lg">
-            Partner with Us
+            Partner
           </h1>
         </div>
       </div>
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Intro strip -->
-        <div class="bg-amber-50 border border-amber-100 rounded-2xl p-6 md:p-8 mb-12 text-center w-full">
+        <div class=" rounded-2xl p-6 md:p-8 mb-12 text-center w-full">
           <p class="text-gray-700 text-base md:text-lg max-w-4xl mx-auto">
             Partner with R.O.C.K Bridge Ministries through workplace evangelism, education scholarships, and social enterprises.
             Your partnership fuels sustainable, Gospel-centered impact in Kenya.
@@ -48,7 +48,7 @@
           <!-- Top row with two cards side by side -->
           <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
             <!-- Workplace Evangelism Card -->
-            <section class="group bg-white border border-slate-200 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
+            <section class=" rounded-3xl p-8 shadow-sm hover: duration-300 hover:-translate-y-1 h-full">
             <div class="flex items-start gap-4 mb-4">
               <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center shadow-inner">
                 <svg class="w-7 h-7 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -78,7 +78,7 @@
             </ul>
             </section>
             <!-- Education Scholarships Card -->
-            <section class="group bg-white border border-slate-200 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
+            <section class=" rounded-3xl p-8 shadow-sm hover: duration-300 hover:-translate-y-1 h-full">
             <div class="flex items-start gap-4 mb-4">
               <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center shadow-inner">
                 <svg class="w-7 h-7 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -114,7 +114,7 @@
           </div>
           
           <!-- Social Enterprises Card - Full Width -->
-          <section class="group bg-white border border-slate-200 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 w-full">
+          <section class=" rounded-3xl p-8 duration-300 hover:-translate-y-1 h-full">
             <div class="flex items-start gap-4 mb-4">
               <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center shadow-inner">
                 <svg class="w-7 h-7 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

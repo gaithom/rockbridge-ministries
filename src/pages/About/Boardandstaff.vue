@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-gray-50 min-h-screen antialiased text-gray-800 pt-24">
+  <div class="bg-gray-50 min-h-screen antialiased text-gray-800 pt-32 md:pt-36">
     <div class="container mx-auto px-6">
       <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4 text-center">Board and Staff</h1>
-      <div class="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto mb-8"></div>
+
       <p class="text-lg text-slate-600 max-w-3xl mx-auto text-center mb-12">
         Meet the dedicated leaders of R.O.C.K Bridge Ministries.
       </p>

@@ -19,7 +19,7 @@
         <div class="space-y-12">
           <div>
             <h2 class="text-2xl font-bold mb-6">Get in Touch!</h2>
-            
+
             <div class="bg-white p-8 rounded-lg shadow-xl space-y-6">
               <div>
                 <h3 class="font-semibold text-lg flex items-center mb-2">
