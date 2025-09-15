@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
+    "@splidejs/vue-splide": "^0.6.12",
     "@tailwindcss/vite": "^4.1.13",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "aos": "^2.3.4",
