@@ -151,7 +151,7 @@ const mediaItems = [
     id: 12,
     name: "FAITH'S STORY VIDEO",
     image: "/images/faith.jpg",
-    route: "/media-and-resources/faith-video"
+    route: "/media-and-resources/faith-story-video"
   },
   {
     id: 12,

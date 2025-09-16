@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gray-50 pt-32">
     <div class="container mx-auto px-4 max-w-4xl">
       <h1 class="text-3xl font-bold mb-6 text-gray-800">TUMAINI BETHANY VIDEO</h1>
-      
+
       <div class="bg-white rounded-lg shadow-lg overflow-hidden">
         <div class="relative pt-[56.25%]"> <!-- 16:9 Aspect Ratio -->
           <iframe
@@ -14,8 +14,12 @@
             allowfullscreen
           ></iframe>
         </div>
-        
+
         <div class="p-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-2">Tumaini Bethany children's home</h2>
+          <p class="text-gray-600">
+            A look at our Tumaini Bethany children's home in Kenya, where we provide a place for children to come together and learn about Jesus Christ.
+          </p>
         </div>
       </div>
     </div>

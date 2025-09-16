@@ -28,14 +28,14 @@ import HolidayHomesPhotos from '../pages/Media and Resouces/Holiday homes photos
 import CleanWaterInitiatives from '../pages/Media and Resouces/Clean water initiatives.vue'
 import LishAiLabs from '../pages/Media and Resouces/Lish AI Labs.vue'
 import MedicalClinicPhotos from '../pages/Media and Resouces/Medical clinic photos.vue'
-import FaithVideo from '../pages/Media and Resouces/videos/Faith video.vue'
-import MedicalTripVideo from '../pages/Media and Resouces/videos/Medical trip video.vue'
-import NursingCollegeVideo from '../pages/Media and Resouces/videos/Nursing college video.vue'
+import FaithStoryVideo from '../pages/Media and Resouces/videos/Faith-story-video.vue'
+import MedicalTripVideo from '../pages/Media and Resouces/videos/Medical-trip-video.vue'
+import NursingCollegeVideo from '../pages/Media and Resouces/videos/Nursing-college-video.vue'
 import OverviewVideo from '../pages/Media and Resouces/videos/Overview.vue'
-import TumainiCenterVideo from '../pages/Media and Resouces/videos/Tumaini center video.vue'
-import TumainiBethanyVideo from '../pages/Media and Resouces/videos/Tumaini bethany video.vue'
-import WorkplaceVideo from '../pages/Media and Resouces/videos/Work place video.vue'
-import YouthVideo from '../pages/Media and Resouces/videos/Youth video.vue'
+import TumainiCenterVideo from '../pages/Media and Resouces/videos/Tumaini-center-video.vue'
+import TumainiBethanyVideo from '../pages/Media and Resouces/videos/Tumaini-bethany-video.vue'
+import WorkplaceVideo from '../pages/Media and Resouces/videos/Work-place-video.vue'
+import YouthVideo from '../pages/Media and Resouces/videos/Youth-video.vue'
 import PrivacyPolicy from '../pages/PrivacyPolicy.vue'
 import TermsOfService from '../pages/TermsOfService.vue'
 import Sitemap from '../pages/Sitemap.vue'
@@ -178,9 +178,9 @@ const routes = [
     component: MedicalClinicPhotos
   },
   {
-    path: '/media-and-resources/faith-video',
-    name: 'faith-video',
-    component: FaithVideo
+    path: '/media-and-resources/faith-story-video',
+    name: 'faith-story-video',
+    component: FaithStoryVideo
   },
   {
     path: '/media-and-resources/medical-trip-video',
