@@ -135,27 +135,45 @@ const mediaItems = [
     image: "/images/youth.jpg",
     route: "/media-and-resources/youth-video"
   },
-  // Second section items
   {
     id: 11,
+    name: "MEDICAL TRIP VIDEO",
+    image: "/images/medicaltrip.jpg",
+    route: "/media-and-resources/medical-trip-video"
+  },
+{
+    id: 12,
+    name: "TUMAINI CENTER VIDEO",
+    image: "/images/tumainicenter.jpg",
+    route: "/media-and-resources/tumaini-center-video"
+},
+  // Second section items
+  {
+    id: 12,
     name: "FAITH'S STORY VIDEO",
     image: "/images/faith.jpg",
     route: "/media-and-resources/faith-video"
   },
   {
     id: 12,
+    name: "TUMAINI BETHANY VIDEO",
+    image: "/images/tumainibethany.jpg",
+    route: "/media-and-resources/tumaini-bethany-video"
+  },
+  {
+    id: 13,
     name: "ROCK Bridge Scholarship Beneficiaries Graduating from PCEA",
     image: "/images/Franciskenji.jpg",
     route: "/media-and-resources/the-dream-of-a-doctor"
   },
   {
-    id: 13,
+    id: 14,
     name: "HOLIDAY HOMES PHOTOS",
     image: "/images/Marthamuiruri.jpg",
     route: "/media-and-resources/the-dream-of-a-doctor"
   },
   {
-    id: 14,
+    id: 15,
     name: "CLEAN WATER INITITATIVE",
     image: "/images/Bensonnjuguna.png",
     route: "/media-and-resources/the-dream-of-a-doctor"

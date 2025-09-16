@@ -8,6 +8,7 @@
               class="fill-current text-amber-600 opacity-20"></path>
       </svg>
     </div>
+    
     <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div class="flex flex-col group">
@@ -152,9 +153,9 @@
             &copy; {{ new Date().getFullYear() }} Rock Bridge Ministries. All rights reserved.
           </p>
           <div class="flex space-x-6">
-            <a href="#" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Privacy Policy</a>
-            <a href="#" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Terms of Service</a>
-            <a href="#" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Sitemap</a>
+            <router-link to="/privacy-policy" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Privacy Policy</router-link>
+            <router-link to="/terms-of-service" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Terms of Service</router-link>
+            <router-link to="/sitemap" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Sitemap</router-link>
           </div>
         </div>
       </div>

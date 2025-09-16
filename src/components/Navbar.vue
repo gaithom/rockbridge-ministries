@@ -1,12 +1,13 @@
 <template>
   <!-- Top navigation bar: fixed, with dynamic background based on scroll/hover -->
   <nav
-    :class="['fixed w-full z-50 transition-all duration-100 ease-linear',]"
+    :class="['fixed w-full z-50 transition-all duration-300 ease-in-out',]"
     :style="{
-      backgroundColor: scrolledUp && !isBoardAndStaffPage ? '' : 'rgb(17, 24, 39)',
-      backdropFilter: scrolledUp && !isBoardAndStaffPage ? 'none' : 'blur(8px)'
+      backgroundColor: isMediaAndResourcesPage ? 'rgb(17, 24, 39)' : (scrolledUp && !isBoardAndStaffPage ? '' : 'rgb(17, 24, 39)'),
+      backdropFilter: isMediaAndResourcesPage ? 'none' : (scrolledUp && !isBoardAndStaffPage ? 'none' : 'blur(8px)')
     }"
-    @mouseleave="restoreTransparency"
+    
+    @mouseleave="isMediaAndResourcesPage ? null : restoreTransparency()"
   >
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
 
@@ -45,7 +46,7 @@
 
         <!-- About Dropdown -->
         <div class="relative group" v-motion-slide-visible-once-bottom>
-          <router-link to="/about" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden" active-class="underline decoration-amber-500 decoration-2 underline-offset-8" @click="handleNavigation">
+          <router-link to="/about" :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', { 'underline decoration-amber-500 decoration-2 underline-offset-8': isAboutActive }]" @click="handleNavigation">
             <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover/nav-item:opacity-100 transition-all duration-300 transform -translate-x-full group-hover/nav-item:translate-x-0"></span>
             <i class="fas fa-info-circle mr-2 text-slate-500 group-hover/nav-item:text-amber-400 transition-transform duration-300 group-hover/nav-item:scale-110"></i> 
             <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">About</span>
@@ -54,10 +55,6 @@
 
           <!-- Hover dropdown menu for About section -->
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-gray-900 rounded-lg shadow-xl mt-2 py-2 w-56 border border-gray-800 z-50">
-           
-
-      
-
             <!-- Board and Staff -->
             <router-link 
               to="/about/board-and-staff" 
@@ -80,7 +77,7 @@
         
         <!-- Our Ministries Dropdown -->
         <div class="relative group" v-motion-slide-visible-once-bottom :delay="100">
-          <router-link to="/our-ministries" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden" active-class="underline decoration-amber-500 decoration-2 underline-offset-8" @click="handleNavigation">
+          <router-link to="/our-ministries" :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', { 'underline decoration-amber-500 decoration-2 underline-offset-8': isOurMinistriesActive }]" @click="handleNavigation">
             <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover/nav-item:opacity-100 transition-all duration-300 transform -translate-x-full group-hover/nav-item:translate-x-0"></span>
             <i class="fas fa-church mr-2 text-slate-500 group-hover/nav-item:text-amber-400 transition-transform duration-300 group-hover/nav-item:scale-110"></i> 
             <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">Our Ministries</span>
@@ -118,7 +115,7 @@
         
         <!-- Get Involved Dropdown -->
         <div class="relative group" v-motion-slide-visible-once-bottom :delay="200">
-          <router-link to="/get-involved" class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden" active-class="underline decoration-amber-500 decoration-2 underline-offset-8" @click="handleNavigation">
+          <router-link to="/get-involved" :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', { 'underline decoration-amber-500 decoration-2 underline-offset-8': isGetInvolvedActive }]" @click="handleNavigation">
             <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover/nav-item:opacity-100 transition-all duration-300 transform -translate-x-full group-hover/nav-item:translate-x-0"></span>
             <i class="fas fa-hands-helping mr-2 text-slate-500 group-hover/nav-item:text-amber-400 transition-transform duration-300 group-hover/nav-item:scale-110"></i> 
             <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">Get Involved</span>
@@ -250,8 +247,8 @@
         
         <!-- Mobile About Section -->
         <div class="space-y-1">
-          <div class="flex items-center text-amber-100 px-4 py-3 font-medium">
-            <i class="fas fa-info-circle mr-3 text-amber-300"></i> About
+          <div :class="['flex items-center text-amber-100 px-4 py-3 font-medium', { 'text-amber-300': isAboutActive }]">
+            <i class="fas fa-info-circle mr-3"></i> About
           </div>
           <div class="ml-6 space-y-1">
             <router-link 
@@ -284,8 +281,8 @@
       
       <!-- Mobile Get Involved Section -->
       <div class="space-y-1">
-        <div class="flex items-center text-amber-100 px-4 py-3 font-medium">
-          <i class="fas fa-hands-helping mr-3 text-amber-300"></i> Get Involved
+        <div :class="['flex items-center text-amber-100 px-4 py-3 font-medium', { 'text-amber-300': isGetInvolvedActive }]">
+          <i class="fas fa-hands-helping mr-3"></i> Get Involved
         </div>
         <div class="ml-6 space-y-1">
           <router-link 
@@ -317,8 +314,8 @@
       
       <!-- Mobile Ministries Section -->
       <div class="space-y-1">
-        <div class="flex items-center text-amber-100 px-4 py-3 font-medium">
-          <i class="fas fa-church mr-3 text-amber-300"></i> Our Ministries
+        <div :class="['flex items-center text-amber-100 px-4 py-3 font-medium', { 'text-amber-300': isOurMinistriesActive }]">
+          <i class="fas fa-church mr-3"></i> Our Ministries
         </div>
         <div class="ml-6 space-y-1">
           <router-link 
@@ -380,21 +377,6 @@
 </nav>
 </template>
 
-<!-- ... -->
-@keyframes ping-slow {
-  0% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-
-.animate-ping-slow {
-  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
 
 
 <script setup lang="ts">
@@ -414,6 +396,16 @@ let ticking = false
 const isBoardAndStaffPage = computed(() => {
   return route.path.includes('board-and-staff') || route.path.includes('how-to-support')
 })
+
+// Check if current page is Media and Resources page
+const isMediaAndResourcesPage = computed(() => {
+  return route.path.includes('media-and-resources') && !route.path.includes('videos')
+})
+
+// Computed properties to check for active parent routes
+const isAboutActive = computed(() => route.path.startsWith('/about'))
+const isOurMinistriesActive = computed(() => route.path.startsWith('/our-ministries'))
+const isGetInvolvedActive = computed(() => route.path.startsWith('/get-involved'))
 
 // Toggle mobile menu open state
 const toggleMobileMenu = () => {
@@ -466,12 +458,13 @@ const restoreTransparency = () => {
   scrolledUp.value = window.scrollY === 0
 }
 
-// Update scrolledUp based on current scroll (unless hovered)
+// Update scrolledUp based on current scroll
 const handleScroll = () => {
-  if (isHovered.value) return
+  if (isHovered.value || isMediaAndResourcesPage.value) return
+  
   // Use requestAnimationFrame for smoother updates
   window.requestAnimationFrame(() => {
-    scrolledUp.value = window.scrollY < 10
+    scrolledUp.value = isMediaAndResourcesPage.value ? false : window.scrollY < 10
   })
 }
 

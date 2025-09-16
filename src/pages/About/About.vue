@@ -38,11 +38,11 @@
               class="space-y-6 text-center md:text-center max-w-3xl lg:max-w-4xl"
             >
               <span
-                class="inline-block text-amber-600 font-semibold text-sm uppercase tracking-wider"
+                class="inline-block text-amber-600 font-semibold  text-2xl  uppercase tracking-wider"
                 >Our Foundation</span
               >
               <h2
-                class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight"
+                class="text-3xl md:text-2xl font-bold text-slate-900 leading-tight"
               >
                 Who We Are
               </h2>
