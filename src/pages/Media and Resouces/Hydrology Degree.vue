@@ -1,131 +1,63 @@
 <template>
-    <section class="max-w-6xl mx-auto px-6 py-12 pt-30 space-y-16">
-      <!-- Top Row -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <!-- Text -->
-        <div>
-          <h2 class="text-2xl font-bold text-gray-800 mb-4">
-            Simon Kingori’s Journey to Nursing: A Story of Determination and Hope
-          </h2>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Simon Kingori is a young man from Kenya who is determined to break the
-            cycle of poverty and become a nurse. His journey has not been easy,
-            but his determination and passion for helping others have never
-            wavered.
-          </p>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Simon was born into a humble background. The first born among four
-            others. His father is unreliable and often out of work, and his mother
-            is a casual laborer who often works in other peoples’ farms at a daily
-            wage of Kshs 200 per day ($1.36) -which is not easily available
-            especially during the dry season.
-          </p>
-        </div>
-        <!-- Image -->
-        <div>
-          <img
-            src="/images/WhatsApp-Image-2023-09-14-at-1.34.27-PM.jpeg"
-            alt="FinTech Hub Launch"
-            class="rounded-lg shadow-md"
-          />
-        </div>
+  <section class="max-w-6xl mx-auto px-6 py-12 pt-30 space-y-16">
+    <!-- Top Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Text -->
+      <div>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          In the heart of Njoro, Nakuru County, a remarkable individual named
+          Everlyne Aluso has emerged as a beacon of hope and resilience. Through
+          the support of R.O.C.K Bridge Ministries (RBM), Aluso has not only
+          realized her dream of pursuing higher education but also secured a
+          pivotal role as a site manager for the upcoming holiday homes. Her
+          journey is a testament to the resilience, transformative power of
+          education and the profound impact of organizations like RBM.
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          Aluso’s journey with RBM began in 2012 when she was at a form 2.
+          Facing financial constraints, she encountered a significant hurdle in
+          her pursuit of a university education. Undeterred, she spent two years
+          working at a flower farm near her home, Sunripe Flowers, supporting
+          her family with her meager earnings of $3 per day. Her determination
+          to overcome obstacles and create a brighter future for herself fueled
+          her resolve.
+        </p>
+        <img
+          src="/images/IMG_20230703_153915-scaled.jpg"
+          alt="Event Audience"
+          class="rounded-lg shadow-md mb-6"
+        />
+        <p class="text-gray-700 leading-relaxed mb-5">
+          During her tenure as a site manager, Aluso has gained invaluable experiences and insights. Interacting with people effectively and managing resources have been among the most significant lessons she has learned. Each day presents new challenges, allowing her to develop resilience and adaptability, and further honing her leadership skills.
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-5"> Reflecting on the impact of RBM in her life, Aluso expresses her profound gratitude for the holistic transformation she has undergone. RBM not only provided her with access to quality education but also offered her a stable job as a site manager, enabling her to support her family and contribute to her community. She humorously acknowledges that the opportunity has even given her a good reputation, further highlighting the positive influence RBM has had on her life.</p>
       </div>
-  
-      <!-- Bottom Row -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <!-- Image -->
+      <!-- Image -->
+      <div>
+        <img
+          src="/images/IMG_20230703_153849-scaled.jpg"
+          alt="FinTech Hub Launch"
+          class="rounded-lg shadow-md"
+        />
+        <p class="text-gray-700 leading-relaxed mb-5">
+          A Solution for Her Community: Hailing from Kitui, a semi-arid region in Southeastern Kenya University, Aluso experienced firsthand the devastating effects of drought and water scarcity. Motivated by a desire to find sustainable solutions to these challenges, she was inspired to study hydrology. RBM’s scholarship became the catalyst that enabled her to pursue her chosen field of study, leading to her graduation with a Bachelor of Science in Hydrology in 2022.  
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-6">
+          Upon completing her studies, Aluso, like many graduates, eagerly awaited job opportunities. After an 8-month wait, RBM reached out to her with an offer to work as a site manager for the holiday homes project. Seizing the opportunity, she embraced her new role, which encompassed various responsibilities such as stock management, supervision, payroll administration, material procurement, and logistics. Thriving in a male-dominated sector, Aluso views her position as both a privilege and an opportunity to break barriers and inspire other women.
+        </p>
         <div>
-          <img
-            src="/images/WhatsApp-Image-2023-09-14-at-1.34.39-PM.jpeg"
-            alt="Event Audience"
-            class="rounded-lg shadow-md"
-          />
-        </div>
-        <!-- Text -->
-        <div>
-          <p class="text-gray-700 leading-relaxed mb-5">
-            Simon excelled in school and graduated from high school in the year
-            201l where he scored a (B+) but could not enroll to the university.
-            Upon realizing that he couldn’t raise the tuition fee, he decided to
-            look for a job to support his family and hopefully raise fees to
-            further his education. Simon worked odd jobs for several years, but he
-            never gave up on his dream of becoming a nurse.
-          </p>
-          <p class="text-gray-700 leading-relaxed">
-            he also does laundry for the same amount regardless of the hours input
-            for the whole day. She has single handedly struggled to make ends meet
-            and fed for her children. Due to their financial challenges, Simon’s
-            parents were unable to take their children to school but Simon being
-            bright and disciplined child was supported through primary and high
-            school by a well-wisher.
-          </p>
-        </div>
+        <img
+          src="/images/IMG_20230703_153307-scaled.jpg"
+          alt="Guests at FinTech Hub"
+          class="rounded-lg shadow-md mb-6"
+        />
+        <p class="text-gray-700 leading-relaxed mb-4">
+          To the generous supporters of RBM’s programs, Aluso extends her heartfelt appreciation for their contributions. She urges them to continue supporting the Holiday Homes project to its completion, knowing that the proceeds will bring about transformative impact in the lives of more young boys and girls like herself. The project’s completion will not only generate employment opportunities for the local community but also serve as a demonstration to the lasting change that can be achieved through collective efforts. 
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-4">Everlyne Aluso’s inspiring journey with R.O.C.K Bridge Ministries exemplifies the remarkable potential that lies within individuals when provided with education, empowerment, and opportunities. Through RBM’s support, Aluso has transformed her life and become a role model for her siblings and friends at home. Her story serves as a reminder of the importance of investing in education and offering individuals the chance to thrive, ultimately empowering entire communities to flourish.</p>
       </div>
-    </section>
-    <section class="max-w-6xl mx-auto px-6 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-        <!-- LEFT COLUMN -->
-        <div>
-          <img
-            src="/images/WhatsApp-Image-2023-09-14-at-1.34.41-PM.jpeg"
-            alt="Event Audience"
-            class="rounded-lg shadow-md mb-6"
-          />
-          <p class="text-gray-700 leading-relaxed">
-            Simon then worked as a casual laborer and a motorbike rider at night and also with the driving skills he looked for extra jobs as a taxi driver to save money for his education. He saved up another Ksh 10,000 ($68) and bought a Medical Surgical book.With kes 1500($10.2) he bravely approached the principal of  Lake Lawrenzo College of Nursing and enrolled for his course hoping to be able to raise the fees in installments. He has been in and out of school with a fee’s arrears of ksh 93,000 ($633)
-          </p>
-        </div>
-  
-        <!-- RIGHT COLUMN -->
-        <div>
-          <img
-            src="/images/WhatsApp-Image-2023-09-14-at-1.34.38-PM.jpeg"
-            alt="Guests at FinTech Hub"
-            class="rounded-lg shadow-md mb-6"
-          />
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Simon saved up 30,000 Kenyan shillings ($ 204) to enroll himself at Laikipia University, but he was unable to raise enough money to cover his tuition fees for the full year. He was forced to drop out of school again.
-          </p>
-        </div>
+
       </div>
-    </section>
-    <!-- NEW SECTION WITH IMPACT COLUMN ON THE LEFT -->
-    <section class="max-w-6xl mx-auto px-6 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-        <!-- LEFT COLUMN (Impact Section) -->
-        <div>
-          <img
-            src="/images/WhatsApp-Image-2023-09-14-at-1.34.22-PM.jpeg"
-            alt="Guests at FinTech Hub"
-            class="rounded-lg shadow-md mb-6 h-full"
-          />
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Mr’s Mburu decided to refer the case to ROCK Bridge Ministries for a possible scholarship consideration. RBM decided to do a home visit, which is one of the criteria of selecting beneficiaries, to ascertain the need. It was evident that Simon needed the support to completer the remaining part of his course and help him actualize a 13-year journey of becoming a medic.
-          </p>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Simon is now in his second year of studies at Lake Lawrenzo College of Nursing. He is excelling in his classes and is determined to graduate at the top of his class. He is also working part-time as a nurse’s aide to gain experience and support his family.
-          </p>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            An inspiration to us all. Simon shows us that anything is possible if we set our minds to it. Simon is determined to use his skills as a nurse to help others, especially those from humble backgrounds.
-          </p>
-        </div>
-        <!-- RIGHT COLUMN -->
-        <div>
-          <img
-            src="/images/WhatsApp-Image-2023-09-14-at-1.34.37-PM.jpeg"
-            alt="Guests at FinTech Hub"
-            class="rounded-lg shadow-md mb-6"
-          />
-          <p class="text-gray-700 leading-relaxed mb-6">
-            Out of desperation, he opted to sell the medical book to one of the lecturers, Mr’s Mburu. The idea was to raise money to sustain him in school for a certain period and be allowed to sit for external exams. It’s a that point that Mr’s Mburu was curious to know why Simon is selling a very expensive book. Upon inquiring from Simon, she found out that the young man is struggling to raise school fee, take care of his basic needs as well that of his family.
-          </p>
-          <img
-            src="/images/WhatsApp-Image-2023-09-15-at-2.01.16-PM-2.jpeg"
-            alt="Guests at FinTech Hub"
-            class="rounded-lg shadow-md mb-6"
-          />
-        </div>
-      </div>
-    </section>
-  </template>
-  
+    </div> 
+  </section>
+</template>

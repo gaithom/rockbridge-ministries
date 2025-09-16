@@ -25,7 +25,7 @@ import TheDreamOfADoctor from '../pages/Media and Resouces/The dream of a doctor
 import HydrologyDegree from '../pages/Media and Resouces/Hydrology Degree.vue'
 import RBScholarship from '../pages/Media and Resouces/RB scholarship.vue'
 import HolidayHomesPhotos from '../pages/Media and Resouces/Holiday homes photos.vue'
-import CleanWaterInitiatives from '../pages/Media and Resouces/Clean water intitiative.vue'
+import CleanWaterInitiatives from '../pages/Media and Resouces/Clean water initiatives.vue'
 import LishAiLabs from '../pages/Media and Resouces/Lish AI Labs.vue'
 import MedicalClinicPhotos from '../pages/Media and Resouces/Medical clinic photos.vue'
 import FaithVideo from '../pages/Media and Resouces/videos/Faith video.vue'
@@ -163,7 +163,7 @@ const routes = [
     component: HolidayHomesPhotos
   },
   {
-    path: '/media-and-resources/clean-water-initiatives',
+    path: '/media-and-resouces/clean-water-initiatives',
     name: 'clean-water-initiatives',
     component: CleanWaterInitiatives
   },
@@ -228,11 +228,11 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   // Add scroll behavior to ensure pages start from the top
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to, _from, _savedPosition) {
     // If there's a hash, scroll to that element
     if (to.hash) {
       return {
-        el: to.hash,
+        selector: to.hash,
         behavior: 'smooth',
         top: 100 // Offset for fixed header if needed
       }
