@@ -31,7 +31,7 @@
               >
                 {{ item.name }}
               </h3>
-              
+
               <button
                 type="button"
                 @click="navigateTo(item.route)"
@@ -114,35 +114,33 @@ const mediaItems = [
   {
     id: 7,
     name: "NURSING COLLEGE VIDEO",
-    image: "/images/Larryfeldman.jpg",
-    route: "/media-and-resources/rb-scholarship"
-
-
+    image: "/images/nursing.jpg",
+    route: "/media-and-resources/nursing-college-video"
   },
   {
     id: 8,
     name: "WORKPLACE MINISTRY VIDEO",
-    image: "/images/Rogerwolff.jpg",
-    route: "/media-and-resources/the-dream-of-a-doctor"
+    image: "/images/workplacemini.jpg",
+    route: "/media-and-resources/workplace-video"
   },
   {
     id: 9,
     name: "OVERVIEW",
-    image: "/images/Ellenlucciola.jpg",
-    route: "/media-and-resources/the-dream-of-a-doctor"
+    image: "/images/overview.jpg",
+    route: "/media-and-resources/overview-video"
   },
   {
     id: 10,
     name: "YOUTH DEPARTMENT VIDEO",
-    image: "/images/Hannahcox.jpg",
-    route: "/media-and-resources/the-dream-of-a-doctor"
+    image: "/images/youth.jpg",
+    route: "/media-and-resources/youth-video"
   },
   // Second section items
   {
     id: 11,
     name: "FAITH'S STORY VIDEO",
-    image: "/images/Moseskihara.jpg",
-    route: "/media-and-resources/the-dream-of-a-doctor"
+    image: "/images/faith.jpg",
+    route: "/media-and-resources/faith-video"
   },
   {
     id: 12,

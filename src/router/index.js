@@ -20,18 +20,18 @@ import CETCT from '../pages/Media and Resouces/CETCT.vue'
 import MDDSPG from '../pages/Media and Resouces/MDDSPG.vue'
 import Contact from '../pages/Contact.vue'
 import Home from '../pages/Home.vue'
-import JourneyToNursing from '../pages/Media and Resouces/journey to nursing.vue'
+import JourneyToNursing from '../pages/Media and Resouces/Journey To Nursing.vue'
 import TheDreamOfADoctor from '../pages/Media and Resouces/The dream of a doctor.vue'
 import HydrologyDegree from '../pages/Media and Resouces/Hydrology Degree.vue'
 import RBScholarship from '../pages/Media and Resouces/RB scholarship.vue'
 import HolidayHomesPhotos from '../pages/Media and Resouces/Holiday homes photos.vue'
 import CleanWaterInitiatives from '../pages/Media and Resouces/Clean water intitiative.vue'
-import LishAiLabs from '../pages/Media and Resouces/Lish ai Labs.vue'
+import LishAiLabs from '../pages/Media and Resouces/Lish AI Labs.vue'
 import MedicalClinicPhotos from '../pages/Media and Resouces/Medical clinic photos.vue'
 import MedicalTripVideo from '../pages/Media and Resouces/videos/Medical trip video.vue'
 import NursingCollegeVideo from '../pages/Media and Resouces/videos/Nursing college video.vue'
 import OverviewVideo from '../pages/Media and Resouces/videos/Overview.vue'
-import TumainiCenterVideo from '../pages/Media and Resouces/videos/Tumaini center video.vue'
+import FaithVideo from '../pages/Media and Resouces/videos/faith video.vue'
 import WorkplaceVideo from '../pages/Media and Resouces/videos/Work place video.vue'
 import YouthVideo from '../pages/Media and Resouces/videos/Youth video.vue'
 
@@ -174,8 +174,8 @@ const routes = [
   },
   {
     path: '/media-and-resources/tumaini-center-video',
-    name: 'tumaini-center-video',
-    component: TumainiCenterVideo
+    name: 'Faith-video',
+    component: FaithVideo
   },
   {
     path: '/media-and-resources/workplace-video',

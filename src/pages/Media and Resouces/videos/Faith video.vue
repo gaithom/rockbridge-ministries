@@ -24,6 +24,6 @@
   </section>
 </template>
 
-<script setup>
-import churchVideo from '../../../assets/videos/church.mp4'
-</script>
+<!-- <script setup>
+import churchVideo from '@/assets/videos/church.mp4'
+</script> -->
