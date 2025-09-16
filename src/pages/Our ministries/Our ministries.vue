@@ -4,7 +4,7 @@
     class="relative w-full h-screen flex items-center justify-center overflow-hidden"
   >
     <img
-      :src="churchImg"
+      :src="ministriesImg"
       class="absolute inset-0 w-full h-full object-cover"
       alt="Church Background"
     />
@@ -15,14 +15,8 @@
         <h1
           class="font-serif text-4xl text-white md:text-6xl lg:text-7xl text-center font-bold mb-6 animate-fade-up"
         >
-          Reaching Out to Communities <br />
-          in Kenya for Christ
-        </h1>
-        <p
-          class="text-xl text-center md:text-2xl mb-8 text-white/90 animate-fade-up stagger-1"
-        >
-          -Come and See What God is Doing-
-        </p>
+          Our Ministry
+       </h1>
       </hgroup>
     </div>
   </section>
@@ -94,7 +88,7 @@
 
 <script setup>
 import { Icon } from "@iconify/vue";
-import churchImg from "../../assets/images/Church.png";
+import ministriesImg from "../../assets/images/ministries.png";
 
 const values = [
   {
