@@ -1,5 +1,103 @@
 @import "tailwindcss";
 
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top);
+  --safe-area-inset-right: env(safe-area-inset-right);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
+  --safe-area-inset-left: env(safe-area-inset-left);
+}
+
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  /* Vendor prefixes first */
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  /* Standard property last */
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+/* Base styles for touch targets */
+a, button, [role="button"], input, textarea, select, label {
+  touch-action: manipulation;
+}
+
+/* Minimum touch target size */
+@media (pointer: coarse) {
+  a, button, [role="button"], .clickable {
+    min-width: 44px;
+    min-height: 44px;
   }
+}
+
+/* Prevent iOS text size adjust after orientation change */
+@media screen and (max-device-width: 1024px) {
+  html {
+    /* Vendor prefixes first */
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    /* Standard property last */
+    text-size-adjust: 100%;
+  }
+}
+
+/* Improve form elements on mobile */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="password"],
+textarea,
+select {
+  font-size: 16px !important; /* Prevent iOS zoom on focus */
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  input, textarea {
+    font-size: 16px !important; /* Prevent iOS zoom on focus */
+  }
+}
+
+/* Android Chrome address bar fix */
+@media (max-height: 500px) {
+  html {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+}
+
+/* Prevent callout on tap */
+.no-callout {
+  -webkit-touch-callout: none;
+}
+
+/* Smooth scrolling */
+.scroll-smooth {
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* Fix for sticky hover on mobile */
+@media (hover: none) and (pointer: coarse) {
+  .hover\:bg-yellow-500\/10:hover {
+    background-color: transparent;
+  }
+  .hover\:text-amber-400:hover {
+    color: inherit;
+  }
+  .hover\:scale-110:hover {
+    transform: scale(1);
+  }
+  .group-hover\:text-amber-400:hover {
+    color: inherit;
+  }
+}
