@@ -629,17 +629,14 @@ const mobileSubmenus = ref({
 const isBoardAndStaffPage = computed(() => {
   return route.path.includes('board-and-staff') || route.path.includes('how-to-support')
 })
-
 // Check if current page is Media and Resources page
 const isMediaAndResourcesPage = computed(() => {
   return route.path.includes('media-and-resources') && !route.path.includes('videos')
 })
-
 // Computed properties to check for active parent routes
 const isAboutActive = computed(() => route.path.startsWith('/about'))
 const isOurMinistriesActive = computed(() => route.path.startsWith('/our-ministries'))
 const isGetInvolvedActive = computed(() => route.path.startsWith('/get-involved'))
-
 // Toggle mobile menu open state
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
@@ -653,7 +650,6 @@ const toggleMobileMenu = () => {
     handleScroll()
   }
 }
-
 // Close mobile menu and scroll to top (called on link click)
 const closeMobileMenu = () => {
   mobileMenuOpen.value = false
@@ -673,7 +669,6 @@ const closeMobileMenu = () => {
   // Re-enable body scroll
   document.body.style.overflow = 'auto'
 }
-
 // Handle navigation with scroll to top
 const handleNavigation = () => {
   closeMobileMenu()
@@ -683,36 +678,30 @@ const handleNavigation = () => {
     behavior: 'smooth'
   })
 }
-
 // Force opaque background while hovered
 const makeOpaque = () => {
   isHovered.value = true
   scrolledUp.value = false
 }
-
 // Restore transparency if scrolled to very top and not hovered
 const restoreTransparency = () => {
   isHovered.value = false
   // Transparent only when scrolled to very top
   scrolledUp.value = window.scrollY === 0
 }
-
 // Update scrolledUp based on current scroll
 const handleScroll = () => {
-  if (isHovered.value || isMediaAndResourcesPage.value) return
-  
+  if (isHovered.value || isMediaAndResourcesPage.value) return 
   // Use requestAnimationFrame for smoother updates
   window.requestAnimationFrame(() => {
     scrolledUp.value = isMediaAndResourcesPage.value ? false : window.scrollY < 10
   })
 }
-
 onMounted(() => {
   // Initialize state on mount and subscribe to scroll listener
   handleScroll()
   window.addEventListener('scroll', handleScroll, { passive: true })
 })
-
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
   // Re-enable body scroll when component is unmounted
