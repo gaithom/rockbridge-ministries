@@ -208,7 +208,7 @@
       </div>
     </div>
 
-    <!-- Mobile Menu Overlay -->
+    <!-- Mobile Menu Overlay with animated background -->
     <transition
       enter-active-class="transition-opacity duration-300 ease-out"
       leave-active-class="transition-opacity duration-200 ease-in"
@@ -219,12 +219,32 @@
     >
       <div 
         v-if="mobileMenuOpen" 
-        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+        class="fixed inset-0 z-40 lg:hidden overflow-hidden"
         @click="closeMobileMenu"
-      ></div>
+      >
+        <!-- Animated gradient background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-amber-900/30 via-gray-900/90 to-amber-800/30 animate-gradient-xy"></div>
+        
+        <!-- Floating particles -->
+        <div class="absolute inset-0 overflow-hidden">
+          <div v-for="i in 15" :key="`particle-${i}`" 
+            class="absolute rounded-full bg-amber-400/20"
+            :class="`w-${Math.floor(Math.random() * 3) + 1} h-${Math.floor(Math.random() * 3) + 1}`"
+            :style="{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animation: `float ${6 + Math.random() * 10}s infinite ease-in-out ${Math.random() * 5}s`,
+              transform: `scale(${0.5 + Math.random()})`
+            }"
+          ></div>
+        </div>
+        
+        <!-- Backdrop blur -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+      </div>
     </transition>
 
-    <!-- Mobile Menu Sidebar -->
+    <!-- Mobile Menu Sidebar with enhanced styling -->
     <transition
       enter-active-class="transition-transform duration-300 ease-out"
       leave-active-class="transition-transform duration-200 ease-in"
@@ -235,258 +255,349 @@
     >
       <div 
         v-if="mobileMenuOpen"
-        class="fixed top-0 right-0 h-screen w-80 bg-gradient-to-b from-gray-900 to-gray-800 shadow-2xl z-[60] overflow-y-auto"
+        class="fixed top-0 right-0 h-screen w-80 bg-gradient-to-b from-gray-900 via-gray-900/95 to-gray-800/95 shadow-2xl z-[60] overflow-y-auto overflow-x-hidden"
         @click.stop
       >
-        <!-- Close button inside the menu -->
-        <div class="flex justify-end p-4 sticky top-0 bg-gray-900/80 backdrop-blur-sm z-[70]">
+        <!-- Animated border highlight -->
+        <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-amber-400 via-amber-300 to-amber-600 animate-pulse"></div>
+        
+        <!-- Glow effect container -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+          <div class="absolute -top-1/2 -right-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-500/5 via-transparent to-transparent animate-float-slow"></div>
+        </div>
+        <!-- Enhanced close button with animation -->
+        <div class="flex justify-between items-center p-4 sticky top-0 bg-gradient-to-b from-gray-900/90 to-transparent backdrop-blur-sm z-[70] border-b border-amber-500/10">
+          <div class="flex items-center pl-2">
+            <span class="text-amber-300 font-medium text-sm tracking-wider">MENU</span>
+          </div>
           <button 
             @click="toggleMobileMenu" 
-            class="text-amber-300 hover:text-amber-200 focus:outline-none p-2 -mr-2"
+            class="relative group p-2 -mr-2 rounded-full hover:bg-amber-500/10 transition-all duration-300"
             aria-label="Close menu"
           >
-            <i class="fas fa-times text-2xl"></i>
+            <div class="absolute inset-0 rounded-full bg-amber-400/10 group-hover:bg-amber-400/20 transition-all duration-300 scale-0 group-hover:scale-100"></div>
+            <i class="fas fa-times text-xl text-amber-300 group-hover:text-amber-200 relative z-10 transition-transform duration-300 group-hover:rotate-180"></i>
           </button>
         </div>
 
-        <!-- Mobile Menu Content -->
-        <div class="p-4 space-y-6">
-          <!-- Logo -->
-          <div class="flex items-center px-4 mb-6">
-            <img 
-              src="/images/logo.jpg" 
-              alt="Rock Bridge Ministries" 
-              class="w-16 h-16 rounded-full object-cover border-2 border-amber-300/80 shadow-md"
-            />
-            <div class="ml-4">
-              <h1 class="text-xl font-bold text-white">R.O.C.K. Bridge</h1>
-              <h2 class="text-lg text-amber-300">Ministries</h2>
+        <!-- Mobile Menu Content with enhanced styling -->
+        <div class="p-4 space-y-6 relative">
+          <!-- Logo with animation -->
+          <div class="flex items-center px-4 mb-8 group relative">
+            <div class="relative">
+              <!-- Animated glow effect -->
+              <div class="absolute -inset-1 bg-amber-400/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <!-- Pulsing ring -->
+              <div class="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping-slow opacity-0 group-hover:opacity-100"></div>
+              <img 
+                src="/images/logo.jpg" 
+                alt="Rock Bridge Ministries" 
+                class="relative w-16 h-16 rounded-full object-cover border-2 border-amber-300/80 shadow-lg transition-all duration-500 group-hover:border-amber-200 group-hover:scale-105 z-10"
+              />
             </div>
+            <div class="ml-4 transform transition-all duration-500 group-hover:translate-x-1">
+              <h1 class="text-xl font-bold bg-gradient-to-r from-amber-100 to-amber-300 bg-clip-text text-transparent">R.O.C.K. Bridge</h1>
+              <h2 class="text-lg font-semibold text-amber-300/90">Ministries</h2>
+            </div>
+            <!-- Subtle animated line -->
+            <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/30 to-transparent"></div>
           </div>
 
           <!-- Navigation Links -->
-          <nav class="space-y-2">
-            <!-- Home -->
+          <nav class="space-y-3 relative z-10">
+            <!-- Home with enhanced animation -->
             <router-link 
               to="/" 
-              class="flex items-center text-amber-50 hover:bg-gray-700/50 px-4 py-3 rounded-lg transition-all duration-200 group"
-              :class="{'bg-gray-700/50 text-amber-200': $route.path === '/'}"
+              class="flex items-center text-amber-50 hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-3.5 rounded-xl transition-all duration-300 group relative overflow-hidden"
+              :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path === '/'}"
               @click="handleNavigation"
             >
-              <i class="fas fa-home mr-3 text-amber-300 group-hover:text-amber-200 text-lg w-6 text-center"></i> 
-              <span>Home</span>
+              <!-- Animated background highlight -->
+              <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <!-- Animated icon -->
+              <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+                <i class="fas fa-home text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
+              </div>
+              <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Home</span>
+              <!-- Animated chevron -->
+              <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+              <!-- Active indicator -->
+              <div v-if="$route.path === '/'" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
             </router-link>
     
-            <!-- About Section -->
+            <!-- About Section with enhanced animations -->
             <div class="space-y-1">
-              <!-- About main link -->
+              <!-- About main link with animation -->
               <router-link 
                 to="/about" 
-                class="flex items-center text-amber-50 hover:bg-gray-700/50 px-4 py-3 rounded-lg transition-all duration-200 group"
-                :class="{'bg-gray-700/50 text-amber-200': $route.path === '/about'}"
+                class="flex items-center hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-3.5 rounded-xl transition-all duration-300 group relative overflow-hidden"
+                :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path.startsWith('/about')}"
                 @click="handleNavigation"
               >
-                <i class="fas fa-info-circle mr-3 text-amber-300 group-hover:text-amber-200 text-lg w-6 text-center"></i>
-                <span>About</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+                  <i class="fas fa-info-circle text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
+                </div>
+                <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">About</span>
+                <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+                <div v-if="$route.path.startsWith('/about')" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
               </router-link>
 
-              <!-- About submenu toggle -->
+              <!-- About submenu toggle with animation -->
               <button 
                 @click="mobileSubmenus.about = !mobileSubmenus.about"
-                class="w-full flex items-center justify-between text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 group"
+                class="w-full flex items-center justify-between hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-2.5 rounded-xl transition-all duration-300 group relative overflow-hidden"
               >
+                <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div class="flex items-center">
-                  <div class="w-6 mr-3"></div> <!-- Spacer to align with parent -->
-                  <span class="text-sm text-amber-100">More About</span>
+                  <div class="w-6 mr-3"></div>
+                  <span class="text-sm font-medium text-amber-100 group-hover:text-white transition-colors duration-300">More About</span>
                 </div>
                 <i 
-                  class="fas fa-chevron-down transition-transform duration-200 text-amber-400/70 text-sm"
-                  :class="mobileSubmenus.about ? 'transform rotate-180' : ''"
+                  class="fas transition-transform duration-300 text-xs text-amber-400/60 group-hover:text-amber-300"
+                  :class="mobileSubmenus.about ? 'fa-chevron-up rotate-180' : 'fa-chevron-down'"
                 ></i>
               </button>
               
-              <div 
-                v-if="mobileSubmenus.about" 
-                class="mt-1 ml-4 pl-4 border-l-2 border-amber-900/30 space-y-1"
+              <!-- About dropdown content with animation -->
+              <transition
+                enter-active-class="transition-all duration-300 ease-out"
+                leave-active-class="transition-all duration-200 ease-in"
+                enter-from-class="opacity-0 max-h-0"
+                enter-to-class="opacity-100 max-h-96"
+                leave-from-class="opacity-100 max-h-96"
+                leave-to-class="opacity-0 max-h-0"
               >
-                <router-link 
-                  to="/about/board-and-staff" 
-                  class="block text-amber-100 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 text-sm"
-                  :class="{'bg-gray-700/50 text-amber-200': $route.path === '/about/board-and-staff'}"
-                  @click="handleNavigation"
+                <div 
+                  v-if="mobileSubmenus.about" 
+                  class="ml-6 pl-4 border-l-2 border-amber-800/30 space-y-1.5 mt-1.5"
                 >
-                  <i class="fas fa-users mr-2 text-orange-400"></i>Board and Staff
-                </router-link>
-                <router-link 
-                  to="/about/history" 
-                  class="block text-amber-100 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 text-sm"
-                  :class="{'bg-gray-700/50 text-amber-200': $route.path === '/about/history'}"
-                  @click="handleNavigation"
-                >
-                  <i class="fas fa-history mr-2 text-orange-400"></i>History
-                </router-link>
-              </div>
+                  <router-link 
+                    to="/about/board-and-staff" 
+                    class="flex items-center text-amber-100 hover:bg-gradient-to-r from-amber-500/5 to-transparent px-3 py-2.5 rounded-lg transition-all duration-300 text-sm group relative overflow-hidden"
+                    :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path === '/about/board-and-staff'}"
+                    @click="handleNavigation"
+                  >
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <i class="fas fa-users mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="relative z-10">Board and Staff</span>
+                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                  </router-link>
+                  <router-link 
+                    to="/about/history" 
+                    class="flex items-center text-amber-100 hover:bg-gradient-to-r from-amber-500/5 to-transparent px-3 py-2.5 rounded-lg transition-all duration-300 text-sm group relative overflow-hidden"
+                    :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path === '/about/history'}"
+                    @click="handleNavigation"
+                  >
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <i class="fas fa-history mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="relative z-10">History</span>
+                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                  </router-link>
+                </div>
+              </transition>
             </div>
 
-            <!-- Our Ministries Section -->
+            <!-- Our Ministries Section with enhanced animations -->
             <div class="space-y-1">
-              <!-- Our Ministries main link -->
+              <!-- Our Ministries main link with animation -->
               <router-link 
                 to="/our-ministries" 
-                class="flex items-center text-amber-50 hover:bg-gray-700/50 px-4 py-3 rounded-lg transition-all duration-200 group"
-                :class="{'bg-gray-700/50 text-amber-200': $route.path === '/our-ministries'}"
+                class="flex items-center hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-3.5 rounded-xl transition-all duration-300 group relative overflow-hidden"
+                :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path.startsWith('/our-ministries')}"
                 @click="handleNavigation"
               >
-                <i class="fas fa-church mr-3 text-amber-300 group-hover:text-amber-200 text-lg w-6 text-center"></i>
-                <span>Our Ministries</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+                  <i class="fas fa-church text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
+                </div>
+                <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Our Ministries</span>
+                <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+                <div v-if="$route.path.startsWith('/our-ministries')" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
               </router-link>
 
-              <!-- Our Ministries submenu toggle -->
+              <!-- Our Ministries submenu toggle with animation -->
               <button 
                 @click="mobileSubmenus.ministries = !mobileSubmenus.ministries"
-                class="w-full flex items-center justify-between text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 group"
+                class="w-full flex items-center justify-between hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-2.5 rounded-xl transition-all duration-300 group relative overflow-hidden"
               >
+                <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div class="flex items-center">
-                  <div class="w-6 mr-3"></div> <!-- Spacer to align with parent -->
-                  <span class="text-sm text-amber-100">View Ministries</span>
+                  <div class="w-6 mr-3"></div>
+                  <span class="text-sm font-medium text-amber-100 group-hover:text-white transition-colors duration-300">View Ministries</span>
                 </div>
                 <i 
-                  class="fas fa-chevron-down transition-transform duration-200 text-amber-400/70 text-sm"
-                  :class="mobileSubmenus.ministries ? 'transform rotate-180' : ''"
+                  class="fas transition-transform duration-300 text-xs text-amber-400/60 group-hover:text-amber-300"
+                  :class="mobileSubmenus.ministries ? 'fa-chevron-up rotate-180' : 'fa-chevron-down'"
                 ></i>
               </button>
               
-              <div 
-                v-if="mobileSubmenus.ministries" 
-                class="mt-1 ml-4 pl-4 border-l-2 border-amber-900/30 space-y-1"
+              <!-- Our Ministries dropdown content with animation -->
+              <transition
+                enter-active-class="transition-all duration-300 ease-out"
+                leave-active-class="transition-all duration-200 ease-in"
+                enter-from-class="opacity-0 max-h-0"
+                enter-to-class="opacity-100 max-h-96"
+                leave-from-class="opacity-100 max-h-96"
+                leave-to-class="opacity-0 max-h-0"
               >
-                <router-link 
-                  to="/our-ministries/education-scholarship" 
-                  class="block text-amber-100 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 text-sm"
-                  :class="{'bg-gray-700/50 text-amber-200': $route.path === '/our-ministries/education-scholarship'}"
-                  @click="handleNavigation"
+                <div 
+                  v-if="mobileSubmenus.ministries" 
+                  class="ml-6 pl-4 border-l-2 border-amber-800/30 space-y-1.5 mt-1.5"
                 >
-                  <i class="fas fa-graduation-cap mr-2 text-orange-400"></i>Education Scholarship
-                </router-link>
-                <router-link 
-                  to="/our-ministries/social-enterprises" 
-                  class="block text-amber-100 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 text-sm"
-                  :class="{'bg-gray-700/50 text-amber-200': $route.path === '/our-ministries/social-enterprises'}"
-                  @click="handleNavigation"
-                >
-                  <i class="fas fa-building mr-2 text-orange-400"></i>Social Enterprises
-                </router-link>
-                <router-link 
-                  to="/our-ministries/workplace-evangelism" 
-                  class="block text-amber-100 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 text-sm"
-                  :class="{'bg-gray-700/50 text-amber-200': $route.path === '/our-ministries/workplace-evangelism'}"
-                  @click="handleNavigation"
-                >
-                  <i class="fas fa-briefcase mr-2 text-orange-400"></i>Workplace Evangelism
-                </router-link>
-              </div>
+                  <router-link 
+                    to="/our-ministries/education-scholarship" 
+                    class="flex items-center text-amber-100 hover:bg-gradient-to-r from-amber-500/5 to-transparent px-3 py-2.5 rounded-lg transition-all duration-300 text-sm group relative overflow-hidden"
+                    :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path === '/our-ministries/education-scholarship'}"
+                    @click="handleNavigation"
+                  >
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <i class="fas fa-graduation-cap mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="relative z-10">Education Scholarship</span>
+                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                  </router-link>
+                  <router-link 
+                    to="/our-ministries/social-enterprises" 
+                    class="flex items-center text-amber-100 hover:bg-gradient-to-r from-amber-500/5 to-transparent px-3 py-2.5 rounded-lg transition-all duration-300 text-sm group relative overflow-hidden"
+                    :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path === '/our-ministries/social-enterprises'}"
+                    @click="handleNavigation"
+                  >
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <i class="fas fa-building mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="relative z-10">Social Enterprises</span>
+                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                  </router-link>
+                  <router-link 
+                    to="/our-ministries/workplace-evangelism" 
+                    class="flex items-center text-amber-100 hover:bg-gradient-to-r from-amber-500/5 to-transparent px-3 py-2.5 rounded-lg transition-all duration-300 text-sm group relative overflow-hidden"
+                    :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path === '/our-ministries/workplace-evangelism'}"
+                    @click="handleNavigation"
+                  >
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <i class="fas fa-briefcase mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="relative z-10">Workplace Evangelism</span>
+                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                  </router-link>
+                </div>
+              </transition>
             </div>
         
-            <!-- Get Involved Section -->
+            <!-- Get Involved Section with enhanced animations -->
             <div class="space-y-1">
-              <!-- Get Involved main link -->
+              <!-- Get Involved main link with animation -->
               <router-link 
                 to="/get-involved" 
-                class="flex items-center text-amber-50 hover:bg-gray-700/50 px-4 py-3 rounded-lg transition-all duration-200 group"
-                :class="{'bg-gray-700/50 text-amber-200': $route.path === '/get-involved'}"
+                class="flex items-center hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-3.5 rounded-xl transition-all duration-300 group relative overflow-hidden"
+                :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path.startsWith('/get-involved')}"
                 @click="handleNavigation"
               >
-                <i class="fas fa-hands-helping mr-3 text-amber-300 group-hover:text-amber-200 text-lg w-6 text-center"></i>
-                <span>Get Involved</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+                  <i class="fas fa-hands-helping text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
+                </div>
+                <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Get Involved</span>
+                <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+                <div v-if="$route.path.startsWith('/get-involved')" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
               </router-link>
 
-              <!-- Get Involved submenu toggle -->
+              <!-- Get Involved submenu toggle with animation -->
               <button 
                 @click="mobileSubmenus.getInvolved = !mobileSubmenus.getInvolved"
-                class="w-full flex items-center justify-between text-amber-50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 group"
+                class="w-full flex items-center justify-between hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-2.5 rounded-xl transition-all duration-300 group relative overflow-hidden"
               >
+                <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div class="flex items-center">
-                  <div class="w-6 mr-3"></div> <!-- Spacer to align with parent -->
-                  <span class="text-sm text-amber-100">Ways to Help</span>
+                  <div class="w-6 mr-3"></div>
+                  <span class="text-sm font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Ways to Help</span>
                 </div>
                 <i 
-                  class="fas fa-chevron-down transition-transform duration-200 text-amber-400/70 text-sm"
-                  :class="mobileSubmenus.getInvolved ? 'transform rotate-180' : ''"
+                  class="fas transition-transform duration-300 text-xs text-amber-400/60 group-hover:text-amber-300"
+                  :class="mobileSubmenus.getInvolved ? 'fa-chevron-up rotate-180' : 'fa-chevron-down'"
                 ></i>
               </button>
               
-              <div 
-                v-if="mobileSubmenus.getInvolved" 
-                class="mt-1 ml-4 pl-4 border-l-2 border-amber-900/30 space-y-1"
+              <!-- Get Involved dropdown content with animation -->
+              <transition
+                enter-active-class="transition-all duration-300 ease-out"
+                leave-active-class="transition-all duration-200 ease-in"
+                enter-from-class="opacity-0 max-h-0"
+                enter-to-class="opacity-100 max-h-96"
+                leave-from-class="opacity-100 max-h-96"
+                leave-to-class="opacity-0 max-h-0"
               >
-                <router-link 
-                  to="/get-involved/how-to-support" 
-                  class="block text-amber-100 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 text-sm"
-                  :class="{'bg-gray-700/50 text-amber-200': $route.path === '/get-involved/how-to-support'}"
-                  @click="handleNavigation"
+                <div 
+                  v-if="mobileSubmenus.getInvolved" 
+                  class="ml-6 pl-4 border-l-2 border-amber-800/30 space-y-1.5 mt-1.5"
                 >
-                  <i class="fas fa-question-circle mr-2 text-orange-400"></i>How to Support
-                </router-link>
-                <router-link 
-                  to="/get-involved/partner-with-us" 
-                  class="block text-amber-100 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 text-sm"
-                  :class="{'bg-gray-700/50 text-amber-200': $route.path === '/get-involved/partner-with-us'}"
-                  @click="handleNavigation"
-                >
-                  <i class="fas fa-handshake mr-2 text-orange-400"></i>Partner with Us
-                </router-link>
-                <router-link 
-                  to="/get-involved/fund-our-programs" 
-                  class="block text-amber-100 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-all duration-200 text-sm"
-                  :class="{'bg-gray-700/50 text-amber-200': $route.path === '/get-involved/fund-our-programs'}"
-                  @click="handleNavigation"
-                >
-                  <i class="fas fa-donate mr-2 text-orange-400"></i>Fund our Programs
-                </router-link>
-              </div>
+                  <router-link 
+                    to="/get-involved/how-to-support" 
+                    class="flex items-center text-amber-100 hover:bg-gradient-to-r from-amber-500/5 to-transparent px-3 py-2.5 rounded-lg transition-all duration-300 text-sm group relative overflow-hidden"
+                    :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path === '/get-involved/how-to-support'}"
+                    @click="handleNavigation"
+                  >
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <i class="fas fa-question-circle mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="relative z-10">How to Support</span>
+                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                  </router-link>
+                  <router-link 
+                    to="/get-involved/partner-with-us" 
+                    class="flex items-center text-amber-100 hover:bg-gradient-to-r from-amber-500/5 to-transparent px-3 py-2.5 rounded-lg transition-all duration-300 text-sm group relative overflow-hidden"
+                    :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path === '/get-involved/partner-with-us'}"
+                    @click="handleNavigation"
+                  >
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <i class="fas fa-handshake mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="relative z-10">Partner with Us</span>
+                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                  </router-link>
+                  <router-link 
+                    to="/get-involved/fund-our-programs" 
+                    class="flex items-center text-amber-100 hover:bg-gradient-to-r from-amber-500/5 to-transparent px-3 py-2.5 rounded-lg transition-all duration-300 text-sm group relative overflow-hidden"
+                    :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path === '/get-involved/fund-our-programs'}"
+                    @click="handleNavigation"
+                  >
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <i class="fas fa-donate mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="relative z-10">Fund our Programs</span>
+                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                  </router-link>
+                </div>
+              </transition>
             </div>
 
-            <!-- Media & Resources -->
+            <!-- Media & Resources with animation -->
             <router-link 
               to="/media-and-resources" 
-              class="flex items-center text-amber-50 hover:bg-gray-700/50 px-4 py-3 rounded-lg transition-all duration-200 group"
-              :class="{'bg-gray-700/50 text-amber-200': $route.path.startsWith('/media-and-resources')}"
+              class="flex items-center hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-3.5 rounded-xl transition-all duration-300 group relative overflow-hidden"
+              :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path.startsWith('/media-and-resources')}"
               @click="handleNavigation"
             >
-              <i class="fas fa-photo-video mr-3 text-amber-300 group-hover:text-amber-200 text-lg w-6 text-center"></i> 
-              <span>Media and Resources</span>
+              <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+                <i class="fas fa-photo-video text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
+              </div>
+              <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Media and Resources</span>
+              <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+              <div v-if="$route.path.startsWith('/media-and-resources')" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
             </router-link>
 
-            <!-- Contact -->
+            <!-- Contact with animation -->
             <router-link 
               to="/contact" 
-              class="flex items-center text-amber-50 hover:bg-gray-700/50 px-4 py-3 rounded-lg transition-all duration-200 group"
-              :class="{'bg-gray-700/50 text-amber-200': $route.path === '/contact'}"
+              class="flex items-center hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-3.5 rounded-xl transition-all duration-300 group relative overflow-hidden"
+              :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5 text-amber-100': $route.path === '/contact'}"
               @click="handleNavigation"
             >
-              <i class="fas fa-envelope mr-3 text-amber-300 group-hover:text-amber-200 text-lg w-6 text-center"></i> 
-              <span>Contact</span>
+              <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+                <i class="fas fa-envelope text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
+              </div>
+              <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Contact</span>
+              <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+              <div v-if="$route.path === '/contact'" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
             </router-link>
           </nav>
-          
-          <!-- Social Links -->
-          <div class="px-4 pt-6 pb-8 border-t border-gray-800 mt-6">
-            <h3 class="text-sm font-medium text-amber-100 mb-4">Connect With Us</h3>
-            <div class="flex space-x-4">
-              <a href="#" class="text-amber-300 hover:text-amber-200 transition-colors">
-                <i class="fab fa-facebook-f text-lg"></i>
-              </a>
-              <a href="#" class="text-amber-300 hover:text-amber-200 transition-colors">
-                <i class="fab fa-twitter text-lg"></i>
-              </a>
-              <a href="#" class="text-amber-300 hover:text-amber-200 transition-colors">
-                <i class="fab fa-instagram text-lg"></i>
-              </a>
-              <a href="#" class="text-amber-300 hover:text-amber-200 transition-colors">
-                <i class="fab fa-youtube text-lg"></i>
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </transition>
