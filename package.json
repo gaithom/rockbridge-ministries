@@ -13,6 +13,7 @@
     "@splidejs/vue-splide": "^0.6.12",
     "@tailwindcss/vite": "^4.1.13",
     "@types/gsap": "^1.20.2",
+    "@vercel/speed-insights": "^1.2.0",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "@vueuse/motion": "^3.0.3",
     "aos": "^2.3.4",
