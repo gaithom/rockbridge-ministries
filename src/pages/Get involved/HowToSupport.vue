@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white">
+  <div class="bg-white overflow-x-hidden">
     <!-- Main Content with adjusted spacing -->
-    <main class="w-full max-w-full px-4 sm:px-6 pt-24 sm:pt-32 pb-12 sm:pb-16">
+    <main class="w-full max-w-full px-4 sm:px-6 pt-24 sm:pt-32 pb-12 sm:pb-16 mx-auto overflow-x-hidden">
       <!-- Page Title -->
       <div 
         class="text-center mb-12"
@@ -15,7 +15,7 @@
       </div>
 
       <!-- Two Column Content -->
-      <div class="grid md:grid-cols-2 gap-8 w-full text-base md:text-lg leading-relaxed text-gray-700">
+      <div class="grid md:grid-cols-2 gap-6 w-full max-w-7xl mx-auto px-2 sm:px-4 text-base md:text-lg leading-relaxed text-gray-700">
         <!-- Left Column -->
         <div class="space-y-10">
           <!-- Individual Donations -->
@@ -23,7 +23,7 @@
             data-aos="fade-right"
             data-aos-delay="200"
             data-aos-offset="100"
-            class="aos-item"
+            class="aos-item w-full overflow-hidden"
           >
             <div class="flex items-center mb-4">
               <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center mr-3">
