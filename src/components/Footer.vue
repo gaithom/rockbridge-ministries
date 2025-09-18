@@ -8,6 +8,7 @@
               class="fill-current text-amber-600 opacity-20"></path>
       </svg>
     </div>
+    
     <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div class="flex flex-col group">
@@ -152,15 +153,15 @@
             &copy; {{ new Date().getFullYear() }} Rock Bridge Ministries. All rights reserved.
           </p>
           <div class="flex space-x-6">
-            <a href="#" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Privacy Policy</a>
-            <a href="#" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Terms of Service</a>
-            <a href="#" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Sitemap</a>
+            <router-link to="/privacy-policy" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Privacy Policy</router-link>
+            <router-link to="/terms-of-service" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Terms of Service</router-link>
+            <router-link to="/sitemap" class="text-amber-50/60 hover:text-amber-400 text-sm transition-colors duration-300">Sitemap</router-link>
           </div>
         </div>
       </div>
       
       <!-- Back to Top Button -->
-      <button v-if="showBackToTop" @click="scrollToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-amber-600 hover:bg-amber-700 text-white shadow-lg flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50 z-50">
+      <button v-if="showBackToTop" @click="scrollToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full  hover:bg-amber-100 text-amber-500 shadow-lg flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50 z-50">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
