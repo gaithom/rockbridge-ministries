@@ -145,12 +145,14 @@
       :stripe="stripe"
       @close="closeModal"
       @submit="handleDonation"
+      @elements-ready="handleElementsReady"
+      @error="handleError"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, nextTick } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import donationService from "../../services/donationService";
 import DonationModal from "../../components/DonationModal.vue";
 import MinistryCard from "../../components/MinistryCard.vue";
@@ -162,8 +164,7 @@ const isProcessing = ref(false);
 const errorMessage = ref("");
 const successMessage = ref("");
 const stripe = ref(null);
-const stripeElements = ref(null);
-const paymentElement = ref(null);
+const currentElementsData = ref(null);
 
 const donation = reactive({
   amount: null,
@@ -238,22 +239,14 @@ const openDonationModal = (initiative) => {
   selectedInitiative.value = initiative;
   donation.ministry = initiative;
   showDonationModal.value = true;
-  errorMessage.value = "";
-  successMessage.value = "";
+  clearMessages();
   document.body.style.overflow = "hidden";
 };
 
 const closeModal = () => {
   showDonationModal.value = false;
   document.body.style.overflow = "";
-
-  // Cleanup Stripe elements
-  if (paymentElement.value) {
-    paymentElement.value.destroy();
-    paymentElement.value = null;
-  }
-  stripeElements.value = null;
-
+  currentElementsData.value = null;
   resetForm();
 };
 
@@ -270,16 +263,40 @@ const resetForm = () => {
   });
 };
 
+const clearMessages = () => {
+  errorMessage.value = "";
+  successMessage.value = "";
+};
+
+const handleError = (error) => {
+  console.error("Form error:", error);
+  errorMessage.value = error;
+  isProcessing.value = false;
+};
+
+const handleElementsReady = (elementsData) => {
+  console.log("Elements ready:", elementsData);
+  currentElementsData.value = elementsData;
+  clearMessages();
+};
+
 const handleDonation = async (elementsData) => {
-  if (!stripe.value || !elementsData.elements) {
-    errorMessage.value =
-      "Payment system not ready. Please refresh and try again.";
+  if (!stripe.value) {
+    handleError("Payment system not ready. Please refresh and try again.");
+    return;
+  }
+
+  // Use the elements data passed from the form
+  const { elements, paymentElement, clientSecret, paymentIntentId } =
+    elementsData;
+
+  if (!elements || !paymentElement || !clientSecret) {
+    handleError("Payment information incomplete. Please try again.");
     return;
   }
 
   isProcessing.value = true;
-  errorMessage.value = "";
-  successMessage.value = "";
+  clearMessages();
 
   try {
     // Validate required fields
@@ -297,77 +314,42 @@ const handleDonation = async (elementsData) => {
       throw new Error("Minimum donation amount is $1");
     }
 
-    console.log("Creating payment intent...");
-
-    // Create payment intent
-    const intentResponse = await donationService.createPaymentIntent({
-      ministry: donation.ministry,
-      amount: Math.round(donation.amount * 100), // Convert to cents
-      currency: "usd",
-      donorInfo: {
-        firstName: donation.firstName,
-        lastName: donation.lastName,
-        email: donation.email,
-        phone: donation.phone || "",
-        postalCode: donation.postalCode,
-      },
-      isRecurring: false,
-      message: donation.message || "",
-    });
-
-    console.log("Payment intent response:", intentResponse);
-
-    if (!intentResponse.success) {
-      throw new Error(
-        intentResponse.message || "Failed to create payment intent"
-      );
-    }
-
-    console.log("Confirming payment...");
+    console.log("Confirming payment with client secret:", clientSecret);
 
     // Confirm payment with Stripe
-    const { error: stripeError } = await stripe.value.confirmPayment({
-      elements: elementsData.elements,
-      clientSecret: intentResponse.data.clientSecret,
-      confirmParams: {
-        return_url: window.location.origin + "/donation-success",
-        payment_method_data: {
-          billing_details: {
-            name: `${donation.firstName} ${donation.lastName}`,
-            email: donation.email,
-            phone: donation.phone || null,
-            address: {
-              postal_code: donation.postalCode,
+    const { error: stripeError, paymentIntent } =
+      await stripe.value.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: window.location.origin + "/donation-success",
+          payment_method_data: {
+            billing_details: {
+              name: `${donation.firstName} ${donation.lastName}`,
+              email: donation.email,
+              phone: donation.phone || null,
+              address: {
+                postal_code: donation.postalCode,
+              },
             },
           },
         },
-      },
-      redirect: "if_required",
-    });
+        redirect: "if_required",
+      });
 
     if (stripeError) {
       console.error("Stripe error:", stripeError);
-      if (
-        stripeError.type === "card_error" ||
-        stripeError.type === "validation_error"
-      ) {
-        throw new Error(stripeError.message);
-      } else {
-        throw new Error(
-          "An error occurred while processing your payment. Please try again."
-        );
-      }
+      throw new Error(stripeError.message || "Payment failed");
     }
 
-    console.log("Payment confirmed successfully");
+    console.log("Payment confirmed successfully:", paymentIntent);
 
     // If we get here, payment was successful
-    successMessage.value = `Thank you! Your donation of $${donation.amount} has been processed successfully. You should receive an email confirmation shortly.`;
+    successMessage.value = `Thank you! Your donation of ${donation.amount} has been processed successfully. You should receive an email confirmation shortly.`;
 
     // Optionally confirm with your backend
     try {
       await donationService.confirmDonation({
-        paymentIntentId: intentResponse.data.paymentIntentId,
+        paymentIntentId: paymentIntentId || paymentIntent.id,
         ministry: donation.ministry,
         donorInfo: {
           firstName: donation.firstName,
@@ -391,8 +373,9 @@ const handleDonation = async (elementsData) => {
     }, 5000);
   } catch (err) {
     console.error("Donation error:", err);
-    errorMessage.value =
-      err.message || "An error occurred while processing your donation";
+    handleError(
+      err.message || "An error occurred while processing your donation"
+    );
   } finally {
     isProcessing.value = false;
   }

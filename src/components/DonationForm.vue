@@ -140,7 +140,7 @@
               v-if="!stripeReady"
               class="flex items-center justify-center text-gray-500 text-sm"
             >
-              Loading payment form...
+              {{ loadingMessage }}
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@
     <div class="pt-6 border-t border-gray-200">
       <button
         type="submit"
-        :disabled="!stripeReady || !localDonation.amount || processing"
+        :disabled="!canSubmit || processing"
         class="w-full bg-amber-600 text-white py-3 px-4 rounded-lg font-semibold text-base hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
       >
         <span v-if="processing" class="flex items-center justify-center">
@@ -212,7 +212,7 @@
 </template>
 
 <script setup>
-import { reactive, watch, ref, nextTick, onMounted } from "vue";
+import { reactive, watch, ref, computed, onBeforeUnmount } from "vue";
 
 const props = defineProps({
   donation: {
@@ -222,22 +222,47 @@ const props = defineProps({
   stripe: Object,
 });
 
-const emit = defineEmits(["submit", "elements-ready"]);
+const emit = defineEmits(["submit", "elements-ready", "error"]);
 
 // Local reactive copy to avoid direct prop mutation
 const localDonation = reactive({ ...props.donation });
 const stripeReady = ref(false);
 const processing = ref(false);
+const loadingMessage = ref("Loading payment form...");
 const elements = ref(null);
 const paymentElement = ref(null);
+const clientSecret = ref(null);
+const paymentIntentId = ref(null);
 
-// Move setupStripeElements function before watchers
-const setupStripeElements = async (stripeInstance) => {
+// Computed property to check if form can be submitted
+const canSubmit = computed(() => {
+  return (
+    stripeReady.value &&
+    localDonation.amount &&
+    localDonation.amount >= 1 &&
+    localDonation.firstName &&
+    localDonation.lastName &&
+    localDonation.email &&
+    localDonation.postalCode &&
+    !processing.value
+  );
+});
+
+// Initialize Stripe Elements with client secret
+const setupStripeElements = async (stripeInstance, secret) => {
   try {
-    await nextTick();
+    if (!stripeInstance || !secret) {
+      throw new Error("Stripe instance or client secret not available");
+    }
 
-    // Create elements instance
+    loadingMessage.value = "Setting up payment form...";
+
+    // Cleanup existing elements first
+    cleanup();
+
+    // Create elements instance with client secret
     elements.value = stripeInstance.elements({
+      clientSecret: secret,
       appearance: {
         theme: "stripe",
         variables: {
@@ -258,9 +283,12 @@ const setupStripeElements = async (stripeInstance) => {
         defaultCollapsed: false,
       },
       fields: {
-        billingDetails: "never",
+        billingDetails: "never", // We collect this separately
       },
     });
+
+    // Wait for DOM to be ready
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     // Mount the payment element
     const paymentElementContainer = document.getElementById("payment-element");
@@ -268,13 +296,15 @@ const setupStripeElements = async (stripeInstance) => {
       await paymentElement.value.mount("#payment-element");
       stripeReady.value = true;
 
-      // Listen for changes
+      // Listen for changes and errors
       paymentElement.value.on("change", (event) => {
         const displayError = document.getElementById("payment-element-errors");
-        if (event.error) {
-          displayError.textContent = event.error.message;
-        } else {
-          displayError.textContent = "";
+        if (displayError) {
+          if (event.error) {
+            displayError.textContent = event.error.message;
+          } else {
+            displayError.textContent = "";
+          }
         }
       });
 
@@ -282,24 +312,105 @@ const setupStripeElements = async (stripeInstance) => {
       emit("elements-ready", {
         elements: elements.value,
         paymentElement: paymentElement.value,
+        clientSecret: secret,
+        paymentIntentId: paymentIntentId.value,
       });
+    } else {
+      throw new Error("Payment element container not found");
     }
   } catch (error) {
     console.error("Error setting up Stripe Elements:", error);
     const displayError = document.getElementById("payment-element-errors");
     if (displayError) {
       displayError.textContent =
+        error.message ||
         "Failed to load payment form. Please refresh the page.";
     }
+    emit("error", error.message || "Failed to setup payment form");
   }
 };
 
-// Watch for Stripe instance and setup elements
+// Create payment intent and setup elements
+const initializePayment = async () => {
+  if (!props.stripe || !localDonation.amount || localDonation.amount < 1) {
+    return;
+  }
+
+  if (
+    !localDonation.firstName ||
+    !localDonation.lastName ||
+    !localDonation.email
+  ) {
+    return;
+  }
+
+  try {
+    loadingMessage.value = "Creating payment intent...";
+
+    // Import the donation service
+    const { default: donationService } = await import(
+      "../services/donationService"
+    );
+
+    // Create payment intent
+    const intentResponse = await donationService.createPaymentIntent({
+      ministry: localDonation.ministry,
+      amount: Math.round(localDonation.amount * 100), // Convert to cents
+      currency: "usd",
+      donorInfo: {
+        firstName: localDonation.firstName,
+        lastName: localDonation.lastName,
+        email: localDonation.email,
+        phone: localDonation.phone || "",
+        postalCode: localDonation.postalCode,
+      },
+      isRecurring: false,
+      message: localDonation.message || "",
+    });
+
+    if (!intentResponse.success) {
+      throw new Error(
+        intentResponse.message || "Failed to create payment intent"
+      );
+    }
+
+    // Store the client secret and payment intent ID
+    clientSecret.value = intentResponse.data.clientSecret;
+    paymentIntentId.value = intentResponse.data.paymentIntentId;
+
+    // Setup Stripe elements with the client secret
+    await setupStripeElements(props.stripe, clientSecret.value);
+  } catch (error) {
+    console.error("Error initializing payment:", error);
+    const displayError = document.getElementById("payment-element-errors");
+    if (displayError) {
+      displayError.textContent =
+        error.message || "Failed to initialize payment. Please try again.";
+    }
+    emit("error", error.message || "Failed to initialize payment");
+  }
+};
+
+// Watch for required fields and reinitialize payment when they're all filled
 watch(
-  () => props.stripe,
-  async (stripeInstance) => {
-    if (stripeInstance && !paymentElement.value) {
-      await setupStripeElements(stripeInstance);
+  [
+    () => localDonation.amount,
+    () => localDonation.firstName,
+    () => localDonation.lastName,
+    () => localDonation.email,
+    () => localDonation.postalCode,
+    () => props.stripe,
+  ],
+  ([amount, firstName, lastName, email, postalCode, stripe]) => {
+    // Reset stripe ready state when key fields change
+    if (stripeReady.value) {
+      stripeReady.value = false;
+      cleanup();
+    }
+
+    // Initialize payment if all required fields are present
+    if (stripe && amount >= 1 && firstName && lastName && email && postalCode) {
+      initializePayment();
     }
   },
   { immediate: true }
@@ -323,8 +434,16 @@ watch(
   { deep: true }
 );
 
-const handleSubmit = async () => {
-  if (!props.stripe || !paymentElement.value) {
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  if (!props.stripe || !paymentElement.value || !clientSecret.value) {
+    emit("error", "Payment system not ready. Please wait and try again.");
+    return;
+  }
+
+  if (!canSubmit.value) {
+    emit("error", "Please fill in all required fields");
     return;
   }
 
@@ -334,25 +453,48 @@ const handleSubmit = async () => {
     emit("submit", {
       elements: elements.value,
       paymentElement: paymentElement.value,
+      clientSecret: clientSecret.value,
+      paymentIntentId: paymentIntentId.value,
     });
   } catch (error) {
     console.error("Submit error:", error);
+    emit(
+      "error",
+      error.message || "An error occurred while processing your donation"
+    );
   } finally {
     processing.value = false;
   }
 };
 
-// Cleanup on unmount
+// Cleanup function
 const cleanup = () => {
   if (paymentElement.value) {
-    paymentElement.value.destroy();
+    try {
+      paymentElement.value.unmount();
+    } catch (error) {
+      console.warn("Error unmounting payment element:", error);
+    }
     paymentElement.value = null;
   }
+
+  if (elements.value) {
+    elements.value = null;
+  }
+
   stripeReady.value = false;
+  clientSecret.value = null;
+  paymentIntentId.value = null;
 };
+
+// Cleanup on unmount
+onBeforeUnmount(() => {
+  cleanup();
+});
 
 // Expose cleanup method
 defineExpose({
   cleanup,
+  initializePayment,
 });
 </script>
