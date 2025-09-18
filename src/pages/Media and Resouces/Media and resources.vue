@@ -163,7 +163,7 @@ const mediaItems = [
     id: 13,
     name: "ROCK Bridge Scholarship Beneficiaries Graduating from PCEA",
     image: "/images/Franciskenji.jpg",
-    route: "/media-and-resources/the-dream-of-a-doctor"
+    route: "/media-and-resources/MDDSPG"
   },
   {
     id: 14,
