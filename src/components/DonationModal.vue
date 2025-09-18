@@ -6,16 +6,22 @@
       @click.self="$emit('close')"
     >
       <!-- Backdrop -->
-      <div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
-      
+      <div
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+      ></div>
+
       <!-- Modal Container -->
-      <div class="relative flex min-h-full items-center justify-center p-4 sm:p-6 lg:p-8">
+      <div
+        class="relative flex min-h-full items-center justify-center p-4 sm:p-6 lg:p-8"
+      >
         <div
           class="relative w-full max-w-lg transform rounded-2xl bg-white shadow-2xl transition-all"
           @click.stop
         >
           <!-- Header -->
-          <div class="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4 rounded-t-2xl">
+          <div
+            class="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4 rounded-t-2xl"
+          >
             <div class="flex-1">
               <h3 class="text-xl font-semibold text-gray-900 truncate">
                 Support {{ selectedInitiative }}
@@ -28,7 +34,12 @@
               @click="$emit('close')"
               class="ml-4 flex-shrink-0 rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500"
             >
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -46,17 +57,17 @@
               <LoadingSpinner v-if="isProcessing" />
 
               <!-- Messages -->
-              <AlertMessage 
-                v-if="errorMessage" 
-                type="error" 
-                :message="errorMessage" 
+              <AlertMessage
+                v-if="errorMessage"
+                type="error"
+                :message="errorMessage"
                 class="mb-6"
               />
-              
-              <AlertMessage 
-                v-if="successMessage" 
-                type="success" 
-                :message="successMessage" 
+
+              <AlertMessage
+                v-if="successMessage"
+                type="success"
+                :message="successMessage"
                 class="mb-6"
               />
 
@@ -65,9 +76,8 @@
                 v-if="!isProcessing && !successMessage"
                 :donation="donation"
                 :stripe="stripe"
-                :card-element="cardElement"
-                @submit="$emit('submit', $event)"
-                @card-ready="setupStripeElements"
+                @submit="handleSubmit"
+                @elements-ready="handleElementsReady"
               />
             </div>
           </div>
@@ -78,10 +88,9 @@
 </template>
 
 <script setup>
-import { nextTick } from 'vue'
-import LoadingSpinner from './LoadingSpinner.vue'
-import AlertMessage from './AlertMessage.vue'
-import DonationForm from './DonationForm.vue'
+import LoadingSpinner from "./LoadingSpinner.vue";
+import AlertMessage from "./AlertMessage.vue";
+import DonationForm from "./DonationForm.vue";
 
 const props = defineProps({
   isOpen: Boolean,
@@ -91,13 +100,15 @@ const props = defineProps({
   errorMessage: String,
   successMessage: String,
   stripe: Object,
-  cardElement: Object
-})
+});
 
-const emit = defineEmits(['close', 'submit', 'card-ready'])
+const emit = defineEmits(["close", "submit", "elements-ready"]);
 
-const setupStripeElements = async () => {
-  await nextTick()
-  emit('card-ready')
-}
+const handleSubmit = (elementsData) => {
+  emit("submit", elementsData);
+};
+
+const handleElementsReady = (elementsData) => {
+  emit("elements-ready", elementsData);
+};
 </script>
