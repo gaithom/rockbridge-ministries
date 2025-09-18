@@ -62,6 +62,8 @@
                 type="error"
                 :message="errorMessage"
                 class="mb-6"
+                dismissible
+                @dismiss="$emit('error', '')"
               />
 
               <AlertMessage
@@ -78,6 +80,7 @@
                 :stripe="stripe"
                 @submit="handleSubmit"
                 @elements-ready="handleElementsReady"
+                @error="handleFormError"
               />
             </div>
           </div>
@@ -102,7 +105,7 @@ const props = defineProps({
   stripe: Object,
 });
 
-const emit = defineEmits(["close", "submit", "elements-ready"]);
+const emit = defineEmits(["close", "submit", "elements-ready", "error"]);
 
 const handleSubmit = (elementsData) => {
   emit("submit", elementsData);
@@ -110,5 +113,9 @@ const handleSubmit = (elementsData) => {
 
 const handleElementsReady = (elementsData) => {
   emit("elements-ready", elementsData);
+};
+
+const handleFormError = (error) => {
+  emit("error", error);
 };
 </script>
