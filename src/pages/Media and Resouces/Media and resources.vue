@@ -101,7 +101,7 @@ const mediaItems = [
   {
     id: 5,
     name: "The Dream of a Doctor",
-    image: "/images/Picture2-2.png",
+    image: "/images/girl.png",
     route: "/media-and-resources/the-dream-of-a-doctor"
   },
   {

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white">
     <!-- Main Content with adjusted spacing -->
-    <main class="container mx-auto px-6 pt-32 pb-16">
+    <main class="w-full max-w-full px-4 sm:px-6 pt-24 sm:pt-32 pb-12 sm:pb-16">
       <!-- Page Title -->
       <div 
         class="text-center mb-12"
@@ -15,7 +15,7 @@
       </div>
 
       <!-- Two Column Content -->
-      <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto text-base md:text-lg leading-relaxed text-gray-700">
+      <div class="grid md:grid-cols-2 gap-8 w-full text-base md:text-lg leading-relaxed text-gray-700">
         <!-- Left Column -->
         <div class="space-y-10">
           <!-- Individual Donations -->
