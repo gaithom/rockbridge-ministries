@@ -175,7 +175,7 @@ const mediaItems = [
     id: 15,
     name: "CLEAN WATER INITITATIVE",
     image: "/images/water.jpeg",
-    route: "/media-and-resouces/clean-water-initiatives"
+    route: "/media-and-resources/clean-water-initiatives"
   },
 ];
 </script>
