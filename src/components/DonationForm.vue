@@ -128,29 +128,26 @@
           <label class="block text-sm font-medium text-gray-700">
             Card Details *
           </label>
+
+          <!-- Always show card input fields -->
           <div
-            class="border-2 border-gray-200 rounded-lg p-1 bg-white transition-colors focus-within:border-amber-400"
+            class="border-2 border-gray-200 rounded-lg p-3 bg-white transition-colors focus-within:border-amber-400"
           >
-            <!-- Vue Stripe Payment Element -->
             <StripeElementPayment
               ref="paymentRef"
               :pk="stripePublishableKey"
               :elements-options="elementsOptions"
-              :confirm-params="confirmParams"
               @loading="handleLoading"
               @error="handleError"
               @element-ready="handleElementReady"
-              v-if="clientSecret"
             />
-            <div
-              v-else
-              class="flex items-center justify-center p-4 text-gray-500 text-sm"
-            >
-              {{ loadingMessage }}
-            </div>
           </div>
         </div>
-        <div v-if="paymentError" class="text-red-600 text-sm">
+
+        <div
+          v-if="paymentError"
+          class="text-red-600 text-sm bg-red-50 border border-red-200 rounded-md p-3"
+        >
           {{ paymentError }}
         </div>
       </div>
@@ -239,131 +236,68 @@ const stripePublishableKey =
 
 // Component state
 const processing = ref(false);
-const loadingMessage = ref("Please fill in all required fields...");
 const paymentError = ref("");
-const clientSecret = ref(null);
-const paymentIntentId = ref(null);
 const paymentRef = ref(null);
 const elementReady = ref(false);
 const isLoading = ref(false);
 
-// Stripe elements options
+// Stripe elements options - No clientSecret needed upfront
 const elementsOptions = ref({
-  clientSecret: null,
+  mode: "payment",
+  amount: 1000, // Default amount in cents, will be updated
+  currency: "usd",
   appearance: {
     theme: "stripe",
     variables: {
-      colorPrimary: "#d97706",
+      colorPrimary: "#d97706", // amber-600
       colorBackground: "#ffffff",
-      colorText: "#374151",
-      colorDanger: "#dc2626",
+      colorText: "#374151", // gray-700
+      colorDanger: "#dc2626", // red-600
       fontFamily: '"Inter", system-ui, sans-serif',
       borderRadius: "8px",
+      spacingUnit: "4px",
+      fontSizeBase: "14px",
+    },
+    rules: {
+      ".Input": {
+        padding: "12px",
+        fontSize: "14px",
+        border: "1px solid #d1d5db",
+        borderRadius: "8px",
+      },
+      ".Input:focus": {
+        borderColor: "#d97706",
+        boxShadow: "0 0 0 2px rgba(217, 119, 6, 0.2)",
+      },
     },
   },
 });
 
-// Confirm params for Stripe
-const confirmParams = ref({
-  return_url: window.location.origin + "/donation-success",
-});
-
-// Computed property to check if form can be submitted
-const canSubmit = computed(() => {
-  return (
-    clientSecret.value &&
-    elementReady.value &&
-    localDonation.amount &&
-    localDonation.amount >= 1 &&
-    localDonation.firstName &&
-    localDonation.lastName &&
-    localDonation.email &&
-    localDonation.postalCode &&
-    !processing.value &&
-    !isLoading.value
-  );
-});
-
-// Initialize payment intent when all required fields are filled
-const initializePayment = async () => {
-  if (!localDonation.amount || localDonation.amount < 1) {
-    return;
-  }
-
-  if (
-    !localDonation.firstName ||
-    !localDonation.lastName ||
-    !localDonation.email ||
-    !localDonation.postalCode
-  ) {
-    return;
-  }
-
-  try {
-    loadingMessage.value = "Creating payment intent...";
-    paymentError.value = "";
-
-    // Create payment intent
-    const response = await donationService.createPaymentIntent({
-      ministry: localDonation.ministry,
-      amount: localDonation.amount, // Amount in dollars
-      currency: "usd",
-      donorInfo: {
-        firstName: localDonation.firstName,
-        lastName: localDonation.lastName,
-        email: localDonation.email,
-        phone: localDonation.phone || "",
-        postalCode: localDonation.postalCode,
-      },
-      isRecurring: false,
-      message: localDonation.message || "",
-    });
-
-    if (!response.success) {
-      throw new Error(response.message || "Failed to create payment intent");
-    }
-
-    // Set client secret for Stripe Elements
-    clientSecret.value = response.data.clientSecret;
-    paymentIntentId.value = response.data.paymentIntentId;
-    elementsOptions.value.clientSecret = response.data.clientSecret;
-
-    console.log("Payment intent created:", response.data);
-  } catch (error) {
-    console.error("Error initializing payment:", error);
-    paymentError.value =
-      error.message || "Failed to initialize payment. Please try again.";
-    emit("error", error.message || "Failed to initialize payment");
-  }
-};
-
-// Watch for required fields and reinitialize payment when they're all filled
+// Update amount in elements options when donation amount changes
 watch(
-  [
-    () => localDonation.amount,
-    () => localDonation.firstName,
-    () => localDonation.lastName,
-    () => localDonation.email,
-    () => localDonation.postalCode,
-  ],
-  ([amount, firstName, lastName, email, postalCode]) => {
-    // Reset client secret when key fields change
-    if (clientSecret.value) {
-      clientSecret.value = null;
-      paymentIntentId.value = null;
-      elementsOptions.value.clientSecret = null;
-      elementReady.value = false;
-    }
-
-    // Initialize payment if all required fields are present
-    if (amount >= 1 && firstName && lastName && email && postalCode) {
-      initializePayment();
-    } else {
-      loadingMessage.value = "Please fill in all required fields...";
+  () => localDonation.amount,
+  (newAmount) => {
+    if (newAmount && newAmount > 0) {
+      elementsOptions.value.amount = Math.round(newAmount * 100); // Convert to cents
     }
   },
   { immediate: true }
 );
+
+// Computed property to check if form can be submitted
+const canSubmit = computed(() => {
+  return (
+    elementReady.value &&
+    localDonation.amount &&
+    localDonation.amount >= 1 &&
+    localDonation.firstName?.trim() &&
+    localDonation.lastName?.trim() &&
+    localDonation.email?.trim() &&
+    localDonation.postalCode?.trim() &&
+    !processing.value &&
+    !isLoading.value
+  );
+});
 
 // Watch for changes in props and update local copy
 watch(
@@ -386,7 +320,7 @@ watch(
 // Stripe event handlers
 const handleLoading = (loading) => {
   isLoading.value = loading;
-  console.log("Loading state:", loading);
+  console.log("Stripe loading state:", loading);
 };
 
 const handleError = (error) => {
@@ -396,16 +330,15 @@ const handleError = (error) => {
 
 const handleElementReady = () => {
   elementReady.value = true;
-  console.log("Payment element ready");
+  console.log("Stripe payment element ready");
 };
 
-// Handle form submission
+// Handle form submission - Create payment intent and confirm in one step
 const handleSubmit = async (event) => {
   event.preventDefault();
 
   if (!canSubmit.value) {
-    paymentError.value =
-      "Please fill in all required fields and wait for the payment form to load";
+    paymentError.value = "Please complete all required fields";
     return;
   }
 
@@ -419,48 +352,93 @@ const handleSubmit = async (event) => {
   paymentError.value = "";
 
   try {
-    console.log("Submitting payment...");
+    console.log("Creating payment intent and processing payment...");
 
-    // Submit the payment using Vue Stripe
-    const result = await paymentRef.value.submit();
+    // Step 1: Create payment intent
+    const paymentIntentResponse = await donationService.createPaymentIntent({
+      ministry: localDonation.ministry,
+      amount: localDonation.amount, // Amount in dollars
+      currency: "usd",
+      donorInfo: {
+        firstName: localDonation.firstName.trim(),
+        lastName: localDonation.lastName.trim(),
+        email: localDonation.email.trim(),
+        phone: localDonation.phone?.trim() || "",
+        postalCode: localDonation.postalCode.trim(),
+      },
+      isRecurring: false,
+      message: localDonation.message?.trim() || "",
+    });
 
-    console.log("Payment result:", result);
-
-    if (result.error) {
-      throw new Error(result.error.message);
+    if (
+      !paymentIntentResponse.success ||
+      !paymentIntentResponse.data?.clientSecret
+    ) {
+      throw new Error(
+        paymentIntentResponse.message || "Failed to create payment intent"
+      );
     }
 
-    // If payment is successful, confirm with backend
-    if (result.paymentIntent && result.paymentIntent.status === "succeeded") {
-      try {
-        await donationService.confirmDonation({
-          paymentIntentId: paymentIntentId.value || result.paymentIntent.id,
-          ministry: localDonation.ministry,
-          donorInfo: {
-            firstName: localDonation.firstName,
-            lastName: localDonation.lastName,
+    const clientSecret = paymentIntentResponse.data.clientSecret;
+    const paymentIntentId = paymentIntentResponse.data.paymentIntentId;
+
+    console.log("Payment intent created:", paymentIntentId);
+
+    // Step 2: Confirm payment using the client secret
+    const { error } = await paymentRef.value.confirmPayment({
+      clientSecret: clientSecret,
+      confirmParams: {
+        return_url: `${window.location.origin}/donation-success`,
+        payment_method_data: {
+          billing_details: {
+            name: `${localDonation.firstName} ${localDonation.lastName}`,
             email: localDonation.email,
-            phone: localDonation.phone || "",
-            postalCode: localDonation.postalCode,
+            phone: localDonation.phone || undefined,
+            address: {
+              postal_code: localDonation.postalCode,
+            },
           },
-          amount: localDonation.amount,
-          currency: "USD",
-          isRecurring: false,
-          message: localDonation.message || "",
-        });
-      } catch (confirmError) {
-        console.error("Error confirming donation in backend:", confirmError);
-        // Don't throw here as payment was successful
-      }
+        },
+      },
+      redirect: "if_required",
+    });
 
-      // Emit success
-      emit("submit", {
-        success: true,
-        paymentIntent: result.paymentIntent,
-        amount: localDonation.amount,
-        ministry: localDonation.ministry,
-      });
+    if (error) {
+      console.error("Payment confirmation error:", error);
+      throw new Error(error.message);
     }
+
+    // Step 3: Confirm with backend
+    try {
+      await donationService.confirmDonation({
+        paymentIntentId: paymentIntentId,
+        ministry: localDonation.ministry,
+        donorInfo: {
+          firstName: localDonation.firstName,
+          lastName: localDonation.lastName,
+          email: localDonation.email,
+          phone: localDonation.phone || "",
+          postalCode: localDonation.postalCode,
+        },
+        amount: localDonation.amount,
+        currency: "USD",
+        isRecurring: false,
+        message: localDonation.message || "",
+      });
+    } catch (confirmError) {
+      console.error("Error confirming donation in backend:", confirmError);
+      // Don't throw here as payment was successful
+    }
+
+    // Step 4: Emit success
+    emit("submit", {
+      success: true,
+      paymentIntentId: paymentIntentId,
+      amount: localDonation.amount,
+      ministry: localDonation.ministry,
+    });
+
+    console.log("Payment completed successfully!");
   } catch (error) {
     console.error("Payment error:", error);
     paymentError.value =
@@ -480,5 +458,6 @@ onMounted(() => {
     "DonationForm mounted with Stripe key:",
     stripePublishableKey ? "✓" : "✗"
   );
+  console.log("Initial donation data:", localDonation);
 });
 </script>
