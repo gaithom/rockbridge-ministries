@@ -77,9 +77,7 @@
               <DonationForm
                 v-if="!isProcessing && !successMessage"
                 :donation="donation"
-                :stripe="stripe"
                 @submit="handleSubmit"
-                @elements-ready="handleElementsReady"
                 @error="handleFormError"
               />
             </div>
@@ -102,17 +100,12 @@ const props = defineProps({
   isProcessing: Boolean,
   errorMessage: String,
   successMessage: String,
-  stripe: Object,
 });
 
-const emit = defineEmits(["close", "submit", "elements-ready", "error"]);
+const emit = defineEmits(["close", "submit", "error"]);
 
-const handleSubmit = (elementsData) => {
-  emit("submit", elementsData);
-};
-
-const handleElementsReady = (elementsData) => {
-  emit("elements-ready", elementsData);
+const handleSubmit = (result) => {
+  emit("submit", result);
 };
 
 const handleFormError = (error) => {

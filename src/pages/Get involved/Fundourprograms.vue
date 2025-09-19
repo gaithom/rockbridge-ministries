@@ -142,18 +142,15 @@
       :is-processing="isProcessing"
       :error-message="errorMessage"
       :success-message="successMessage"
-      :stripe="stripe"
       @close="closeModal"
       @submit="handleDonation"
-      @elements-ready="handleElementsReady"
       @error="handleError"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
-import donationService from "../../services/donationService";
+import { ref, reactive } from "vue";
 import DonationModal from "../../components/DonationModal.vue";
 import MinistryCard from "../../components/MinistryCard.vue";
 
@@ -163,8 +160,6 @@ const selectedInitiative = ref("");
 const isProcessing = ref(false);
 const errorMessage = ref("");
 const successMessage = ref("");
-const stripe = ref(null);
-const currentElementsData = ref(null);
 
 const donation = reactive({
   amount: null,
@@ -222,18 +217,6 @@ const ministries = ref([
   },
 ]);
 
-// Initialize Stripe on mount
-onMounted(async () => {
-  try {
-    stripe.value = await donationService.getStripe();
-    console.log("Stripe loaded successfully:", !!stripe.value);
-  } catch (error) {
-    console.error("Failed to load Stripe:", error);
-    errorMessage.value =
-      "Failed to load payment system. Please refresh the page.";
-  }
-});
-
 // Modal functions
 const openDonationModal = (initiative) => {
   selectedInitiative.value = initiative;
@@ -246,7 +229,6 @@ const openDonationModal = (initiative) => {
 const closeModal = () => {
   showDonationModal.value = false;
   document.body.style.overflow = "";
-  currentElementsData.value = null;
   resetForm();
 };
 
@@ -269,112 +251,33 @@ const clearMessages = () => {
 };
 
 const handleError = (error) => {
-  console.error("Form error:", error);
+  console.error("Donation error:", error);
   errorMessage.value = error;
   isProcessing.value = false;
 };
 
-const handleElementsReady = (elementsData) => {
-  console.log("Elements ready:", elementsData);
-  currentElementsData.value = elementsData;
-  clearMessages();
-};
-
-const handleDonation = async (elementsData) => {
-  if (!stripe.value) {
-    handleError("Payment system not ready. Please refresh and try again.");
-    return;
-  }
-
-  // Use the elements data passed from the form
-  const { elements, paymentElement, clientSecret, paymentIntentId } =
-    elementsData;
-
-  if (!elements || !paymentElement || !clientSecret) {
-    handleError("Payment information incomplete. Please try again.");
-    return;
-  }
+const handleDonation = async (result) => {
+  console.log("Donation result:", result);
 
   isProcessing.value = true;
   clearMessages();
 
   try {
-    // Validate required fields
-    if (
-      !donation.amount ||
-      !donation.firstName ||
-      !donation.lastName ||
-      !donation.email ||
-      !donation.postalCode
-    ) {
-      throw new Error("Please fill in all required fields");
+    if (result.success && result.paymentIntent) {
+      // Payment was successful
+      successMessage.value = `Thank you! Your donation of $${result.amount} to ${result.ministry} has been processed successfully. You should receive an email confirmation shortly.`;
+
+      // Auto-close modal after 5 seconds
+      setTimeout(() => {
+        closeModal();
+      }, 5000);
+    } else {
+      throw new Error("Payment was not completed successfully");
     }
-
-    if (donation.amount < 1) {
-      throw new Error("Minimum donation amount is $1");
-    }
-
-    console.log("Confirming payment with client secret:", clientSecret);
-
-    // Confirm payment with Stripe
-    const { error: stripeError, paymentIntent } =
-      await stripe.value.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: window.location.origin + "/donation-success",
-          payment_method_data: {
-            billing_details: {
-              name: `${donation.firstName} ${donation.lastName}`,
-              email: donation.email,
-              phone: donation.phone || null,
-              address: {
-                postal_code: donation.postalCode,
-              },
-            },
-          },
-        },
-        redirect: "if_required",
-      });
-
-    if (stripeError) {
-      console.error("Stripe error:", stripeError);
-      throw new Error(stripeError.message || "Payment failed");
-    }
-
-    console.log("Payment confirmed successfully:", paymentIntent);
-
-    // If we get here, payment was successful
-    successMessage.value = `Thank you! Your donation of ${donation.amount} has been processed successfully. You should receive an email confirmation shortly.`;
-
-    // Optionally confirm with your backend
-    try {
-      await donationService.confirmDonation({
-        paymentIntentId: paymentIntentId || paymentIntent.id,
-        ministry: donation.ministry,
-        donorInfo: {
-          firstName: donation.firstName,
-          lastName: donation.lastName,
-          email: donation.email,
-          phone: donation.phone || "",
-          postalCode: donation.postalCode,
-        },
-        amount: donation.amount,
-        currency: "USD",
-        isRecurring: false,
-        message: donation.message || "",
-      });
-    } catch (confirmError) {
-      console.error("Error confirming donation in backend:", confirmError);
-      // Don't throw here as payment was successful
-    }
-
-    setTimeout(() => {
-      closeModal();
-    }, 5000);
-  } catch (err) {
-    console.error("Donation error:", err);
+  } catch (error) {
+    console.error("Error processing donation:", error);
     handleError(
-      err.message || "An error occurred while processing your donation"
+      error.message || "An error occurred while processing your donation"
     );
   } finally {
     isProcessing.value = false;
