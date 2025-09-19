@@ -1,4 +1,3 @@
-// src/services/donationService.js
 import axios from "axios";
 
 // Create axios instance with better configuration
@@ -53,10 +52,13 @@ api.interceptors.response.use(
         errorMessage = data.message;
       } else if (data?.error) {
         errorMessage = data.error;
+      } else if (data?.errors && Array.isArray(data.errors)) {
+        errorMessage = data.errors.join(", ");
       } else {
         switch (status) {
           case 400:
-            errorMessage = "Invalid request data";
+            errorMessage =
+              "Invalid request data. Please check your information and try again.";
             break;
           case 401:
             errorMessage = "Authentication required";
@@ -68,7 +70,8 @@ api.interceptors.response.use(
             errorMessage = "Service not found";
             break;
           case 422:
-            errorMessage = "Invalid data provided";
+            errorMessage =
+              "Invalid data provided. Please check your information.";
             break;
           case 429:
             errorMessage = "Too many requests. Please wait and try again";
@@ -136,11 +139,11 @@ export const donationService = {
         throw new Error("Postal code is required");
       }
 
-      // Ensure amount is in cents for Stripe
+      // Ensure amount is in dollars (not cents)
       const payload = {
         ...donationData,
-        amount: Math.round(donationData.amount * 100), // Convert to cents
-        currency: donationData.currency?.toLowerCase() || "usd",
+        amount: Number(donationData.amount), // Keep as dollars
+        currency: donationData.currency?.toUpperCase() || "USD",
       };
 
       console.log("Sending payment intent payload:", payload);
@@ -167,7 +170,9 @@ export const donationService = {
       console.error("Error creating payment intent:", error);
 
       if (error.status === 400) {
-        throw new Error("Invalid donation information provided");
+        throw new Error(
+          error.message || "Invalid donation information provided"
+        );
       } else if (error.status === 422) {
         throw new Error("Please check your donation details and try again");
       } else if (error.status >= 500) {
