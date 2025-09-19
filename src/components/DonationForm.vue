@@ -254,44 +254,6 @@ let stripe = null;
 let elements = null;
 let paymentElement = null;
 
-// Elements options
-const elementsOptions = computed(() => ({
-  mode: "payment",
-  amount: localDonation.amount ? Math.round(localDonation.amount * 100) : 1000,
-  currency: "usd",
-  setup_future_usage: "off_session",
-  payment_method_types: ["card"],
-  appearance: {
-    theme: "stripe",
-    variables: {
-      colorPrimary: "#d97706",
-      colorBackground: "#ffffff",
-      colorText: "#374151",
-      colorDanger: "#dc2626",
-      fontFamily: '"Inter", system-ui, sans-serif',
-      borderRadius: "8px",
-      spacingUnit: "4px",
-      fontSizeBase: "14px",
-    },
-    rules: {
-      ".Input": {
-        padding: "12px",
-        fontSize: "14px",
-        border: "1px solid #d1d5db",
-        borderRadius: "8px",
-        boxShadow: "none",
-      },
-      ".Input:focus": {
-        borderColor: "#d97706",
-        boxShadow: "0 0 0 2px rgba(217, 119, 6, 0.2)",
-      },
-      ".Input--invalid": {
-        borderColor: "#dc2626",
-      },
-    },
-  },
-}));
-
 // Computed property to check if form can be submitted
 const canSubmit = computed(() => {
   return (
@@ -333,15 +295,65 @@ const initializeStripe = async () => {
       throw new Error("Stripe container element not found");
     }
 
-    // Create elements
-    elements = stripe.elements(elementsOptions.value);
+    // Create elements with proper options
+    const elementsOptions = {
+      mode: "payment",
+      amount: localDonation.amount
+        ? Math.round(localDonation.amount * 100)
+        : 1200, // Default $12
+      currency: "usd",
+      payment_method_types: ["card"],
+      appearance: {
+        theme: "stripe",
+        variables: {
+          colorPrimary: "#d97706",
+          colorBackground: "#ffffff",
+          colorText: "#374151",
+          colorDanger: "#dc2626",
+          fontFamily: '"Inter", system-ui, sans-serif',
+          borderRadius: "8px",
+          spacingUnit: "4px",
+          fontSizeBase: "14px",
+        },
+        rules: {
+          ".Input": {
+            padding: "12px",
+            fontSize: "14px",
+            border: "1px solid #d1d5db",
+            borderRadius: "8px",
+            boxShadow: "none",
+          },
+          ".Input:focus": {
+            borderColor: "#d97706",
+            boxShadow: "0 0 0 2px rgba(217, 119, 6, 0.2)",
+          },
+          ".Input--invalid": {
+            borderColor: "#dc2626",
+          },
+        },
+      },
+    };
+
+    elements = stripe.elements(elementsOptions);
 
     if (!elements) {
       throw new Error("Failed to create Stripe elements");
     }
 
     // Create payment element
-    paymentElement = elements.create("payment");
+    paymentElement = elements.create("payment", {
+      layout: "tabs",
+      defaultValues: {
+        billingDetails: {
+          name: "",
+          email: "",
+          phone: "",
+          address: {
+            postal_code: "",
+          },
+        },
+      },
+    });
 
     if (!paymentElement) {
       throw new Error("Failed to create payment element");
@@ -362,6 +374,10 @@ const initializeStripe = async () => {
       }
     });
 
+    paymentElement.on("focus", () => {
+      paymentError.value = "";
+    });
+
     // Mount the element
     await paymentElement.mount("#stripe-payment-element");
     console.log("Stripe payment element mounted");
@@ -377,7 +393,15 @@ const updateElements = async () => {
   if (!elements || !localDonation.amount) return;
 
   try {
-    await elements.update(elementsOptions.value);
+    const newAmount = Math.round(localDonation.amount * 100);
+    console.log("Updating elements with amount:", newAmount);
+
+    await elements.update({
+      mode: "payment",
+      amount: newAmount,
+      currency: "usd",
+      // REMOVED: setup_future_usage - Let Payment Intent handle this
+    });
   } catch (error) {
     console.error("Error updating elements:", error);
   }
@@ -449,7 +473,16 @@ const handleSubmit = async (event) => {
 
     console.log("Payment intent created:", paymentIntentId);
 
-    // Step 2: Confirm payment
+    // Step 2: Submit the payment form to validate
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      console.error("Form submission error:", submitError);
+      throw new Error(submitError.message);
+    }
+
+    console.log("Form submitted successfully, confirming payment...");
+
+    // Step 3: Confirm payment
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       clientSecret,
@@ -478,7 +511,9 @@ const handleSubmit = async (event) => {
       throw new Error("Payment was not completed successfully");
     }
 
-    // Step 3: Confirm with backend
+    console.log("Payment confirmed successfully:", paymentIntent);
+
+    // Step 4: Confirm with backend
     try {
       await donationService.confirmDonation({
         paymentIntentId: paymentIntentId,
@@ -497,9 +532,10 @@ const handleSubmit = async (event) => {
       });
     } catch (confirmError) {
       console.error("Error confirming donation in backend:", confirmError);
+      // Don't throw here since payment was successful
     }
 
-    // Step 4: Emit success
+    // Step 5: Emit success
     emit("submit", {
       success: true,
       paymentIntent: paymentIntent,
