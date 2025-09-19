@@ -129,18 +129,13 @@
             Card Details *
           </label>
 
-          <!-- Always show card input fields -->
+          <!-- Native Stripe Elements Container -->
           <div
-            class="border-2 border-gray-200 rounded-lg p-3 bg-white transition-colors focus-within:border-amber-400"
+            id="stripe-payment-element"
+            class="border-2 border-gray-200 rounded-lg p-4 bg-white transition-colors focus-within:border-amber-400"
+            style="min-height: 120px"
           >
-            <StripeElementPayment
-              ref="paymentRef"
-              :pk="stripePublishableKey"
-              :elements-options="elementsOptions"
-              @loading="handleLoading"
-              @error="handleError"
-              @element-ready="handleElementReady"
-            />
+            <!-- Stripe will mount payment element here -->
           </div>
         </div>
 
@@ -149,6 +144,13 @@
           class="text-red-600 text-sm bg-red-50 border border-red-200 rounded-md p-3"
         >
           {{ paymentError }}
+        </div>
+
+        <div
+          v-if="stripeLoading"
+          class="text-blue-600 text-sm bg-blue-50 border border-blue-200 rounded-md p-3"
+        >
+          Loading payment form...
         </div>
       </div>
     </div>
@@ -213,8 +215,15 @@
 </template>
 
 <script setup>
-import { reactive, watch, ref, computed, onMounted } from "vue";
-import { StripeElementPayment } from "@vue-stripe/vue-stripe";
+import {
+  reactive,
+  watch,
+  ref,
+  computed,
+  onMounted,
+  nextTick,
+  onBeforeUnmount,
+} from "vue";
 import donationService from "../services/donationService";
 
 const props = defineProps({
@@ -226,33 +235,39 @@ const props = defineProps({
 
 const emit = defineEmits(["submit", "error"]);
 
-// Local reactive copy to avoid direct prop mutation
+// Local reactive copy
 const localDonation = reactive({ ...props.donation });
 
 // Stripe configuration
 const stripePublishableKey =
   import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ||
-  "pk_test_51QFdLKRwgKCnc7KZNRM1uGBb7z6TKjFUzOj2YFAGDbKhx4jm3p7xxQFfg6xw4wV9LJqG0REOQVUE9nGmNfgjqyUm00IlEBJy0F";
+  "pk_test_51S8H6j7nMNd6hGyDlGi92ziaM4Bhm5juRM50liyQv8qlJsmHCk8bHQUA79xiy5ZHX5hkAnYX2VQ4kqj4y6TuJSXW00eWF1rzVv";
 
 // Component state
 const processing = ref(false);
 const paymentError = ref("");
-const paymentRef = ref(null);
+const stripeLoading = ref(true);
 const elementReady = ref(false);
-const isLoading = ref(false);
 
-// Stripe elements options - No clientSecret needed upfront
-const elementsOptions = ref({
+// Stripe instances
+let stripe = null;
+let elements = null;
+let paymentElement = null;
+
+// Elements options
+const elementsOptions = computed(() => ({
   mode: "payment",
-  amount: 1000, // Default amount in cents, will be updated
+  amount: localDonation.amount ? Math.round(localDonation.amount * 100) : 1000,
   currency: "usd",
+  setup_future_usage: "off_session",
+  payment_method_types: ["card"],
   appearance: {
     theme: "stripe",
     variables: {
-      colorPrimary: "#d97706", // amber-600
+      colorPrimary: "#d97706",
       colorBackground: "#ffffff",
-      colorText: "#374151", // gray-700
-      colorDanger: "#dc2626", // red-600
+      colorText: "#374151",
+      colorDanger: "#dc2626",
       fontFamily: '"Inter", system-ui, sans-serif',
       borderRadius: "8px",
       spacingUnit: "4px",
@@ -264,25 +279,18 @@ const elementsOptions = ref({
         fontSize: "14px",
         border: "1px solid #d1d5db",
         borderRadius: "8px",
+        boxShadow: "none",
       },
       ".Input:focus": {
         borderColor: "#d97706",
         boxShadow: "0 0 0 2px rgba(217, 119, 6, 0.2)",
       },
+      ".Input--invalid": {
+        borderColor: "#dc2626",
+      },
     },
   },
-});
-
-// Update amount in elements options when donation amount changes
-watch(
-  () => localDonation.amount,
-  (newAmount) => {
-    if (newAmount && newAmount > 0) {
-      elementsOptions.value.amount = Math.round(newAmount * 100); // Convert to cents
-    }
-  },
-  { immediate: true }
-);
+}));
 
 // Computed property to check if form can be submitted
 const canSubmit = computed(() => {
@@ -295,9 +303,88 @@ const canSubmit = computed(() => {
     localDonation.email?.trim() &&
     localDonation.postalCode?.trim() &&
     !processing.value &&
-    !isLoading.value
+    !stripeLoading.value &&
+    stripe &&
+    paymentElement
   );
 });
+
+// Initialize Stripe
+const initializeStripe = async () => {
+  try {
+    stripeLoading.value = true;
+    paymentError.value = "";
+
+    // Load Stripe
+    if (!window.Stripe) {
+      throw new Error("Stripe.js failed to load");
+    }
+
+    stripe = window.Stripe(stripePublishableKey);
+    if (!stripe) {
+      throw new Error("Failed to initialize Stripe");
+    }
+
+    // Wait for DOM to be ready
+    await nextTick();
+
+    const container = document.getElementById("stripe-payment-element");
+    if (!container) {
+      throw new Error("Stripe container element not found");
+    }
+
+    // Create elements
+    elements = stripe.elements(elementsOptions.value);
+
+    if (!elements) {
+      throw new Error("Failed to create Stripe elements");
+    }
+
+    // Create payment element
+    paymentElement = elements.create("payment");
+
+    if (!paymentElement) {
+      throw new Error("Failed to create payment element");
+    }
+
+    // Handle element events
+    paymentElement.on("ready", () => {
+      console.log("Stripe payment element ready");
+      elementReady.value = true;
+      stripeLoading.value = false;
+    });
+
+    paymentElement.on("change", (event) => {
+      if (event.error) {
+        paymentError.value = event.error.message;
+      } else {
+        paymentError.value = "";
+      }
+    });
+
+    // Mount the element
+    await paymentElement.mount("#stripe-payment-element");
+    console.log("Stripe payment element mounted");
+  } catch (error) {
+    console.error("Error initializing Stripe:", error);
+    paymentError.value = error.message || "Failed to load payment form";
+    stripeLoading.value = false;
+  }
+};
+
+// Update elements when amount changes
+const updateElements = async () => {
+  if (!elements || !localDonation.amount) return;
+
+  try {
+    await elements.update(elementsOptions.value);
+  } catch (error) {
+    console.error("Error updating elements:", error);
+  }
+};
+
+// Watch for amount changes
+watch(() => localDonation.amount, updateElements);
 
 // Watch for changes in props and update local copy
 watch(
@@ -317,23 +404,7 @@ watch(
   { deep: true }
 );
 
-// Stripe event handlers
-const handleLoading = (loading) => {
-  isLoading.value = loading;
-  console.log("Stripe loading state:", loading);
-};
-
-const handleError = (error) => {
-  console.error("Stripe element error:", error);
-  paymentError.value = error.message || "Payment form error";
-};
-
-const handleElementReady = () => {
-  elementReady.value = true;
-  console.log("Stripe payment element ready");
-};
-
-// Handle form submission - Create payment intent and confirm in one step
+// Handle form submission
 const handleSubmit = async (event) => {
   event.preventDefault();
 
@@ -342,22 +413,16 @@ const handleSubmit = async (event) => {
     return;
   }
 
-  if (!paymentRef.value) {
-    paymentError.value =
-      "Payment system not ready. Please refresh and try again.";
-    return;
-  }
-
   processing.value = true;
   paymentError.value = "";
 
   try {
-    console.log("Creating payment intent and processing payment...");
+    console.log("Creating payment intent...");
 
     // Step 1: Create payment intent
     const paymentIntentResponse = await donationService.createPaymentIntent({
       ministry: localDonation.ministry,
-      amount: localDonation.amount, // Amount in dollars
+      amount: localDonation.amount,
       currency: "usd",
       donorInfo: {
         firstName: localDonation.firstName.trim(),
@@ -384,9 +449,10 @@ const handleSubmit = async (event) => {
 
     console.log("Payment intent created:", paymentIntentId);
 
-    // Step 2: Confirm payment using the client secret
-    const { error } = await paymentRef.value.confirmPayment({
-      clientSecret: clientSecret,
+    // Step 2: Confirm payment
+    const { error, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      clientSecret,
       confirmParams: {
         return_url: `${window.location.origin}/donation-success`,
         payment_method_data: {
@@ -408,6 +474,10 @@ const handleSubmit = async (event) => {
       throw new Error(error.message);
     }
 
+    if (paymentIntent?.status !== "succeeded") {
+      throw new Error("Payment was not completed successfully");
+    }
+
     // Step 3: Confirm with backend
     try {
       await donationService.confirmDonation({
@@ -427,12 +497,12 @@ const handleSubmit = async (event) => {
       });
     } catch (confirmError) {
       console.error("Error confirming donation in backend:", confirmError);
-      // Don't throw here as payment was successful
     }
 
     // Step 4: Emit success
     emit("submit", {
       success: true,
+      paymentIntent: paymentIntent,
       paymentIntentId: paymentIntentId,
       amount: localDonation.amount,
       ministry: localDonation.ministry,
@@ -452,12 +522,23 @@ const handleSubmit = async (event) => {
   }
 };
 
+// Cleanup
+onBeforeUnmount(() => {
+  if (paymentElement) {
+    paymentElement.unmount();
+  }
+});
+
 // Initialize on mount
-onMounted(() => {
+onMounted(async () => {
   console.log(
     "DonationForm mounted with Stripe key:",
     stripePublishableKey ? "✓" : "✗"
   );
   console.log("Initial donation data:", localDonation);
+
+  // Wait a bit for DOM to be ready and then initialize Stripe
+  await nextTick();
+  setTimeout(initializeStripe, 100);
 });
 </script>

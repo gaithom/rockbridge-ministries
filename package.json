@@ -15,7 +15,6 @@
     "@types/gsap": "^1.20.2",
     "@vercel/speed-insights": "^1.2.0",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
-    "@vue-stripe/vue-stripe": "^4.5.0",
     "@vueuse/motion": "^3.0.3",
     "aos": "^2.3.4",
     "axios": "^1.12.2",
