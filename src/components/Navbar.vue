@@ -34,148 +34,193 @@
       <div class="hidden lg:flex items-center space-x-2">
 
         <!-- Home -->
-        <router-link
-          to="/"
-          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group relative overflow-hidden"
-          active-class="underline decoration-amber-500 decoration-2 underline-offset-8"
-          @click="handleNavigation"
-        >
-          <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-full group-hover:translate-x-0"></span>
-          <i class="fas fa-home mr-2 text-slate-500 group-hover:text-amber-400 transition-transform duration-300 group-hover:scale-110"></i> 
-          <span class="font-medium relative group-hover:text-white transition-all duration-300">Home</span>
-        </router-link>
+        <div class="relative group">
+          <router-link
+            to="/"
+            :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', { '!text-amber-300': $route.path === '/' }]"
+            @click="handleNavigation"
+          >
+            <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" :class="{ 'scale-x-100': $route.path === '/' }"></span>
+            <i class="fas fa-home mr-2 text-amber-400 group-hover/nav-item:text-amber-300 transition-all duration-300 group-hover/nav-item:scale-110"></i> 
+            <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">Home</span>
+          </router-link>
+        </div>
 
         <!-- About Dropdown -->
         <div class="relative group" v-motion-slide-visible-once-bottom>
-          <router-link to="/about" :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', { 'underline decoration-amber-500 decoration-2 underline-offset-8': isAboutActive }]" @click="handleNavigation">
-            <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover/nav-item:opacity-100 transition-all duration-300 transform -translate-x-full group-hover/nav-item:translate-x-0"></span>
-            <i class="fas fa-info-circle mr-2 text-slate-500 group-hover/nav-item:text-amber-400 transition-transform duration-300 group-hover/nav-item:scale-110"></i> 
+          <router-link 
+            to="/about" 
+            :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', 
+                   { '!text-amber-300': isAboutActive }]" 
+            @click="handleNavigation"
+          >
+            <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" :class="{ 'scale-x-100': isAboutActive }"></span>
+            <i class="fas fa-info-circle mr-2 text-amber-400 group-hover/nav-item:text-amber-300 transition-all duration-300 group-hover/nav-item:scale-110"></i> 
             <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">About</span>
-            <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-300"></i>
+            <i class="fas fa-chevron-down ml-2 text-xs text-amber-400/80 group-hover:rotate-180 transition-all duration-300"></i>
           </router-link>
 
           <!-- Hover dropdown menu for About section -->
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-gray-900 rounded-lg shadow-xl mt-2 py-2 w-56 border border-gray-800 z-50">
             <!-- Board and Staff -->
-            <router-link 
-              to="/about/board-and-staff" 
-              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
-              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
-            >
-              <i class="fas fa-users mr-2 text-orange-400"></i>Board and Staff
-            </router-link>
+            <div class="relative group/dd-item">
+              <router-link 
+                to="/about/board-and-staff" 
+                class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200 group/item"
+                :class="{ '!text-amber-300': $route.path.startsWith('/about/board-and-staff') }"
+              >
+                <span class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-400 scale-y-0 group-hover/dd-item:scale-y-100 transition-transform duration-300 origin-top" :class="{ 'scale-y-100': $route.path.startsWith('/about/board-and-staff') }"></span>
+                <i class="fas fa-users mr-2 text-amber-400 group-hover/item:text-amber-300 transition-colors duration-200"></i>Board and Staff
+              </router-link>
+            </div>
 
             <!-- History -->
-            <router-link 
-              to="/about/history" 
-              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
-              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
-            >
-              <i class="fas fa-history mr-2 text-orange-400"></i>History
-            </router-link>
+            <div class="relative group/dd-item">
+              <router-link 
+                to="/about/history" 
+                class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200 group/item"
+                :class="{ '!text-amber-300': $route.path.startsWith('/about/history') }"
+              >
+                <span class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-400 scale-y-0 group-hover/dd-item:scale-y-100 transition-transform duration-300 origin-top" :class="{ 'scale-y-100': $route.path.startsWith('/about/history') }"></span>
+                <i class="fas fa-history mr-2 text-amber-400 group-hover/item:text-amber-300 transition-colors duration-200"></i>History
+              </router-link>
+            </div>
           </div>
         </div>
         
         <!-- Our Ministries Dropdown -->
         <div class="relative group" v-motion-slide-visible-once-bottom :delay="100">
-          <router-link to="/our-ministries" :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', { 'underline decoration-amber-500 decoration-2 underline-offset-8': isOurMinistriesActive }]" @click="handleNavigation">
-            <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover/nav-item:opacity-100 transition-all duration-300 transform -translate-x-full group-hover/nav-item:translate-x-0"></span>
-            <i class="fas fa-church mr-2 text-slate-500 group-hover/nav-item:text-amber-400 transition-transform duration-300 group-hover/nav-item:scale-110"></i> 
+          <router-link 
+            to="/our-ministries" 
+            :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', 
+                   { '!text-amber-300': isOurMinistriesActive }]" 
+            @click="handleNavigation"
+          >
+            <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" :class="{ 'scale-x-100': isOurMinistriesActive }"></span>
+            <i class="fas fa-church mr-2 text-amber-400 group-hover/nav-item:text-amber-300 transition-all duration-300 group-hover/nav-item:scale-110"></i> 
             <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">Our Ministries</span>
-            <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-300"></i>
+            <i class="fas fa-chevron-down ml-2 text-xs text-amber-400/80 group-hover:rotate-180 transition-all duration-300"></i>
           </router-link>
+          
           <!-- Hover dropdown menu for Our Ministries -->
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-gray-900 rounded-lg shadow-xl mt-2 py-2 w-56 border border-gray-800 z-50">
-          
             <!-- Education Scholarship -->
-            <router-link 
-              to="/our-ministries/education-scholarship" 
-              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
-              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
-            >
-              <i class="fas fa-graduation-cap mr-2 text-orange-400"></i>Education Scholarship
-            </router-link>
+            <div class="relative group/dd-item">
+              <router-link 
+                to="/our-ministries/education-scholarship" 
+                class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200 group/item"
+                :class="{ '!text-amber-300': $route.path.startsWith('/our-ministries/education-scholarship') }"
+              >
+                <span class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-400 scale-y-0 group-hover/dd-item:scale-y-100 transition-transform duration-300 origin-top" :class="{ 'scale-y-100': $route.path.startsWith('/our-ministries/education-scholarship') }"></span>
+                <i class="fas fa-graduation-cap mr-2 text-amber-400 group-hover/item:text-amber-300 transition-colors duration-200"></i>Education Scholarship
+              </router-link>
+            </div>
+            
             <!-- Social Enterprises -->
-            <router-link 
-              to="/our-ministries/social-enterprises" 
-              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
-              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
-            >
-              <i class="fas fa-building mr-2 text-orange-400"></i>Social Enterprises
-            </router-link>
+            <div class="relative group/dd-item">
+              <router-link 
+                to="/our-ministries/social-enterprises" 
+                class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200 group/item"
+                :class="{ '!text-amber-300': $route.path.startsWith('/our-ministries/social-enterprises') }"
+              >
+                <span class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-400 scale-y-0 group-hover/dd-item:scale-y-100 transition-transform duration-300 origin-top" :class="{ 'scale-y-100': $route.path.startsWith('/our-ministries/social-enterprises') }"></span>
+                <i class="fas fa-building mr-2 text-amber-400 group-hover/item:text-amber-300 transition-colors duration-200"></i>Social Enterprises
+              </router-link>
+            </div>
+            
             <!-- Workplace Evangelism -->
-            <router-link 
-              to="/our-ministries/workplace-evangelism" 
-              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
-              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
-            >
-              <i class="fas fa-briefcase mr-2 text-orange-400"></i>Workplace Evangelism
-            </router-link>
+            <div class="relative group/dd-item">
+              <router-link 
+                to="/our-ministries/workplace-evangelism" 
+                class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200 group/item"
+                :class="{ '!text-amber-300': $route.path.startsWith('/our-ministries/workplace-evangelism') }"
+              >
+                <span class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-400 scale-y-0 group-hover/dd-item:scale-y-100 transition-transform duration-300 origin-top" :class="{ 'scale-y-100': $route.path.startsWith('/our-ministries/workplace-evangelism') }"></span>
+                <i class="fas fa-briefcase mr-2 text-amber-400 group-hover/item:text-amber-300 transition-colors duration-200"></i>Workplace Evangelism
+              </router-link>
+            </div>
           </div>
         </div>
         
         <!-- Get Involved Dropdown -->
         <div class="relative group" v-motion-slide-visible-once-bottom :delay="200">
-          <router-link to="/get-involved" :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', { 'underline decoration-amber-500 decoration-2 underline-offset-8': isGetInvolvedActive }]" @click="handleNavigation">
-            <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover/nav-item:opacity-100 transition-all duration-300 transform -translate-x-full group-hover/nav-item:translate-x-0"></span>
-            <i class="fas fa-hands-helping mr-2 text-slate-500 group-hover/nav-item:text-amber-400 transition-transform duration-300 group-hover/nav-item:scale-110"></i> 
+          <router-link 
+            to="/get-involved" 
+            :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', 
+                   { '!text-amber-300': isGetInvolvedActive }]" 
+            @click="handleNavigation"
+          >
+            <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" :class="{ 'scale-x-100': isGetInvolvedActive }"></span>
+            <i class="fas fa-hands-helping mr-2 text-amber-400 group-hover/nav-item:text-amber-300 transition-all duration-300 group-hover/nav-item:scale-110"></i> 
             <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">Get Involved</span>
-            <i class="fas fa-chevron-down ml-2 text-xs group-hover:rotate-180 transition-transform duration-300"></i>
+            <i class="fas fa-chevron-down ml-2 text-xs text-amber-400/80 group-hover:rotate-180 transition-all duration-300"></i>
           </router-link>
+          
           <!-- Hover dropdown menu for Get Involved -->
           <div class="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-out bg-gray-900 rounded-lg shadow-xl mt-2 py-2 w-56 border border-gray-800 z-50">
             <!-- How to Support -->
-            <router-link 
-              to="/get-involved/how-to-support" 
-              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
-              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
-            >
-              <i class="fas fa-question-circle mr-2 text-orange-400"></i>How to Support
-            </router-link>
+            <div class="relative group/dd-item">
+              <router-link 
+                to="/get-involved/how-to-support" 
+                class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200 group/item"
+                :class="{ '!text-amber-300': $route.path.startsWith('/get-involved/how-to-support') }"
+              >
+                <span class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-400 scale-y-0 group-hover/dd-item:scale-y-100 transition-transform duration-300 origin-top" :class="{ 'scale-y-100': $route.path.startsWith('/get-involved/how-to-support') }"></span>
+                <i class="fas fa-question-circle mr-2 text-amber-400 group-hover/item:text-amber-300 transition-colors duration-200"></i>How to Support
+              </router-link>
+            </div>
+            
             <!-- Partner with Us -->
-            <router-link 
-              to="/get-involved/partner-with-us" 
-              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
-              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
-            >
-              <i class="fas fa-handshake mr-2 text-orange-400"></i>Partner with Us
-            </router-link>
+            <div class="relative group/dd-item">
+              <router-link 
+                to="/get-involved/partner-with-us" 
+                class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200 group/item"
+                :class="{ '!text-amber-300': $route.path.startsWith('/get-involved/partner-with-us') }"
+              >
+                <span class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-400 scale-y-0 group-hover/dd-item:scale-y-100 transition-transform duration-300 origin-top" :class="{ 'scale-y-100': $route.path.startsWith('/get-involved/partner-with-us') }"></span>
+                <i class="fas fa-handshake mr-2 text-amber-400 group-hover/item:text-amber-300 transition-colors duration-200"></i>Partner with Us
+              </router-link>
+            </div>
+            
             <!-- Fund our Programs -->
-            <router-link 
-              to="/get-involved/fund-our-programs" 
-              class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200"
-              active-class="underline decoration-amber-500 decoration-2 underline-offset-4"
-            >
-              <i class="fas fa-donate mr-2 text-orange-400"></i>Fund our Programs
-            </router-link>
+            <div class="relative group/dd-item">
+              <router-link 
+                to="/get-involved/fund-our-programs" 
+                class="block px-4 py-3 text-white hover:bg-gray-800 hover:text-white transition-all duration-200 group/item"
+                :class="{ '!text-amber-300': $route.path.startsWith('/get-involved/fund-our-programs') }"
+              >
+                <span class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-400 scale-y-0 group-hover/dd-item:scale-y-100 transition-transform duration-300 origin-top" :class="{ 'scale-y-100': $route.path.startsWith('/get-involved/fund-our-programs') }"></span>
+                <i class="fas fa-donate mr-2 text-amber-400 group-hover/item:text-amber-300 transition-colors duration-200"></i>Fund our Programs
+              </router-link>
+            </div>
           </div>
         </div>
         
         <!-- Media and Resources -->
-        <router-link 
-          to="/media-and-resources" 
-          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group relative overflow-hidden"
-          active-class="underline decoration-amber-500 decoration-2 underline-offset-8"
-          v-motion-slide-visible-once-bottom :delay="300"
-          @click="handleNavigation"
-        >
-          <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-full group-hover:translate-x-0"></span>
-          <i class="fas fa-photo-video mr-2 text-slate-500 group-hover:text-amber-400 transition-transform duration-300 group-hover:scale-110"></i> 
-          <span class="font-medium relative group-hover:text-white transition-all duration-300">Media and Resources</span>
-        </router-link>
+        <div class="relative group" v-motion-slide-visible-once-bottom :delay="300">
+          <router-link 
+            to="/media-and-resources" 
+            :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', { '!text-amber-300': $route.path.startsWith('/media-and-resources') }]"
+            @click="handleNavigation"
+          >
+            <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" :class="{ 'scale-x-100': $route.path.startsWith('/media-and-resources') }"></span>
+            <i class="fas fa-photo-video mr-2 text-amber-400 group-hover/nav-item:text-amber-300 transition-all duration-300 group-hover/nav-item:scale-110"></i> 
+            <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">Media and Resources</span>
+          </router-link>
+        </div>
 
         <!-- Contact -->
-        <router-link 
-          to="/contact" 
-          class="flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group relative overflow-hidden"
-          active-class="underline decoration-amber-500 decoration-2 underline-offset-8"
-          v-motion-slide-visible-once-bottom :delay="400"
-          @click="handleNavigation"
-        >
-          <span class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-full group-hover:translate-x-0"></span>
-          <i class="fas fa-envelope mr-2 text-slate-500 group-hover:text-amber-400 transition-transform duration-300 group-hover:scale-110"></i> 
-          <span class="font-medium relative group-hover:text-white transition-all duration-300">Contact</span>
-        </router-link>
+        <div class="relative group" v-motion-slide-visible-once-bottom :delay="400">
+          <router-link 
+            to="/contact" 
+            :class="['flex items-center text-amber-500 hover:bg-yellow-500/10 px-4 py-2 rounded-lg transition-all duration-300 group/nav-item relative overflow-hidden', { '!text-amber-300': $route.path === '/contact' }]"
+            @click="handleNavigation"
+          >
+            <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" :class="{ 'scale-x-100': $route.path === '/contact' }"></span>
+            <i class="fas fa-envelope mr-2 text-amber-400 group-hover/nav-item:text-amber-300 transition-all duration-300 group-hover/nav-item:scale-110"></i> 
+            <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">Contact</span>
+          </router-link>
+        </div>
       </div>
 
       <!-- Mobile Menu Button (Hamburger) -->
@@ -315,12 +360,10 @@
               <!-- Animated background highlight -->
               <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <!-- Animated icon -->
-              <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+              <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300 border border-transparent group-hover:border-amber-400/20">
                 <i class="fas fa-home text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
               </div>
-              <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Home</span>
-              <!-- Animated chevron -->
-              <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+              <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300 ml-2">Home</span>
               <!-- Active indicator -->
               <div v-if="$route.path === '/'" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
             </router-link>
@@ -335,11 +378,10 @@
                 @click="handleNavigation"
               >
                 <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+                <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300 border border-transparent group-hover:border-amber-400/20">
                   <i class="fas fa-info-circle text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
                 </div>
-                <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">About</span>
-                <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+                <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300 ml-2">About</span>
                 <div v-if="$route.path.startsWith('/about')" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
               </router-link>
 
@@ -380,8 +422,7 @@
                   >
                     <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <i class="fas fa-users mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
-                    <span class="relative z-10">Board and Staff</span>
-                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                    <span class="relative z-10 ml-2">Board and Staff</span>
                   </router-link>
                   <router-link 
                     to="/about/history" 
@@ -391,8 +432,7 @@
                   >
                     <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <i class="fas fa-history mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
-                    <span class="relative z-10">History</span>
-                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                    <span class="relative z-10 ml-2">History</span>
                   </router-link>
                 </div>
               </transition>
@@ -408,11 +448,10 @@
                 @click="handleNavigation"
               >
                 <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+                <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300 border border-transparent group-hover:border-amber-400/20">
                   <i class="fas fa-church text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
                 </div>
-                <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Our Ministries</span>
-                <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+                <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300 ml-2">Our Ministries</span>
                 <div v-if="$route.path.startsWith('/our-ministries')" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
               </router-link>
 
@@ -453,8 +492,7 @@
                   >
                     <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <i class="fas fa-graduation-cap mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
-                    <span class="relative z-10">Education Scholarship</span>
-                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                    <span class="relative z-10 ml-2">Education Scholarship</span>
                   </router-link>
                   <router-link 
                     to="/our-ministries/social-enterprises" 
@@ -464,8 +502,7 @@
                   >
                     <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <i class="fas fa-building mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
-                    <span class="relative z-10">Social Enterprises</span>
-                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                    <span class="relative z-10 ml-2">Social Enterprises</span>
                   </router-link>
                   <router-link 
                     to="/our-ministries/workplace-evangelism" 
@@ -475,8 +512,7 @@
                   >
                     <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <i class="fas fa-briefcase mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
-                    <span class="relative z-10">Workplace Evangelism</span>
-                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                    <span class="relative z-10 ml-2">Workplace Evangelism</span>
                   </router-link>
                 </div>
               </transition>
@@ -492,11 +528,10 @@
                 @click="handleNavigation"
               >
                 <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+                <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300 border border-transparent group-hover:border-amber-400/20">
                   <i class="fas fa-hands-helping text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
                 </div>
-                <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Get Involved</span>
-                <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+                <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300 ml-2">Get Involved</span>
                 <div v-if="$route.path.startsWith('/get-involved')" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
               </router-link>
 
@@ -537,8 +572,7 @@
                   >
                     <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <i class="fas fa-question-circle mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
-                    <span class="relative z-10">How to Support</span>
-                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                    <span class="relative z-10 ml-2">How to Support</span>
                   </router-link>
                   <router-link 
                     to="/get-involved/partner-with-us" 
@@ -548,8 +582,7 @@
                   >
                     <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <i class="fas fa-handshake mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
-                    <span class="relative z-10">Partner with Us</span>
-                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                    <span class="relative z-10 ml-2">Partner with Us</span>
                   </router-link>
                   <router-link 
                     to="/get-involved/fund-our-programs" 
@@ -559,8 +592,7 @@
                   >
                     <div class="absolute inset-0 bg-gradient-to-r from-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <i class="fas fa-donate mr-3 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
-                    <span class="relative z-10">Fund our Programs</span>
-                    <i class="fas fa-chevron-right ml-auto text-xs opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-amber-400"></i>
+                    <span class="relative z-10 ml-2">Fund our Programs</span>
                   </router-link>
                 </div>
               </transition>
@@ -574,11 +606,10 @@
               @click="handleNavigation"
             >
               <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+              <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300 border border-transparent group-hover:border-amber-400/20">
                 <i class="fas fa-photo-video text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
               </div>
-              <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Media and Resources</span>
-              <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+              <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300 ml-2">Media and Resources</span>
               <div v-if="$route.path.startsWith('/media-and-resources')" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
             </router-link>
 
@@ -590,11 +621,10 @@
               @click="handleNavigation"
             >
               <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300">
+              <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300 border border-transparent group-hover:border-amber-400/20">
                 <i class="fas fa-envelope text-amber-400 group-hover:text-amber-300 transition-colors duration-300"></i>
               </div>
-              <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">Contact</span>
-              <i class="fas fa-chevron-right ml-auto text-xs text-amber-400/60 group-hover:text-amber-300 group-hover:translate-x-1 transition-all duration-300"></i>
+              <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300 ml-2">Contact</span>
               <div v-if="$route.path === '/contact'" class="absolute right-4 w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></div>
             </router-link>
           </nav>
@@ -637,6 +667,12 @@ const isMediaAndResourcesPage = computed(() => {
 const isAboutActive = computed(() => route.path.startsWith('/about'))
 const isOurMinistriesActive = computed(() => route.path.startsWith('/our-ministries'))
 const isGetInvolvedActive = computed(() => route.path.startsWith('/get-involved'))
+// Check if current route is the Media & Resources section
+const isMediaResourcesActive = computed(() => route.path.startsWith('/media-and-resources'))
+// Check if current route is the Contact page
+const isContactActive = computed(() => route.path === '/contact')
+// Check if current route is the Home page
+const isHomeActive = computed(() => route.path === '/')
 // Toggle mobile menu open state
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value

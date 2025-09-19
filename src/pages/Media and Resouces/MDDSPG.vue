@@ -1,85 +1,91 @@
 <template>
-  <section class="max-w-6xl mx-auto px-6 py-12 pt-30 space-y-16">
-    <!-- Top Row -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-      <!-- Text -->
-      <div>
-        <p class="text-gray-700 leading-relaxed mb-4">
-          Nakuru, Kenya – The Daraja 360 Digital Skills Program recently
-          celebrated a significant milestone with the graduation of 38 students
-          who completed an intensive two-month digital skills training course.
-          Among the notable attendees was the manager of ROCK Bridge Ministries
-          (RBM), who played a crucial role in encouraging the graduates to
-          utilize their newly acquired skills.
-        </p>
-        <h2 class="text-xl text-gray-800 mb-4">
-          A Step Towards Technological Advancement & Community Empowerment
-        </h2>
-        <p class="text-gray-700 leading-relaxed mb-4">
-          During the ceremony, the RBM manager addressed the graduates,
-          emphasizing the importance of the digital skills training offered in
-          Nakuru town. “This program equips you with the tools needed to
-          navigate the digital world,” he said. “Take full advantage of these
-          opportunities to advance your careers and contribute to the
-          technological growth of our community.”
-        </p>
-      </div>
-      <!-- Image -->
-      <div>
-        <img
-          src="/images/IMG_7539-scaled.jpg"
-          alt="FinTech Hub Launch"
-          class="rounded-lg shadow-md"
-        />
-      </div>
-    </div>
+  <div class="bg-gray-50 min-h-screen flex flex-col items-center justify-center py-12">
+    <!-- Heading -->
+    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6 text-center">
+      Our Memories in Pictures
+    </h2>
+    <div class="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mb-10"></div>
 
-    <!-- Bottom Row -->
-  </section>
-  <section class="max-w-6xl mx-auto px-6 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-      <!-- LEFT COLUMN -->
-     
-      <!-- Image -->
-      <div>
-        <img
-          src="/images/IMG_7451-scaled.jpg"
-          alt="Event Audience"
-          class="rounded-lg shadow-md"
-        />
+    <!-- Slideshow Container -->
+    <div class="relative w-full max-w-4xl overflow-hidden rounded-2xl shadow-lg">
+      <!-- Images -->
+      <div
+        class="flex transition-transform duration-700 ease-in-out"
+        :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
+      >
+        <div
+          v-for="(image, index) in images"
+          :key="index"
+          class="w-full flex-shrink-0"
+        >
+          <img
+            :src="image"
+            alt="Slideshow Image"
+              class="w-full h-96 object-cover"
+          />
+        </div>
       </div>
-      <div>
-        <h2 class="text-xl font-bold text-gray-800 mb-4">
-          The Significance of the Visit
-        </h2>
-        <p class="text-gray-700 leading-relaxed mb-4">
-          This visit is a significant milestone for both Lish AI Labs and
-          R.O.C.K Bridge Ministries. For Lish AI Labs, it represents a
-          recognition of their efforts in pushing the boundaries of technology
-          and innovation. The government’s interest in their work highlights the
-          potential for public-private partnerships to foster technological
-          advancements that can benefit the entire country.
-        </p>
-        <h2 class="text-xl font-bold text-gray-800 mb-4">
-          Partnership with Lish AI labs
-        </h2>
-        <p class="text-gray-700 leading-relaxed mb-4">
-          ROCK Bridge Ministries has also partnered with LISH AI LABS, a leading job aggregator firm specializing in AI and machine learning. This partnership aims to provide graduates with further training and job opportunities in the rapidly evolving fields of artificial intelligence and machine learning.
-        </p>
-      </div>
-      <div>
-        <img
-          src="/images/IMG_7544-scaled.jpg"
-          alt="Guests at FinTech Hub"
-          class="rounded-lg shadow-md mb-6"
-        />
-        <h2 class="text-xl font-bold text-gray-800 mb-4">
-          Bridging the Digital Divide
-        </h2>
-        <p class="text-gray-700 leading-relaxed mb-4">
-          The collaboration between RBM and LISH AI LABS underscores the commitment to bridging the digital divide and fostering an environment where young people can thrive in the digital economy. By combining resources and expertise, these organizations are paving the way for a brighter, more connected future for Nakuru’s youth.
-        </p>
+
+      <!-- Previous Button -->
+      <button
+        @click="prevSlide"
+        class="absolute top-1/2 left-4 -translate-y-1/2 bg-white/70 hover:bg-white text-gray-800 rounded-full p-2 shadow-md"
+      >
+        ‹
+      </button>
+
+      <!-- Next Button -->
+      <button
+        @click="nextSlide"
+        class="absolute top-1/2 right-4 -translate-y-1/2 bg-white/70 hover:bg-white text-gray-800 rounded-full p-2 shadow-md"
+      >
+        ›
+      </button>
+
+      <!-- Dots -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <button
+          v-for="(image, index) in images"
+          :key="index"
+          @click="goToSlide(index)"
+          :class="[
+            'w-3 h-3 rounded-full',
+            currentIndex === index ? 'bg-amber-500' : 'bg-gray-300'
+          ]"
+        ></button>
       </div>
     </div>
-  </section>
+  </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+
+// Array of images (replace with your actual paths)
+const images = [
+  '/images/garduation/WhatsApp-Image-2024-01-20-at-10.34.56-1.jpeg',
+  '/images/garduation/WhatsApp-Image-2024-01-20-at-10.34.55-10.jpeg',
+  '/images/garduation/WhatsApp-Image-2024-01-20-at-10.34.55-9.jpeg',
+  '/images/garduation/WhatsApp-Image-2024-01-20-at-10.34.55-8.jpeg',
+  '/images/garduation/WhatsApp-Image-2024-01-20-at-13.17.22-e1705746040834.jpeg',
+  '/images/garduation/WhatsApp-Image-2024-01-19-at-14.21.27-1.jpeg',
+  '/images/garduation/WhatsApp-Image-2024-01-19-at-14.21.27.jpeg',
+  '/images/garduation/WhatsApp-Image-2024-01-19-at-14.21.28-1.jpeg',
+  '/images/garduation/WhatsApp-Image-2024-01-19-at-14.21.28.jpeg',
+  '/images/garduation/WhatsApp-Image-2024-01-19-at-14.21.29.jpeg'
+];
+
+const currentIndex = ref(0);
+
+const nextSlide = () => {
+  currentIndex.value = (currentIndex.value + 1) % images.length;
+};
+
+const prevSlide = () => {
+  currentIndex.value = (currentIndex.value - 1 + images.length) % images.length;
+};
+
+const goToSlide = (index) => {
+  currentIndex.value = index;
+};
+</script>
