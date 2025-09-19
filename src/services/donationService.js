@@ -1,19 +1,11 @@
 // src/services/donationService.js
 import axios from "axios";
-import { loadStripe } from "@stripe/stripe-js";
-
-// Initialize Stripe with your publishable key
-const stripePromise = loadStripe(
-  import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ||
-    "pk_test_51QFdLKRwgKCnc7KZNRM1uGBb7z6TKjFUzOj2YFAGDbKhx4jm3p7xxQFfg6xw4wV9LJqG0REOQVUE9nGmNfgjqyUm00IlEBJy0F"
-);
 
 // Create axios instance with better configuration
 const api = axios.create({
   baseURL:
-    import.meta.env.VITE_API_BASE_URL ||
-    "https://rockbridge.up.railway.app/api",
-  timeout: 60000, // Increased timeout
+    import.meta.env.VITE_API_URL || "https://rockbridge.up.railway.app/api",
+  timeout: 60000,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -55,7 +47,6 @@ api.interceptors.response.use(
     let errorMessage = "An unexpected error occurred";
 
     if (error.response) {
-      // Server responded with error status
       const { status, data } = error.response;
 
       if (data?.message) {
@@ -95,7 +86,6 @@ api.interceptors.response.use(
         }
       }
     } else if (error.request) {
-      // Network error
       if (error.code === "ECONNABORTED") {
         errorMessage =
           "Request timeout. Please check your connection and try again";
@@ -116,11 +106,6 @@ api.interceptors.response.use(
 );
 
 export const donationService = {
-  // Get Stripe instance
-  getStripe() {
-    return stripePromise;
-  },
-
   // Create payment intent
   async createPaymentIntent(donationData) {
     try {
@@ -151,9 +136,10 @@ export const donationService = {
         throw new Error("Postal code is required");
       }
 
-      // Ensure amount is in cents for Stripe (should already be converted)
+      // Ensure amount is in cents for Stripe
       const payload = {
         ...donationData,
+        amount: Math.round(donationData.amount * 100), // Convert to cents
         currency: donationData.currency?.toLowerCase() || "usd",
       };
 
@@ -180,7 +166,6 @@ export const donationService = {
     } catch (error) {
       console.error("Error creating payment intent:", error);
 
-      // Re-throw with more specific error messages
       if (error.status === 400) {
         throw new Error("Invalid donation information provided");
       } else if (error.status === 422) {
@@ -216,13 +201,11 @@ export const donationService = {
       return response.data;
     } catch (error) {
       console.error("Error confirming donation:", error);
-      // Don't re-throw here as this is just for backend confirmation
-      // The payment has already been processed by Stripe
       return { success: false, message: error.message };
     }
   },
 
-  // Get recent donations (optional - for admin purposes)
+  // Get recent donations
   async getRecentDonations(limit = 10, ministry = null) {
     try {
       const params = { limit };
@@ -244,39 +227,6 @@ export const donationService = {
     } catch (error) {
       console.error("Health check failed:", error);
       throw error;
-    }
-  },
-
-  // Test Stripe connection
-  async testStripeConnection() {
-    try {
-      const stripe = await this.getStripe();
-      if (!stripe) {
-        throw new Error("Failed to load Stripe");
-      }
-      return { success: true, message: "Stripe connected successfully" };
-    } catch (error) {
-      console.error("Stripe connection test failed:", error);
-      return { success: false, message: error.message };
-    }
-  },
-
-  // Validate card before payment
-  async validateCard(elements) {
-    try {
-      if (!elements) {
-        throw new Error("Elements not initialized");
-      }
-
-      const { error } = await elements.submit();
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return { valid: true };
-    } catch (error) {
-      console.error("Card validation error:", error);
-      return { valid: false, error: error.message };
     }
   },
 };
