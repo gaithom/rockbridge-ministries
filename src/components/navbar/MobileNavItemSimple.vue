@@ -21,57 +21,59 @@
     <!-- Dropdown parent -->
     <div v-else class="relative">
       <!-- Parent link container -->
-      <div class="flex items-center">
-        <!-- Parent link that navigates -->
-        <a
-          :href="item.to"
-          class="flex-1 flex items-center hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-3.5 rounded-xl transition-all duration-300 group text-left"
-          :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5': isActive}"
-          @click.prevent="handleParentClick"
-        >
-          <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300 border border-transparent group-hover:border-amber-400/20">
-            <i :class="['fas', `fa-${item.icon}`, 'text-amber-400 group-hover:text-amber-300 transition-colors duration-300']"></i>
-          </div>
-          <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">
-            {{ item.text }}
-          </span>
-        </a>
-        
-        <!-- Dropdown toggle button -->
-        <button 
-          class="p-2 text-amber-400/80 hover:text-amber-300 transition-colors duration-200 focus:outline-none"
-          @click.stop="toggleDropdown"
-          aria-label="Toggle dropdown menu"
-        >
-          <i 
-            class="fas fa-chevron-down text-xs transition-transform duration-200"
-            :class="{'transform rotate-180': isOpen}"
-          ></i>
-        </button>
-      </div>
-      
-      <!-- Dropdown menu -->
-      <transition
-        enter-active-class="transition-all duration-200 ease-out"
-        leave-active-class="transition-all duration-150 ease-in"
-        enter-from-class="opacity-0 max-h-0"
-        enter-to-class="opacity-100 max-h-96"
-        leave-from-class="opacity-100 max-h-96"
-        leave-to-class="opacity-0 max-h-0"
-      >
-        <div v-if="isOpen" class="ml-8 mt-1 space-y-1 overflow-hidden">
-          <a
-            v-for="(subItem, subIndex) in item.dropdownItems"
-            :key="subIndex"
-            :href="subItem.to"
-            class="flex items-center px-4 py-2.5 text-sm text-amber-100/90 hover:text-white hover:bg-amber-500/10 rounded-lg transition-colors duration-200 group cursor-pointer"
-            @click.prevent="navigateTo(subItem.to)"
+      <div class="flex flex-col">
+        <div class="flex items-center">
+          <!-- Parent link that navigates -->
+          <router-link
+            :to="item.to"
+            class="flex-1 flex items-center hover:bg-gradient-to-r from-amber-500/5 to-transparent px-4 py-3.5 rounded-xl transition-all duration-300 group text-left"
+            :class="{'bg-gradient-to-r from-amber-500/10 to-amber-500/5': isActive}"
+            @click="handleParentClick"
           >
-            <i :class="['fas', `fa-${subItem.icon}`, 'mr-3 text-amber-400/80 group-hover:text-amber-300 w-4 text-center']"></i>
-            {{ subItem.text }}
-          </a>
+            <div class="p-2 mr-3 bg-amber-500/10 rounded-lg group-hover:bg-amber-400/20 transition-colors duration-300 border border-transparent group-hover:border-amber-400/20">
+              <i :class="['fas', `fa-${item.icon}`, 'text-amber-400 group-hover:text-amber-300 transition-colors duration-300']"></i>
+            </div>
+            <span class="font-medium text-amber-100 group-hover:text-white transition-colors duration-300">
+              {{ item.text }}
+            </span>
+          </router-link>
+          
+          <!-- Dropdown toggle button -->
+          <button 
+            class="p-2 text-amber-400/80 hover:text-amber-300 transition-colors duration-200 focus:outline-none"
+            @click.stop="toggleDropdown"
+            aria-label="Toggle dropdown menu"
+          >
+            <i 
+              class="fas fa-chevron-down text-xs transition-transform duration-200"
+              :class="{'transform rotate-180': isOpen}"
+            ></i>
+          </button>
         </div>
-      </transition>
+      
+        <!-- Dropdown menu -->
+        <transition
+          enter-active-class="transition-all duration-200 ease-out"
+          leave-active-class="transition-all duration-150 ease-in"
+          enter-from-class="opacity-0 max-h-0"
+          enter-to-class="opacity-100 max-h-96"
+          leave-from-class="opacity-100 max-h-96"
+          leave-to-class="opacity-0 max-h-0"
+        >
+          <div v-if="isOpen" class="ml-8 mt-1 space-y-1 overflow-hidden">
+            <a
+              v-for="(subItem, subIndex) in item.dropdownItems"
+              :key="subIndex"
+              :href="subItem.to"
+              class="flex items-center px-4 py-2.5 text-sm text-amber-100/90 hover:text-white hover:bg-amber-500/10 rounded-lg transition-colors duration-200 group cursor-pointer"
+              @click.prevent="navigateTo(subItem.to)"
+            >
+              <i :class="['fas', `fa-${subItem.icon}`, 'mr-3 text-amber-400/80 group-hover:text-amber-300 w-4 text-center']"></i>
+              {{ subItem.text }}
+            </a>
+          </div>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
@@ -107,15 +109,10 @@ const toggleDropdown = (event) => {
 };
 
 const handleParentClick = (event) => {
-  // If dropdown is closed, navigate to the parent link
-  if (!isOpen.value) {
-    emit('navigate');
-    router.push(item.to);
-  } else {
-    // If dropdown is open, just close it
-    isOpen.value = false;
-  }
-  event.preventDefault();
+  // Always navigate to the parent link when clicked
+  emit('navigate');
+  // Close the dropdown when a parent link is clicked
+  isOpen.value = false;
 };
 
 // Close dropdown when route changes
