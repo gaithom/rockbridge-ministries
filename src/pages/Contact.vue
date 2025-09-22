@@ -28,9 +28,13 @@
                   </svg>
                   Give Us a Call
                 </h3>
-                <p class="text-gray-600">
-                  If you would like to speak to someone, you may call Dick Mulloy at <a href="tel:+14049349728" class="text-blue-600 hover:underline">(404) 934-9728</a> or contact Mary Cox at <a href="tel:+14042597735" class="text-blue-600 hover:underline">(404) 259-7735</a>.
-                </p>
+                <div class="text-gray-600">
+                  <p class="mb-2">If you would like to speak to someone, please call:</p>
+                  <div class="flex flex-col space-y-2 pl-4">
+                    <a href="tel:+14049349728" class="text-blue-600 hover:underline">(404) 934-9728</a>
+                    <a href="tel:+14042597735" class="text-blue-600 hover:underline">(404) 259-7735</a>
+                  </div>
+                </div>
               </div>
 
               <div>
