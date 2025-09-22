@@ -17,7 +17,6 @@ import FundOurPrograms from '../pages/Get involved/Fundourprograms.vue'
 import MediaAndResources from '../pages/Media and Resouces/Media and resources.vue'
 import GrandLaunch from '../pages/Media and Resouces/Grand Launch.vue'
 import CETCT from '../pages/Media and Resouces/CETCT.vue'
-import MDDSPG from '../pages/Media and Resouces/MDDSPG.vue'
 import Contact from '../pages/Contact.vue'
 import Home from '../pages/Home.vue'
 import JourneyToNursing from '../pages/Media and Resouces/Journey To Nursing.vue'
@@ -39,6 +38,8 @@ import YouthVideo from '../pages/Media and Resouces/videos/Youth-video.vue'
 import PrivacyPolicy from '../pages/PrivacyPolicy.vue'
 import TermsOfService from '../pages/TermsOfService.vue'
 import Sitemap from '../pages/Sitemap.vue'
+// import MDDSPG from '../pages/Media and Resouces/MDDSPG.vue'
+
 
 const routes = [
   {
@@ -132,11 +133,11 @@ const routes = [
     name: 'CETCT',
     component: CETCT
   },
-  {
-    path: '/media-and-resources/MDDSPG',
-    name: 'MDDSPG',
-    component: MDDSPG
-  },
+  // {
+  //   path: '/media-and-resources/MDDSPG',
+  //   name: 'MDDSPG',
+  //   component: MDDSPG
+  // },
   {
     path: '/media-and-resources/journey-to-nursing',
     name: 'journey-to-nursing',

@@ -1,58 +1,50 @@
 <template>
-  <div class="bg-gray-50 min-h-screen flex flex-col items-center justify-center py-12">
+  <div class="bg-gray-50 min-h-screen p-25">
     <!-- Heading -->
-    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6 text-center">
-      Our Memories in Pictures
+    <h2 class="text-3xl font-bold text-slate-800 text-center mb-10">
+      Graduation Memories
     </h2>
-    <div class="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mb-10"></div>
+    <div
+          class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-500 mx-auto mb-8 sm:mb-12"
+        ></div>
 
-    <!-- Slideshow Container -->
-    <div class="relative w-full max-w-4xl overflow-hidden rounded-2xl shadow-lg">
-      <!-- Images -->
+    <!-- Gallery -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <div
-        class="flex transition-transform duration-700 ease-in-out"
-        :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
+        v-for="(image, index) in images"
+        :key="index"
+        class="overflow-hidden rounded-lg shadow hover:shadow-xl transition cursor-pointer"
+        @click="openModal(image)"
       >
-        <div
-          v-for="(image, index) in images"
-          :key="index"
-          class="w-full flex-shrink-0"
-        >
-          <img
-            :src="image"
-            alt="Slideshow Image"
-              class="w-full h-96 object-cover"
-          />
-        </div>
+        <img
+          :src="image"
+          alt="Gallery Image"
+          class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+        />
       </div>
+    </div>
 
-      <!-- Previous Button -->
-      <button
-        @click="prevSlide"
-        class="absolute top-1/2 left-4 -translate-y-1/2 bg-white/70 hover:bg-white text-gray-800 rounded-full p-2 shadow-md"
-      >
-        ‹
-      </button>
-
-      <!-- Next Button -->
-      <button
-        @click="nextSlide"
-        class="absolute top-1/2 right-4 -translate-y-1/2 bg-white/70 hover:bg-white text-gray-800 rounded-full p-2 shadow-md"
-      >
-        ›
-      </button>
-
-      <!-- Dots -->
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+    <!-- Modal -->
+    <div
+      v-if="selectedImage"
+      class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
+      @click.self="closeModal"
+    >
+      <div class="relative max-w-4xl w-full">
+        <!-- Close Button -->
         <button
-          v-for="(image, index) in images"
-          :key="index"
-          @click="goToSlide(index)"
-          :class="[
-            'w-3 h-3 rounded-full',
-            currentIndex === index ? 'bg-amber-500' : 'bg-gray-300'
-          ]"
-        ></button>
+          class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow"
+          @click="closeModal"
+        >
+          ✕
+        </button>
+
+        <!-- Fullscreen Image -->
+        <img
+          :src="selectedImage"
+          alt="Selected Image"
+          class="w-full max-h-[90vh] object-contain rounded-lg shadow-lg"
+        />
       </div>
     </div>
   </div>
@@ -61,7 +53,7 @@
 <script setup>
 import { ref } from "vue";
 
-// Array of images (replace with your actual paths)
+// Empty array (add your image paths later)
 const images = [
   '/images/home/e94e186f-8558-4563-bcb8-eeba8b0ea724-scaled.jpg',
   '/images/home/f22932c8-b292-431c-9e7e-5607b942997a-scaled.jpg',
@@ -92,17 +84,13 @@ const images = [
   '/images/home/WhatsApp-Image-2023-03-26-at-07.51.27.jpeg,',
 ];
 
-const currentIndex = ref(0);
+const selectedImage = ref(null);
 
-const nextSlide = () => {
-  currentIndex.value = (currentIndex.value + 1) % images.length;
+const openModal = (image) => {
+  selectedImage.value = image;
 };
 
-const prevSlide = () => {
-  currentIndex.value = (currentIndex.value - 1 + images.length) % images.length;
-};
-
-const goToSlide = (index) => {
-  currentIndex.value = index;
+const closeModal = () => {
+  selectedImage.value = null;
 };
 </script>
