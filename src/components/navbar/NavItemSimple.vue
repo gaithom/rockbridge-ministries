@@ -7,7 +7,6 @@
       @click="$emit('navigate')"
     >
       <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" :class="{ 'scale-x-100': isActive }"></span>
-      <i :class="['fas', `fa-${icon}`, 'mr-2 text-amber-400 group-hover/nav-item:text-amber-300 transition-all duration-300 group-hover/nav-item:scale-110']"></i> 
       <span class="font-medium relative group-hover/nav-item:text-white transition-all duration-300">
         {{ text }}
       </span>
@@ -28,7 +27,7 @@ const props = defineProps({
   },
   icon: {
     type: String,
-    required: true
+    required: false
   },
   text: {
     type: String,

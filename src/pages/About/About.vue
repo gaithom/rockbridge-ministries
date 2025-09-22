@@ -5,17 +5,38 @@
     
     <!-- Hero section with video background and overlay -->
     <section class="relative min-h-screen bg-slate-900 overflow-hidden flex items-center justify-center">
-
-      <div class="absolute inset-0 z-0 overflow-hidden">
-        <iframe
-          src="https://www.youtube.com/embed/82iipouWg5U?autoplay=1&mute=1&loop=1&playlist=82iipouWg5U&controls=0&showinfo=0&autohide=1"
-          frameborder="0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-[120vw] h-[120vh] pointer-events-none"
-        ></iframe>
+      <!-- Video Background Container -->
+      <div class="absolute inset-0 z-0 w-full h-full overflow-hidden">
+        <!-- Desktop View -->
+        <div class="hidden md:block absolute inset-0 w-full h-full">
+          <iframe
+            src="https://www.youtube.com/embed/82iipouWg5U?autoplay=1&mute=1&loop=1&playlist=82iipouWg5U&controls=0&showinfo=0&autohide=1"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-[120vw] h-[120vh] pointer-events-none"
+          ></iframe>
+        </div>
+        
+        <!-- Mobile View -->
+        <div class="md:hidden absolute inset-0 w-full h-full">
+          <div class="relative w-full h-full">
+            <div class="absolute inset-0 w-full h-full flex items-center justify-center">
+              <iframe
+                src="https://www.youtube.com/embed/82iipouWg5U?autoplay=1&mute=1&loop=1&playlist=82iipouWg5U&controls=0&showinfo=0&autohide=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                class="absolute w-[177.78vh] min-w-full min-h-full h-[56.25vw] max-h-none max-w-none"
+                style="aspect-ratio: 16/9;"
+              ></iframe>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="absolute inset-0 bg-black opacity-50 z-10"></div>
+      
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black/50 z-10"></div>
 
       <div class="container mx-auto px-6 relative z-30">
         <div class="max-w-4xl text-center mx-auto">

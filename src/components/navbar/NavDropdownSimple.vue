@@ -8,8 +8,7 @@
         @click="$emit('navigate')"
       >
         <span class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-400 scale-y-0 group-hover/dd-item:scale-y-100 transition-transform duration-300 origin-top" :class="{ 'scale-y-100': $route.path === item.to }"></span>
-        <i :class="['fas', `fa-${item.icon}`, 'mr-2 text-amber-400 group-hover/item:text-amber-300 transition-colors duration-200']"></i>
-        {{ item.text }}
+        <span class="pl-2">{{ item.text }}</span>
       </router-link>
     </div>
   </div>
