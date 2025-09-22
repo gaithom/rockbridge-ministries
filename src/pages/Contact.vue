@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen text-gray-800">
     <!-- Hero Section -->
-    <div class="bg-gray-900 text-gray-100 py-14 md:py-20 border-b border-gray-200">
+    <div class="bg-gray-900 text-gray-100 pt-24 md:pt-32 pb-14 md:pb-20 border-b border-gray-200">
       <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
           <h1 class="text-3xl md:text-4xl font-bold mb-4">Contact Us</h1>
