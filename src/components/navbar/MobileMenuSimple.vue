@@ -75,8 +75,8 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
-import { navItems, animationClasses } from './NavbarParts';
+import { ref, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import MobileNavItem from './MobileNavItemSimple.vue';
 
 const props = defineProps({
