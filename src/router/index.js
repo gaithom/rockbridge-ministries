@@ -164,7 +164,7 @@ const routes = [
     component: HolidayHomesPhotos
   },
   {
-    path: '/media-and-resouces/clean-water-initiatives',
+    path: '/media-and-resources/clean-water-initiatives',
     name: 'clean-water-initiatives',
     component: CleanWaterInitiatives
   },

@@ -4,36 +4,5 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "images": {
-    "sizes": [640, 750, 828, 1080, 1200, 1920, 2048],
-    "domains": ["rockbridge-ministries.vercel.app"],
-    "minimumCacheTTL": 86400,
-    "formats": ["image/webp", "image/avif"],
-    "deviceSizes": [640, 750, 1000, 1200, 1920]
-  },
-  "headers": [
-    {
-      "source": "/images/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        },
-        {
-          "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*).(jpg|jpeg|png|webp|gif|ico|svg)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, must-revalidate"
-        }
-      ]
-    }
   ]
 }

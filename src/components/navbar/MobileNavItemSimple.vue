@@ -86,7 +86,6 @@ const route = useRoute();
 const router = useRouter();
 const isOpen = ref(false);
 
-// Define props and emits
 const props = defineProps({
   item: {
     type: Object,
