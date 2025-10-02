@@ -30,7 +30,7 @@
       <div class="text-center mb-16">
         
         <div class="w-24 h-1 bg-amber-400 mx-auto mb-8"></div>
-        <p class="text-base text-gray-600 max-w-4xl mx-auto leading-relaxed">
+        <p class="text-lg text-gray-600 max-w-6xl mx-auto leading-relaxed">
           We want to invite you to form a relationship with us at R.O.C.K Bridge Ministries! We are a group of people who feel called to obey Christ by reaching out to the community of Nakuru, Kenya. We believe that everyone has something to offer, and we would love to find a way for you to get involved.
         </p>
       </div>

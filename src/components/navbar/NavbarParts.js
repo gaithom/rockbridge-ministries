@@ -1,4 +1,4 @@
-// This file will contain shared data and utilities for the navbar components
+// This file will contain shared data and utilities for the navbar component
 export const navItems = [
   {
     to: '/',
@@ -49,6 +49,19 @@ export const navItems = [
     icon: 'envelope',
     text: 'Contact',
     hasDropdown: false
+  },
+  {
+    to: '/admin',
+    icon: 'user-shield',
+    text: 'Admin',
+    hasDropdown: false
+  },
+  {
+    to: '/get-involved/fund-our-programs',
+    icon: 'donate',
+    text: 'Donate',
+    hasDropdown: false,
+    isDonateButton: true
   }
 ];
 

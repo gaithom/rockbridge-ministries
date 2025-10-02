@@ -40,6 +40,10 @@ import TermsOfService from '../pages/TermsOfService.vue'
 import Sitemap from '../pages/Sitemap.vue'
 // import MDDSPG from '../pages/Media and Resouces/MDDSPG.vue'
 
+// Admin pages
+import AdminLogin from '../pages/Admin/AdminLogin.vue'
+import AdminLayout from '../layouts/AdminLayout.vue'
+import AdminDashboard from '../pages/Admin/AdminDashboard.vue'
 
 const routes = [
   {
@@ -222,6 +226,28 @@ const routes = [
     path: '/contact',
     name: 'Contact',
     component: Contact
+  },
+  // Admin routes
+  {
+    path: '/admin/login',
+    name: 'AdminLogin',
+    component: AdminLogin,
+    meta: { public: true }
+  },
+  {
+    path: '/admin',
+    component: AdminLayout,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'AdminDashboard',
+        component: AdminDashboard
+      },
+      // Add more admin routes here as needed
+      // { path: 'users', component: AdminUsers },
+      // { path: 'settings', component: AdminSettings }
+    ]
   }
 ]
 
@@ -243,5 +269,14 @@ const router = createRouter({
   }
 })
 
-export default router 
+// Simple route guard for admin routes
+import { isAuthenticated } from '../services/authService'
 
+router.beforeEach((to) => {
+  if (to.meta?.requiresAuth && !isAuthenticated()) {
+    return { path: '/admin/login', query: { redirect: to.fullPath } }
+  }
+  return true
+})
+
+export default router 

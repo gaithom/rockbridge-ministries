@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="font-sans">
     <nav
       :class="['fixed w-full z-50 transition-all duration-300 ease-in-out']"
       :style="{
-        backgroundColor: isMediaAndResourcesPage ? 'rgb(17, 24, 39)' : (scrolledUp && !isBoardAndStaffPage ? '' : 'rgb(17, 24, 39)'),
-        backdropFilter: isMediaAndResourcesPage ? 'none' : (scrolledUp && !isBoardAndStaffPage ? 'none' : 'blur(8px)')
+        backgroundColor: isAdminPage || isMediaAndResourcesPage ? 'rgb(17, 24, 39)' : (scrolledUp && !isBoardAndStaffPage ? '' : 'rgb(17, 24, 39)'),
+        backdropFilter: isAdminPage || isMediaAndResourcesPage ? 'none' : (scrolledUp && !isBoardAndStaffPage ? 'none' : 'blur(8px)')
       }"
       @mouseleave="isMediaAndResourcesPage ? null : restoreTransparency()"
     >
@@ -13,9 +13,10 @@
         <LogoSection />
 
         <!-- Desktop Navigation -->
-        <div class="hidden lg:flex items-center space-x-2">
+        <div class="hidden lg:flex items-center space-x-1">
           <template v-for="(item, index) in navItems" :key="index">
             <NavItem 
+              v-if="!item.isDonateButton"
               :to="item.to"
               :icon="item.icon"
               :text="item.text"
@@ -27,6 +28,12 @@
                 <NavDropdown :items="item.dropdownItems" @navigate="handleNavigation" />
               </template>
             </NavItem>
+            <DonationButton 
+              v-else
+              class="ml-4"
+              :button-text="item.text"
+              @success="handleDonationSuccess"
+            />
           </template>
         </div>
 
@@ -59,6 +66,7 @@ import NavItem from './navbar/NavItemSimple.vue';
 import NavDropdown from './navbar/NavDropdownSimple.vue';
 import MobileMenu from './navbar/MobileMenuSimple.vue';
 import MobileMenuButton from './MobileMenuButton.vue';
+import DonationButton from './DonationButton.vue';
 
 const route = useRoute();
 const scrolledUp = ref(true);
@@ -71,6 +79,10 @@ const isBoardAndStaffPage = computed(() => {
   return route.path.includes('board-and-staff') || route.path.includes('how-to-support');
 });
 
+const isAdminPage = computed(() => {
+  return route.path.startsWith('/admin');
+});
+
 const isMediaAndResourcesPage = computed(() => {
   return route.path.includes('media-and-resources') && !route.path.includes('videos');
 });
@@ -81,6 +93,12 @@ const isActive = (item) => {
     return route.path === '/';
   }
   return route.path.startsWith(item.to);
+};
+
+// Handle successful donation
+const handleDonationSuccess = (result) => {
+  // You can add any success handling here, like showing a notification
+  console.log('Donation successful:', result);
 };
 
 // Navigation methods
