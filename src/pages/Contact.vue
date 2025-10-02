@@ -1,19 +1,25 @@
 <template>
   <div class="min-h-screen text-gray-800">
     <!-- Hero Section -->
-    <div class="bg-gray-900 text-gray-100 pt-24 md:pt-32 pb-14 md:pb-20 border-b border-gray-200">
-      <div class="container mx-auto px-6">
+    <div class="bg-gradient-to-b from-gray-800 to-gray-900 text-amber-50 pt-24 md:pt-32 pb-14 md:pb-20 relative overflow-hidden">
+      <!-- Decorative wave divider -->
+      <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
+        <svg class="w-full h-12" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+                class="fill-current text-amber-600 opacity-20"></path>
+        </svg>
+      </div>
+      
+      <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="max-w-3xl mx-auto text-center">
           <h1 class="text-3xl md:text-4xl font-bold mb-4">Contact Us</h1>
           <div class="w-16 h-1 bg-amber-500 mx-auto mb-4"></div>
-          <p class="text-lg text-gray-400 max-w-2xl mx-auto">
-            We'd love to hear from you! feel free to reach out to us at 
+          <p class="text-lg text-amber-100/90 max-w-2xl mx-auto">
+            We'd love to hear from you! Feel free to reach out to us
           </p>
         </div>
       </div>
     </div>
-
-    <!-- Main Content -->
     <div class="container mx-auto px-6 py-12">
       <div class="container mx-auto px-6 pb-16 grid lg:grid-cols-2 gap-12">
         <div class="space-y-12">

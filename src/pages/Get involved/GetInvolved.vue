@@ -25,7 +25,10 @@
     </div>
 
     <!-- Main Content Section -->
-    <div id="get-involved" class="container mx-auto px-6 py-16">
+     
+
+     
+    <div id="get-involved" class="container mx-auto px-6 py-16 tab-content">
       <!-- Header Section -->
       <div class="text-center mb-16">
         
@@ -35,7 +38,34 @@
         </p>
       </div>
 
-      <!-- Ways to Get Involved -->
+
+      <!-- Tab Navigation -->
+      <div class="flex justify-center mb-12">
+        <div class="inline-flex rounded-lg border border-gray-200 bg-white p-1">
+          <button
+            @click="setActiveTab('ways')"
+            :class="{
+              'bg-amber-500 text-white': activeTab === 'ways',
+              'text-gray-700 hover:bg-gray-100': activeTab !== 'ways'
+            }"
+            class="px-6 py-2 rounded-md font-medium transition-colors duration-200"
+          >
+            Ways to Get Involved
+          </button>
+          <button
+            @click="setActiveTab('support')"
+            :class="{
+              'bg-amber-500 text-white': activeTab === 'support',
+              'text-gray-700 hover:bg-gray-100': activeTab !== 'support'
+            }"
+            class="px-6 py-2 rounded-md font-medium transition-colors duration-200"
+          >
+            How to Support
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Content -->
       <div class="mb-20">
         <h2 class="text-4xl font-bold text-gray-900 text-center mb-12" data-aos="fade-up">
           Ways You Can Make a Difference
@@ -202,7 +232,7 @@
       </div>
 
       <!-- Call to Action -->
-      <div class="text-center bg-amber-50 rounded-3xl p-12">
+      <div class="text-center bg-amber-50 rounded-3xl p-12 mb-16">
         <h2 class="text-3xl font-bold text-gray-900 mb-6">
           Ready to Make a Difference?
         </h2>
@@ -216,6 +246,261 @@
           To learn more about how you can get involved, please visit our website or 
           <router-link to="/contact" class="text-green-600 font-semibold hover:text-amber-700 transition-colors duration-200">contact us</router-link>!
         </p>
+      </div>
+
+      <!-- How to Support Section -->
+      <div class="bg-gradient-to-b from-gray-50 to-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">
+              Invest in Our Mission
+            </h2>
+            <div class="w-24 h-1 bg-amber-400 mx-auto mt-4"></div>
+            <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
+              Your support helps us transform lives through education and community development in Kenya.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+            <!-- Left Column -->
+            <div class="space-y-12">
+              <!-- Individual Donations -->
+              <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300" data-aos="fade-right">
+                <div class="flex items-center mb-6">
+                  <div class="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900">Individual Donations</h3>
+                </div>
+                <p class="text-gray-600 mb-4">
+                  The power to open pathways to education. Your donation helps students from needy backgrounds transition to higher education and achieve their educational goals.
+                </p>
+                <div class="space-y-3 mt-6">
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      <span class="font-semibold">Online:</span> Make a secure donation on our website
+                    </p>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      <span class="font-semibold">By mail:</span> Send a check to Gibbon House, P.O. Box 16142-20100, Nakuru, Kenya
+                    </p>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      <span class="font-semibold">In person:</span> Visit our office at Gibbon House, Opposite Nyayo Garden
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-6">
+                  <router-link to="/donate" class="inline-flex items-center text-amber-600 font-medium hover:text-amber-700 transition-colors duration-200">
+                    Donate Now
+                    <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </router-link>
+                </div>
+              </div>
+
+              <!-- Foundation Grants -->
+              <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300" data-aos="fade-right" data-aos-delay="100">
+                <div class="flex items-center mb-6">
+                  <div class="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900">Foundation Grants</h3>
+                </div>
+                <p class="text-gray-600 mb-4">
+                  We invite like-minded organizations and donors to help us pursue grants for our scholarship program and improve education in our community.
+                </p>
+                <div class="space-y-3 mt-6">
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      <span class="font-semibold">Scholarship grants:</span> Help provide scholarships to more students from needy backgrounds
+                    </p>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      <span class="font-semibold">General operating grants:</span> Support the overall operations of our ministry
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-6">
+                  <router-link to="/contact" class="inline-flex items-center text-amber-600 font-medium hover:text-amber-700 transition-colors duration-200">
+                    Learn More
+                    <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-12">
+              <!-- Corporate Sponsorships -->
+              <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300" data-aos="fade-left">
+                <div class="flex items-center mb-6">
+                  <div class="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900">Corporate Sponsorships</h3>
+                </div>
+                <p class="text-gray-600 mb-4">
+                  Partner with us to help students from needy backgrounds while achieving your organization's community and social responsibility objectives.
+                </p>
+                <div class="space-y-3 mt-6">
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      <span class="font-semibold">Event sponsorships:</span> Sponsor our outreach events to create more impact
+                    </p>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      <span class="font-semibold">Program sponsorship:</span> Support specific initiatives like our Scholarship Program
+                    </p>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      <span class="font-semibold">Product or service support:</span> Provide operational supplies and services
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-6">
+                  <router-link to="/contact" class="inline-flex items-center text-amber-600 font-medium hover:text-amber-700 transition-colors duration-200">
+                    Partner With Us
+                    <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </router-link>
+                </div>
+              </div>
+
+              <!-- In-Kind Donations -->
+              <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300" data-aos="fade-left" data-aos-delay="100">
+                <div class="flex items-center mb-6">
+                  <div class="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900">In-Kind Donations</h3>
+                </div>
+                <p class="text-gray-600 mb-4">
+                  Your donation of goods or services can help reduce our operating costs and free up more resources for our programs.
+                </p>
+                <div class="space-y-3 mt-6">
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      Office supplies and equipment
+                    </p>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      Printing and design services
+                    </p>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="ml-3 text-gray-700">
+                      Materials for holiday homes and community projects
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-6">
+                  <router-link to="/contact" class="inline-flex items-center text-amber-600 font-medium hover:text-amber-700 transition-colors duration-200">
+                    Contact Us to Donate
+                    <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
