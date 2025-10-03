@@ -107,9 +107,8 @@ const userInitials = computed(() => 'AD');
 const userName = computed(() => 'Admin');
 
 const navItems = [
-  { to: '/admin/dashboard', name: 'Dashboard', icon: 'fas fa-tachometer-alt' },
-  { to: '/admin/users', name: 'Users', icon: 'fas fa-users' },
-  { to: '/admin/posts', name: 'Posts', icon: 'fas fa-newspaper' },
+  { to: '/admin', name: 'Dashboard', icon: 'fas fa-tachometer-alt' },
+  { to: '/admin/notifications', name: 'Notifications', icon: 'fas fa-bell' },
   { to: '/admin/settings', name: 'Settings', icon: 'fas fa-cog' },
 ];
 </script>

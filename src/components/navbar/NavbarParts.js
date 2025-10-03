@@ -51,12 +51,6 @@ export const navItems = [
     hasDropdown: false
   },
   {
-    to: '/admin',
-    icon: 'user-shield',
-    text: 'Admin',
-    hasDropdown: false
-  },
-  {
     to: '/get-involved/fund-our-programs',
     icon: 'donate',
     text: 'Donate',
