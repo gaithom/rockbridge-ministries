@@ -227,17 +227,17 @@ const routes = [
     name: 'Contact',
     component: Contact
   },
-  // Admin routes
+  // Admin routes (Hidden - not visible in navbar, accessible only via direct URL)
   {
     path: '/admin/login',
     name: 'AdminLogin',
     component: AdminLogin,
-    meta: { public: true }
+    meta: { public: true, hidden: true }
   },
   {
     path: '/admin',
     component: AdminLayout,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, hidden: true },
     children: [
       {
         path: '',
