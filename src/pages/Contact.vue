@@ -1,5 +1,12 @@
 <template>
   <div class="min-h-screen text-gray-800">
+    <!-- Add Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/mZEZPo5RsVEI1EHV44="
+      crossorigin=""
+    />
     <!-- Hero Section -->
     <div class="bg-gradient-to-b from-gray-800 to-gray-900 text-amber-50 pt-24 md:pt-32 pb-14 md:pb-20 relative overflow-hidden">
       <!-- Decorative wave divider -->
@@ -49,23 +56,27 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  Snail Mail
+                  Our Locations
                 </h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 class="font-medium text-gray-700">R.O.C.K. Bridge Ministries, Inc.</h4>
-                    <p class="text-gray-600">
-                      3575 Piedmont Rd NE Bldg 15 Ste 1550<br>
-                      Atlanta, GA 30305
-                    </p>
-                  </div>
-                  <div>
-                    <h4 class="font-medium text-gray-700">Kenya</h4>
-                    <p class="text-gray-600">
-                      P.O. Box 16412-20100<br>
-                      Nakuru, Kenya
-                    </p>
-                  </div>
+                
+                <!-- Atlanta Map -->
+                <div class="mb-8">
+                  <h4 class="font-medium text-gray-700 mb-2">R.O.C.K. Bridge Ministries, Inc.</h4>
+                  <p class="text-gray-600 mb-3">
+                    3575 Piedmont Rd NE Bldg 15 Ste 1550<br>
+                    Atlanta, GA 30305
+                  </p>
+                  <div id="atlantaMap" class="h-64 rounded-lg shadow-md"></div>
+                </div>
+                
+                <!-- Kenya Map -->
+                <div>
+                  <h4 class="font-medium text-gray-700 mb-2">Kenya Office</h4>
+                  <p class="text-gray-600 mb-3">
+                    P.O. Box 16412-20100<br>
+                    Nakuru, Kenya
+                  </p>
+                  <div id="kenyaMap" class="h-64 rounded-lg shadow-md"></div>
                 </div>
               </div>
             </div>
@@ -136,5 +147,108 @@
 </template>
 
 <script setup>
-// Page scaffold
+import { onMounted } from 'vue';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
+// Fix for default marker icons in Vite
+const defaultIcon = L.icon({
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+
+const locations = {
+  atlanta: {
+    coords: [33.8466, -84.3625],
+    zoom: 15,
+    title: 'R.O.C.K. Bridge Ministries, Inc.',
+    address: '3575 Piedmont Rd NE Bldg 15 Ste 1550, Atlanta, GA 30305'
+  },
+  kenya: {
+    coords: [-0.3031, 36.0800],
+    zoom: 13,
+    title: 'R.O.C.K. Bridge Ministries, Kenya',
+    address: 'P.O. Box 16412-20100, Nakuru, Kenya'
+  }
+};
+
+onMounted(() => {
+  // Initialize Atlanta Map
+  const atlantaMap = L.map('atlantaMap').setView(locations.atlanta.coords, locations.atlanta.zoom);
+  
+  // Add tile layer to Atlanta map
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19,
+  }).addTo(atlantaMap);
+  
+  // Add marker for Atlanta location with popup
+  const atlantaMarker = L.marker(locations.atlanta.coords, { 
+    icon: defaultIcon,
+    title: locations.atlanta.title
+  }).addTo(atlantaMap);
+  
+  atlantaMarker.bindPopup(`
+    <div class="p-2">
+      <h3 class="font-bold text-sm">${locations.atlanta.title}</h3>
+      <p class="text-xs">${locations.atlanta.address}</p>
+    </div>
+  `).openPopup();
+
+  // Initialize Kenya Map
+  const kenyaMap = L.map('kenyaMap').setView(locations.kenya.coords, locations.kenya.zoom);
+  
+  // Add tile layer to Kenya map
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19,
+  }).addTo(kenyaMap);
+  
+  // Add marker for Kenya location with popup
+  const kenyaMarker = L.marker(locations.kenya.coords, { 
+    icon: defaultIcon,
+    title: locations.kenya.title
+  }).addTo(kenyaMap);
+  
+  kenyaMarker.bindPopup(`
+    <div class="p-2">
+      <h3 class="font-bold text-sm">${locations.kenya.title}</h3>
+      <p class="text-xs">${locations.kenya.address}</p>
+    </div>
+  `).openPopup();
+});
 </script>
+
+<style scoped>
+/* Ensure the map containers have proper dimensions */
+#atlantaMap, #kenyaMap {
+  width: 100%;
+  height: 300px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1rem;
+  z-index: 1;
+}
+
+/* Style for popup content */
+:deep(.leaflet-popup-content) {
+  margin: 8px 12px;
+  line-height: 1.4;
+}
+
+:deep(.leaflet-popup-content-wrapper) {
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+:deep(.leaflet-popup-tip) {
+  background: white;
+}
+</style>
