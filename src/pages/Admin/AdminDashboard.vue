@@ -384,6 +384,246 @@
         </ul>
       </div>
     </section>
+
+    <!-- Media Management Section -->
+    <section class="mt-8">
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Media & Resources Management</h2>
+        <p class="text-gray-600">Quick access to add media content for the Media & Resources page</p>
+      </div>
+      
+      <!-- Media Quick Add Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Add Video Card -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                <i class="fas fa-video text-white"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900">Add Video</h3>
+                <p class="text-sm text-gray-600">Ministry videos</p>
+              </div>
+            </div>
+            <span class="text-xs font-medium px-2 py-1 rounded-full bg-red-100 text-red-800">
+              {{ mediaItems.filter(m => m.type === 'video').length }} videos
+            </span>
+          </div>
+          <button 
+            @click="openMediaModal('video')"
+            class="w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors duration-200"
+          >
+            <i class="fas fa-plus mr-2"></i>
+            Add Video
+          </button>
+        </div>
+
+        <!-- Add Story Card -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                <i class="fas fa-book-open text-white"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900">Add Story</h3>
+                <p class="text-sm text-gray-600">Impact stories</p>
+              </div>
+            </div>
+            <span class="text-xs font-medium px-2 py-1 rounded-full bg-blue-100 text-blue-800">
+              {{ mediaItems.filter(m => m.type === 'story').length }} stories
+            </span>
+          </div>
+          <button 
+            @click="openMediaModal('story')"
+            class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
+          >
+            <i class="fas fa-plus mr-2"></i>
+            Add Story
+          </button>
+        </div>
+
+        <!-- Add Photo Gallery Card -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                <i class="fas fa-images text-white"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900">Add Photos</h3>
+                <p class="text-sm text-gray-600">Photo galleries</p>
+              </div>
+            </div>
+            <span class="text-xs font-medium px-2 py-1 rounded-full bg-green-100 text-green-800">
+              {{ mediaItems.filter(m => m.type === 'photo').length }} galleries
+            </span>
+          </div>
+          <button 
+            @click="openMediaModal('photo')"
+            class="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200"
+          >
+            <i class="fas fa-plus mr-2"></i>
+            Add Gallery
+          </button>
+        </div>
+      </div>
+
+      <!-- Recent Media Items -->
+      <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold text-gray-900">Recent Media Items</h3>
+          <router-link 
+            to="/admin/media" 
+            class="text-sm text-amber-600 hover:text-amber-700 font-medium"
+          >
+            View All →
+          </router-link>
+        </div>
+        
+        <div v-if="mediaItems.length === 0" class="p-8 text-center bg-gray-50 rounded-lg">
+          <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fas fa-photo-video text-gray-400"></i>
+          </div>
+          <h4 class="text-sm font-medium text-gray-900 mb-1">No media items yet</h4>
+          <p class="text-sm text-gray-500">Start by adding your first video, story, or photo gallery.</p>
+        </div>
+        
+        <div v-else class="space-y-3">
+          <div 
+            v-for="media in mediaItems.slice(0, 5)" 
+            :key="media.id"
+            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            <div class="flex items-center space-x-3">
+              <div :class="getMediaTypeClass(media.type)" class="w-8 h-8 rounded-lg flex items-center justify-center">
+                <i :class="getMediaTypeIcon(media.type)" class="text-white text-sm"></i>
+              </div>
+              <div>
+                <h4 class="text-sm font-medium text-gray-900">{{ media.name }}</h4>
+                <p class="text-xs text-gray-500">{{ media.type.charAt(0).toUpperCase() + media.type.slice(1) }} • {{ formatDate(media.createdAt) }}</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span :class="media.published !== false ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'" 
+                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium">
+                {{ media.published !== false ? 'Published' : 'Draft' }}
+              </span>
+              <button 
+                @click="toggleMediaItem(media)"
+                :class="media.published !== false ? 'text-green-600 hover:bg-green-50' : 'text-gray-400 hover:bg-gray-50'"
+                class="p-1 rounded transition-colors"
+                :title="media.published !== false ? 'Unpublish' : 'Publish'"
+              >
+                <i :class="media.published !== false ? 'fas fa-eye' : 'fas fa-eye-slash'" class="text-sm"></i>
+              </button>
+              <button 
+                @click="removeMediaItem(media)"
+                class="p-1 text-red-600 hover:bg-red-50 rounded transition-colors"
+                title="Delete"
+              >
+                <i class="fas fa-trash text-sm"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Media Modal -->
+    <div v-if="showMediaModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+        <div class="flex items-center justify-between p-6 border-b border-gray-200">
+          <h3 class="text-lg font-semibold text-gray-900">
+            Add {{ mediaForm.type.charAt(0).toUpperCase() + mediaForm.type.slice(1) }}
+          </h3>
+          <button @click="closeMediaModal" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+            <i class="fas fa-times text-gray-500"></i>
+          </button>
+        </div>
+        
+        <form @submit.prevent="createMediaUI" class="p-6 space-y-4 overflow-y-auto max-h-[calc(90vh-120px)]">
+          <!-- Title -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Title</label>
+            <input
+              v-model="mediaForm.name"
+              type="text"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500"
+              placeholder="Enter title..."
+              required
+            />
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <textarea
+              v-model="mediaForm.description"
+              rows="3"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500"
+              placeholder="Enter description..."
+            ></textarea>
+          </div>
+
+          <!-- Image URL -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Image URL</label>
+            <input
+              v-model="mediaForm.image"
+              type="url"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500"
+              placeholder="https://example.com/image.jpg"
+            />
+          </div>
+
+          <!-- Route -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Route/Link (Optional)</label>
+            <input
+              v-model="mediaForm.route"
+              type="text"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500"
+              placeholder="/media-and-resources/your-content (leave empty for auto-generated)"
+            />
+            <p class="mt-1 text-xs text-gray-500">
+              Leave empty to automatically generate a route based on the title. Custom routes should start with "/media-and-resources/"
+            </p>
+          </div>
+
+          <!-- Published Status -->
+          <div class="flex items-center">
+            <input
+              v-model="mediaForm.published"
+              type="checkbox"
+              id="published"
+              class="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
+            />
+            <label for="published" class="ml-2 block text-sm text-gray-900">
+              Publish immediately
+            </label>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+            <button
+              type="button"
+              @click="closeMediaModal"
+              class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-md transition-colors"
+            >
+              Create {{ mediaForm.type.charAt(0).toUpperCase() + mediaForm.type.slice(1) }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
       </div>
     </div>
   </div>
@@ -400,6 +640,13 @@ import {
   getBlogs, createBlog, updateBlog, deleteBlog,
   exportJSON, importJSON
 } from '../../services/contentService'
+import {
+  getAllMedia,
+  createMedia,
+  updateMedia,
+  deleteMedia,
+  toggleMediaPublished
+} from '../../services/mediaService'
 import NotificationDemo from '../../components/admin/NotificationDemo.vue'
 
 const router = useRouter()
@@ -424,6 +671,18 @@ const storyDraft = ref({ title: '', body: '', author: '', date: new Date().toISO
 const blogs = ref([])
 const blogDraft = ref({ title: '', body: '', date: new Date().toISOString().slice(0,16), published: true })
 
+// Media state
+const mediaItems = ref([])
+const showMediaModal = ref(false)
+const mediaForm = ref({
+  type: '',
+  name: '',
+  description: '',
+  image: '',
+  route: '',
+  published: true
+})
+
 // Toggle expand/collapse for content
 function toggleExpand(event) {
   const content = event.target.previousElementSibling;
@@ -441,6 +700,7 @@ function refreshAll() {
   videos.value = getVideos()
   stories.value = getStories()
   blogs.value = getBlogs()
+  mediaItems.value = getAllMedia()
 }
 
 // Announcement handlers
@@ -478,6 +738,87 @@ function createBlogUI() {
 }
 function toggleBlog(b) { updateBlog(b.id, { published: !b.published }); refreshAll() }
 function removeBlog(b) { if (confirm('Delete blog?')) { deleteBlog(b.id); refreshAll() } }
+
+// Media handlers
+function openMediaModal(type = '') {
+  mediaForm.value = {
+    type: type,
+    name: '',
+    description: '',
+    image: '',
+    route: '',
+    published: true
+  }
+  showMediaModal.value = true
+}
+
+function closeMediaModal() {
+  showMediaModal.value = false
+  mediaForm.value = {
+    type: '',
+    name: '',
+    description: '',
+    image: '',
+    route: '',
+    published: true
+  }
+}
+
+function createMediaUI() {
+  const result = createMedia(mediaForm.value)
+  if (result.ok) {
+    closeMediaModal()
+    refreshAll()
+  } else {
+    alert('Error creating media: ' + (result.error || 'Unknown error'))
+  }
+}
+
+function toggleMediaItem(media) {
+  const result = toggleMediaPublished(media.id)
+  if (result.ok) {
+    refreshAll()
+  } else {
+    alert('Error updating media: ' + (result.error || 'Unknown error'))
+  }
+}
+
+function removeMediaItem(media) {
+  if (confirm('Delete this media item?')) {
+    const result = deleteMedia(media.id)
+    if (result.ok) {
+      refreshAll()
+    } else {
+      alert('Error deleting media: ' + (result.error || 'Unknown error'))
+    }
+  }
+}
+
+function getMediaTypeClass(type) {
+  switch (type) {
+    case 'video':
+      return 'bg-gradient-to-br from-red-500 to-red-600'
+    case 'story':
+      return 'bg-gradient-to-br from-blue-500 to-blue-600'
+    case 'photo':
+      return 'bg-gradient-to-br from-green-500 to-green-600'
+    default:
+      return 'bg-gradient-to-br from-gray-500 to-gray-600'
+  }
+}
+
+function getMediaTypeIcon(type) {
+  switch (type) {
+    case 'video':
+      return 'fas fa-video'
+    case 'story':
+      return 'fas fa-book-open'
+    case 'photo':
+      return 'fas fa-images'
+    default:
+      return 'fas fa-file'
+  }
+}
 
 function formatDate(d) {
   try { return new Date(d).toLocaleString() } catch { return d }

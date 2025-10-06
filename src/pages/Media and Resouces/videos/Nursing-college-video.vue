@@ -1,6 +1,8 @@
 <template>
   <div class="min-h-screen bg-gray-50 pt-32">
     <div class="container mx-auto px-4 max-w-4xl">
+      <BackToMediaButton />
+      
       <h1 class="text-3xl font-bold mb-6 text-gray-800">Nursing College Video</h1>
       
       <div class="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -28,6 +30,7 @@
 
 <script setup>
 import { onMounted, onUnmounted } from 'vue';
+import BackToMediaButton from '../../../components/BackToMediaButton.vue';
 import { useRoute } from 'vue-router';
 
 const youtubeEmbedUrl = 'https://www.youtube.com/embed/Ug_Vb4DJadY?rel=0&showinfo=1&modestbranding=1';

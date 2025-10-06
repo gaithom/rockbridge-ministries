@@ -89,6 +89,15 @@
         </router-link>
         
         <router-link 
+          to="/admin/media"
+          class="flex flex-col items-center justify-center p-3 min-w-0 flex-1 text-gray-600 hover:text-amber-600 transition-colors duration-200"
+          :class="{ 'text-amber-600': $route.path.startsWith('/admin/media') }"
+        >
+          <i class="fas fa-photo-video text-lg mb-1"></i>
+          <span class="text-xs font-medium">Media</span>
+        </router-link>
+        
+        <router-link 
           to="/admin/notifications"
           class="flex flex-col items-center justify-center p-3 min-w-0 flex-1 text-gray-600 hover:text-amber-600 transition-colors duration-200 relative"
           :class="{ 'text-amber-600': $route.path.startsWith('/admin/notifications') }"
@@ -210,6 +219,7 @@ const userName = computed(() => 'Admin');
 
 const navItems = [
   { to: '/admin', name: 'Dashboard', icon: 'fas fa-tachometer-alt' },
+  { to: '/admin/media', name: 'Media Management', icon: 'fas fa-photo-video' },
   { to: '/admin/notifications', name: 'Notifications', icon: 'fas fa-bell' },
   { to: '/admin/settings', name: 'Settings', icon: 'fas fa-cog' },
 ];

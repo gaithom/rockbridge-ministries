@@ -35,6 +35,7 @@ import TumainiCenterVideo from '../pages/Media and Resouces/videos/Tumaini-cente
 import TumainiBethanyVideo from '../pages/Media and Resouces/videos/Tumaini-bethany-video.vue'
 import WorkplaceVideo from '../pages/Media and Resouces/videos/Work-place-video.vue'
 import YouthVideo from '../pages/Media and Resouces/videos/Youth-video.vue'
+import MediaDetail from '../pages/Media and Resouces/MediaDetail.vue'
 import PrivacyPolicy from '../pages/PrivacyPolicy.vue'
 import TermsOfService from '../pages/TermsOfService.vue'
 import Sitemap from '../pages/Sitemap.vue'
@@ -45,6 +46,7 @@ import AdminLogin from '../pages/Admin/AdminLogin.vue'
 import AdminLayout from '../layouts/AdminLayout.vue'
 import AdminDashboard from '../pages/Admin/AdminDashboard.vue'
 import Notifications from '../pages/Admin/Notifications.vue'
+import MediaManagement from '../pages/Admin/MediaManagement.vue'
 
 const routes = [
   {
@@ -228,6 +230,15 @@ const routes = [
     name: 'Contact',
     component: Contact
   },
+  
+  // Dynamic Media Detail Route (catch-all for auto-generated media routes)
+  {
+    path: '/media-and-resources/:type/:slug',
+    name: 'MediaDetail',
+    component: MediaDetail,
+    meta: { hidden: true }
+  },
+  
   // Admin routes (Hidden - not visible in navbar, accessible only via direct URL)
   {
     path: '/admin/login',
@@ -254,6 +265,11 @@ const routes = [
         path: 'settings',
         name: 'AdminSettings',
         component: () => import('../pages/Admin/Settings.vue')
+      },
+      {
+        path: 'media',
+        name: 'MediaManagement',
+        component: MediaManagement
       }
       // Add more admin routes here as needed
       // { path: 'users', component: AdminUsers }
