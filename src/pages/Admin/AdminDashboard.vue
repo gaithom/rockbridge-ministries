@@ -48,6 +48,11 @@
           </div>
         </div>
 
+    <!-- Notification Demo Card -->
+    <section class="mb-8">
+      <NotificationDemo />
+    </section>
+
     <!-- Cards Grid -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- Announcements Card -->
@@ -395,6 +400,7 @@ import {
   getBlogs, createBlog, updateBlog, deleteBlog,
   exportJSON, importJSON
 } from '../../services/contentService'
+import NotificationDemo from '../../components/admin/NotificationDemo.vue'
 
 const router = useRouter()
 
