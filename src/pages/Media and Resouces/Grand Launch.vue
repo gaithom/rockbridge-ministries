@@ -1,5 +1,7 @@
 <template>
  <section class="max-w-6xl mx-auto px-6 py-12 pt-40 space-y-16">
+  <BackToMediaButton />
+  
   <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Grand Launch of Fin-Tech Hub</h1>
   <!-- Top Row -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -169,3 +171,7 @@
 </section>
 
 </template>
+
+<script setup>
+import BackToMediaButton from '../../components/BackToMediaButton.vue'
+</script>

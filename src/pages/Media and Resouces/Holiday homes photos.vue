@@ -1,5 +1,7 @@
 <template>
   <div class="bg-gray-50 min-h-screen p-25">
+    <BackToMediaButton />
+    
     <!-- Heading -->
     <h2 class="text-3xl font-bold text-slate-800 text-center mb-10">
       Graduation Memories
@@ -52,6 +54,7 @@
 
 <script setup>
 import { ref } from "vue";
+import BackToMediaButton from '../../components/BackToMediaButton.vue';
 
 // Empty array (add your image paths later)
 const images = [

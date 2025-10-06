@@ -1,7 +1,8 @@
-// Simple client-side auth (for demo/local use only)
-// NOTE: This is not secure for production without a backend.
+// Enhanced auth service with user management integration
+// NOTE: This is for demo purposes. Use proper backend authentication in production.
 
 const TOKEN_KEY = 'rbm_admin_authed';
+const USER_KEY = 'rbm_current_user';
 
 function getAdminPassword() {
   const pw = import.meta.env.VITE_ADMIN_PASSWORD;
@@ -27,6 +28,63 @@ export function login(password) {
 
 export function logout() {
   sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(USER_KEY);
+}
+
+// Enhanced authentication functions
+export function getCurrentUser() {
+  const userData = sessionStorage.getItem(USER_KEY);
+  return userData ? JSON.parse(userData) : null;
+}
+
+export function loginWithEmail(email, password) {
+  if (!email || !password) {
+    return { ok: false, error: 'Email and password required' };
+  }
+
+  // For demo purposes, check against default admin credentials
+  if (email === 'admin@rockbridge.org' && password === getAdminPassword()) {
+    const userData = {
+      id: 1,
+      name: 'Admin User',
+      email: 'admin@rockbridge.org',
+      role: 'admin',
+      loginTime: new Date().toISOString()
+    };
+    
+    sessionStorage.setItem(TOKEN_KEY, 'true');
+    sessionStorage.setItem(USER_KEY, JSON.stringify(userData));
+    
+    return { ok: true, user: userData };
+  }
+
+  return { ok: false, error: 'Invalid credentials' };
+}
+
+export function hasPermission(permission) {
+  const user = getCurrentUser();
+  if (!user) return false;
+
+  // Basic permission check based on role
+  const adminPermissions = ['User Management', 'System Settings', 'Manage Content', 'View Dashboard'];
+  const editorPermissions = ['Manage Content', 'View Dashboard'];
+  const viewerPermissions = ['View Dashboard'];
+
+  switch (user.role) {
+    case 'admin':
+      return adminPermissions.includes(permission);
+    case 'editor':
+      return editorPermissions.includes(permission);
+    case 'viewer':
+      return viewerPermissions.includes(permission);
+    default:
+      return false;
+  }
+}
+
+export function canAccessAdminPanel() {
+  const user = getCurrentUser();
+  return user && ['admin', 'editor'].includes(user.role);
 }
 
 // Helper function to get user IP (simplified for demo)

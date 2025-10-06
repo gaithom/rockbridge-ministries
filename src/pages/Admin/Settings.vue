@@ -186,7 +186,7 @@
                         >
                       </div>
                     </div>
-                    <button @click="changePassword" class="mt-4 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-md transition-colors">
+                    <button @click="handleChangePassword" class="mt-4 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-md transition-colors">
                       Update Password
                     </button>
                   </div>
@@ -338,7 +338,7 @@
                           </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                          <select v-model="user.role" @change="updateUserRole(user)" class="text-sm border-gray-300 rounded-md focus:ring-amber-500 focus:border-amber-500">
+                          <select v-model="user.role" @change="updateUserRoleHandler(user)" class="text-sm border-gray-300 rounded-md focus:ring-amber-500 focus:border-amber-500">
                             <option value="admin">Admin</option>
                             <option value="editor">Editor</option>
                             <option value="viewer">Viewer</option>
@@ -358,7 +358,7 @@
                           {{ formatDate(user.lastActive) }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                          <button @click="toggleUserStatus(user)" :class="[
+                          <button @click="toggleUserStatusHandler(user)" :class="[
                             'px-3 py-1 rounded-md text-xs font-medium transition-colors',
                             user.status === 'active' 
                               ? 'bg-red-100 text-red-700 hover:bg-red-200' 
@@ -366,7 +366,7 @@
                           ]">
                             {{ user.status === 'active' ? 'Disable' : 'Enable' }}
                           </button>
-                          <button @click="deleteUser(user)" class="px-3 py-1 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-md text-xs font-medium transition-colors">
+                          <button @click="deleteUserHandler(user)" class="px-3 py-1 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-md text-xs font-medium transition-colors">
                             Delete
                           </button>
                         </td>
@@ -429,6 +429,101 @@
           <i class="fas fa-check-circle"></i>
           <span>{{ successMessage }}</span>
         </div>
+
+        <!-- Error Message -->
+        <div v-if="errorMessage" class="fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center space-x-2">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ errorMessage }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div v-if="showAddUserModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Add New User</h3>
+          <form @submit.prevent="addUser">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                <input
+                  v-model="newUser.name"
+                  type="text"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  placeholder="Enter full name"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <input
+                  v-model="newUser.email"
+                  type="email"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  placeholder="Enter email address"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                <input
+                  v-model="newUser.phone"
+                  type="tel"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  placeholder="Enter phone number"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Job Title</label>
+                <input
+                  v-model="newUser.jobTitle"
+                  type="text"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  placeholder="Enter job title"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                <select
+                  v-model="newUser.role"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                >
+                  <option value="viewer">Viewer</option>
+                  <option value="editor">Editor</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div>
+                <label class="flex items-center">
+                  <input
+                    v-model="newUser.status"
+                    type="checkbox"
+                    true-value="active"
+                    false-value="inactive"
+                    class="rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+                  />
+                  <span class="ml-2 text-sm text-gray-700">Active User</span>
+                </label>
+              </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6">
+              <button
+                type="button"
+                @click="cancelAddUser"
+                class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded-md hover:bg-amber-700"
+              >
+                Add User
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -438,6 +533,20 @@
 import { ref, reactive, onMounted } from 'vue'
 import { isAuthenticated } from '../../services/authService'
 import { useRouter } from 'vue-router'
+import {
+  getUsers,
+  createUser,
+  updateUser,
+  deleteUser,
+  toggleUserStatus,
+  updateUserRole,
+  getPermissions,
+  updatePermissions,
+  getSettings,
+  updateSettings,
+  changePassword,
+  initializeUserSystem
+} from '../../services/userService'
 
 const router = useRouter()
 
@@ -448,6 +557,7 @@ if (!isAuthenticated()) {
 // State
 const activeTab = ref('profile')
 const successMessage = ref('')
+const errorMessage = ref('')
 const showAddUserModal = ref(false)
 const fileInput = ref(null)
 
@@ -497,70 +607,19 @@ const themeColors = [
   { name: 'Indigo', value: '#6366f1' }
 ]
 
-// Users data
-const users = ref([
-  {
-    id: 1,
-    name: 'John Doe',
-    email: 'john.doe@rockbridge.org',
-    role: 'admin',
-    status: 'active',
-    lastActive: new Date(Date.now() - 2 * 60 * 60 * 1000),
-    avatar: null
-  },
-  {
-    id: 2,
-    name: 'Jane Smith',
-    email: 'jane.smith@rockbridge.org',
-    role: 'editor',
-    status: 'active',
-    lastActive: new Date(Date.now() - 5 * 60 * 60 * 1000),
-    avatar: null
-  },
-  {
-    id: 3,
-    name: 'Bob Johnson',
-    email: 'bob.johnson@rockbridge.org',
-    role: 'viewer',
-    status: 'inactive',
-    lastActive: new Date(Date.now() - 24 * 60 * 60 * 1000),
-    avatar: null
-  }
-])
+// Data refs
+const users = ref([])
+const permissions = ref([])
 
-// Permissions data
-const permissions = ref([
-  {
-    id: 1,
-    name: 'View Dashboard',
-    roles: { admin: true, editor: true, viewer: true }
-  },
-  {
-    id: 2,
-    name: 'Manage Content',
-    roles: { admin: true, editor: true, viewer: false }
-  },
-  {
-    id: 3,
-    name: 'User Management',
-    roles: { admin: true, editor: false, viewer: false }
-  },
-  {
-    id: 4,
-    name: 'System Settings',
-    roles: { admin: true, editor: false, viewer: false }
-  },
-  {
-    id: 5,
-    name: 'View Notifications',
-    roles: { admin: true, editor: true, viewer: true }
-  },
-  {
-    id: 6,
-    name: 'Manage Notifications',
-    roles: { admin: true, editor: false, viewer: false }
-  }
-])
+// New user form
+const newUser = reactive({
+  name: '',
+  email: '',
+  phone: '',
+  jobTitle: '',
+  role: 'viewer',
+  status: 'active'
+})
 
 // Methods
 function triggerFileUpload() {
@@ -580,52 +639,126 @@ function handleFileUpload(event) {
   }
 }
 
-function changePassword() {
+function handleChangePassword() {
   if (passwordForm.new !== passwordForm.confirm) {
-    alert('New passwords do not match!')
+    showError('New passwords do not match!')
     return
   }
   if (passwordForm.new.length < 8) {
-    alert('Password must be at least 8 characters long!')
+    showError('Password must be at least 8 characters long!')
     return
   }
   
-  // In a real app, you'd validate the current password and update it
-  showSuccess('Password updated successfully!')
-  passwordForm.current = ''
-  passwordForm.new = ''
-  passwordForm.confirm = ''
+  try {
+    changePassword(1, passwordForm.current, passwordForm.new) // Using user ID 1 as example
+    showSuccess('Password updated successfully!')
+    passwordForm.current = ''
+    passwordForm.new = ''
+    passwordForm.confirm = ''
+  } catch (error) {
+    showError(error.message)
+  }
 }
 
-function updateUserRole(user) {
-  showSuccess(`${user.name}'s role updated to ${user.role}`)
+function updateUserRoleHandler(user) {
+  try {
+    updateUserRole(user.id, user.role)
+    showSuccess(`${user.name}'s role updated to ${user.role}`)
+  } catch (error) {
+    showError(error.message)
+    loadUsers() // Reload to reset the UI
+  }
 }
 
-function toggleUserStatus(user) {
-  user.status = user.status === 'active' ? 'inactive' : 'active'
-  showSuccess(`${user.name} ${user.status === 'active' ? 'enabled' : 'disabled'}`)
-}
-
-function deleteUser(user) {
-  if (confirm(`Are you sure you want to delete ${user.name}?`)) {
+function toggleUserStatusHandler(user) {
+  try {
+    const updatedUser = toggleUserStatus(user.id)
     const index = users.value.findIndex(u => u.id === user.id)
     if (index > -1) {
-      users.value.splice(index, 1)
+      users.value[index] = updatedUser
+    }
+    showSuccess(`${user.name} ${updatedUser.status === 'active' ? 'enabled' : 'disabled'}`)
+  } catch (error) {
+    showError(error.message)
+  }
+}
+
+function deleteUserHandler(user) {
+  if (confirm(`Are you sure you want to delete ${user.name}?`)) {
+    try {
+      deleteUser(user.id)
+      loadUsers() // Reload the users list
       showSuccess(`${user.name} deleted successfully`)
+    } catch (error) {
+      showError(error.message)
     }
   }
 }
 
+function addUser() {
+  try {
+    const createdUser = createUser(newUser)
+    users.value.push(createdUser)
+    showSuccess(`User ${createdUser.name} added successfully`)
+    cancelAddUser()
+  } catch (error) {
+    showError(error.message)
+  }
+}
+
+function cancelAddUser() {
+  showAddUserModal.value = false
+  Object.assign(newUser, {
+    name: '',
+    email: '',
+    phone: '',
+    jobTitle: '',
+    role: 'viewer',
+    status: 'active'
+  })
+}
+
 function saveAllSettings() {
-  // In a real app, you'd save all settings to the backend
-  showSuccess('All settings saved successfully!')
+  try {
+    updateSettings({
+      profile: profileSettings,
+      system: systemSettings
+    })
+    updatePermissions(permissions.value)
+    showSuccess('All settings saved successfully!')
+  } catch (error) {
+    showError('Failed to save settings: ' + error.message)
+  }
+}
+
+function loadUsers() {
+  users.value = getUsers()
+}
+
+function loadPermissions() {
+  permissions.value = getPermissions()
+}
+
+function loadSettings() {
+  const settings = getSettings()
+  Object.assign(profileSettings, settings.profile || {})
+  Object.assign(systemSettings, settings.system || {})
 }
 
 function showSuccess(message) {
   successMessage.value = message
+  errorMessage.value = ''
   setTimeout(() => {
     successMessage.value = ''
   }, 3000)
+}
+
+function showError(message) {
+  errorMessage.value = message
+  successMessage.value = ''
+  setTimeout(() => {
+    errorMessage.value = ''
+  }, 5000)
 }
 
 function formatDate(date) {
@@ -633,13 +766,13 @@ function formatDate(date) {
 }
 
 onMounted(() => {
-  // Load settings from localStorage or API
-  const savedSettings = localStorage.getItem('adminSettings')
-  if (savedSettings) {
-    const settings = JSON.parse(savedSettings)
-    Object.assign(profileSettings, settings.profile || {})
-    Object.assign(systemSettings, settings.system || {})
-  }
+  // Initialize the user system
+  initializeUserSystem()
+  
+  // Load all data
+  loadUsers()
+  loadPermissions()
+  loadSettings()
 })
 </script>
 

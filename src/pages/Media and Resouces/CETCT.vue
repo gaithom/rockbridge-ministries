@@ -1,25 +1,28 @@
 <template>
-    <section class="max-w-6xl mx-auto px-6 py-12 pt-30 space-y-16">
-     <!-- Top Row -->
-     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-       <!-- Text -->
-       <div>
-         <h2 class="text-2xl font-bold text-gray-800 mb-4">
-            A Step Towards Technological Advancement & Community Empowerment
-         </h2>
-         <p class="text-gray-700 leading-relaxed">
-           On an inspiring visit to Lish AI Labs and R.O.C.K Bridge Ministries, Kenyan government spokesperson Isaac Mwaura underscored the vital role of technology and community initiatives in driving the nation’s progress. This visit not only highlighted the groundbreaking work being done at these institutions but also signaled the government’s commitment to supporting technological innovation and community development.
-         </p>
-       </div>
-       <!-- Image -->
-       <div>
-         <img 
-           src="/images/rbm6.jpeg" 
-           alt="FinTech Hub Launch" 
-           class="rounded-lg shadow-md"
-         />
-       </div>
-     </div>
+<section class="max-w-6xl mx-auto px-6 py-12 pt-40 space-y-16">
+  <BackToMediaButton />
+  
+  <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Community Empowerment Through Collaborative Technology</h1>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <!-- Text -->
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">
+        A Step Towards Technological Advancement & Community Empowerment
+      </h2>
+      <p class="text-gray-700 leading-relaxed">
+        On an inspiring visit to Lish AI Labs and R.O.C.K Bridge Ministries, Kenyan government spokesperson Isaac Mwaura underscored the vital role of technology and community initiatives in driving the nation's progress. This visit not only highlighted the groundbreaking work being done at these institutions but also signaled the government's commitment to supporting technological innovation and community development.
+      </p>
+    </div>
+    <!-- Image -->
+    <div>
+      <img 
+        src="/images/rbm6.jpeg" 
+        alt="FinTech Hub Launch" 
+        class="rounded-lg shadow-md"
+      />
+    </div>
+  </div>
    
      <!-- Bottom Row -->
      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -153,5 +156,9 @@
  
    
    </template>
+
+<script setup>
+import BackToMediaButton from '../../components/BackToMediaButton.vue'
+</script>
   
  

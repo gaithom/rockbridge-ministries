@@ -1,5 +1,7 @@
 <template>
   <section class="max-w-6xl mx-auto px-6 py-12 pt-30 space-y-16">
+    <BackToMediaButton />
+    
     <!-- Top Row -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
       <!-- Text -->
@@ -128,3 +130,7 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import BackToMediaButton from '../../components/BackToMediaButton.vue'
+</script>
