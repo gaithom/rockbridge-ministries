@@ -28,3 +28,22 @@ export function login(password) {
 export function logout() {
   sessionStorage.removeItem(TOKEN_KEY);
 }
+
+// Helper function to get user IP (simplified for demo)
+function getUserIP() {
+  // In a real application, this would be handled by the backend
+  // For demo purposes, we'll use a placeholder
+  return '192.168.1.' + Math.floor(Math.random() * 255);
+}
+
+// Simulate user registration (for demo purposes)
+export function simulateUserRegistration(userInfo) {
+  import('./notificationService').then(({ notifyUserRegistration, initializeNotifications }) => {
+    initializeNotifications();
+    notifyUserRegistration({
+      ...userInfo,
+      ip: getUserIP(),
+      userAgent: navigator.userAgent
+    });
+  });
+}
