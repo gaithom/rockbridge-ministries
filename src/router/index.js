@@ -44,6 +44,7 @@ import Sitemap from '../pages/Sitemap.vue'
 import AdminLogin from '../pages/Admin/AdminLogin.vue'
 import AdminLayout from '../layouts/AdminLayout.vue'
 import AdminDashboard from '../pages/Admin/AdminDashboard.vue'
+import Notifications from '../pages/Admin/Notifications.vue'
 
 const routes = [
   {
@@ -233,7 +234,7 @@ const routes = [
     name: 'AdminLogin',
     component: AdminLogin,
     meta: { public: true, hidden: true }
-  },
+  }, 
   {
     path: '/admin',
     component: AdminLayout,
@@ -244,9 +245,18 @@ const routes = [
         name: 'AdminDashboard',
         component: AdminDashboard
       },
+      {
+        path: 'notifications',
+        name: 'AdminNotifications',
+        component: Notifications
+      },
+      {
+        path: 'settings',
+        name: 'AdminSettings',
+        component: () => import('../pages/Admin/Settings.vue')
+      }
       // Add more admin routes here as needed
-      // { path: 'users', component: AdminUsers },
-      // { path: 'settings', component: AdminSettings }
+      // { path: 'users', component: AdminUsers }
     ]
   }
 ]
