@@ -45,6 +45,11 @@ export const navItems = [
     icon: 'envelope',
     text: 'Contact',
     hasDropdown: false
+  },
+  {
+    isDonateButton: true,
+    text: 'Donate',
+    hasDropdown: false
   }
 ];
 

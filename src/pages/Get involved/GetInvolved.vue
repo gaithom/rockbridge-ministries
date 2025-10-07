@@ -526,22 +526,24 @@
 
       <!-- Fund Our Programs Content -->
       <div id="fund-our-programs" class="container mx-auto p-6 md:p-12 bg-gradient-to-br from-amber-50 to-white rounded-3xl shadow-xl mt-12">
-        <!-- Ministry Introduction -->
-        <section class="mb-16" data-aos="fade-up">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-amber-600 mb-4">
-              R.O.C.K. Bridge Ministries
-            </h2>
-            <p class="text-gray-600 max-w-4xl mx-auto leading-relaxed text-lg">
-              If you wish to help us expand our ministries of discipleship,
-              development, and empowerment in Nakuru, we invite you to partner
-              with R.O.C.K. Bridge Ministries. We believe in creating
-              sustainability in missions and not dependence on our help;
-              therefore, the donations we collect are used for creating lifelong
-              investments in the Kingdom of God in Nakuru.
-            </p>
+        <!-- Bible Verse and Donation Callout -->
+        <div class="bg-gradient-to-r from-amber-50 to-amber-100 rounded-2xl p-8 md:p-10 my-12 border-l-8 border-amber-400 shadow-md hover:shadow-lg transition-shadow duration-300" data-aos="fade-up" data-aos-delay="100">
+            <div class="max-w-4xl mx-auto text-center">
+              <svg class="h-12 w-12 text-amber-500 mx-auto mb-6 opacity-75" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <blockquote class="text-xl md:text-2xl font-serif italic text-gray-700 mb-6 leading-relaxed">
+                "Each one must give as he has decided in his heart..."
+                <span class="block text-right text-lg text-amber-600 mt-2">— 2 Corinthians 9:7</span>
+              </blockquote>
+              <div class="w-24 h-1 bg-amber-300 mx-auto my-8"></div>
+              <p class="text-gray-700 text-lg leading-relaxed max-w-3xl mx-auto">
+                R.O.C.K Bridge Ministries invites donors to partner in making ministries sustainable rather than creating dependency. 
+                Donations support administrative costs, staff salaries, scholarship funds, and enterprise development.
+              </p>
+            </div>
           </div>
-        </section>
+      
 
         <!-- Ministry Cards -->
         <section class="mb-16" data-aos="fade-up" data-aos-delay="200">
