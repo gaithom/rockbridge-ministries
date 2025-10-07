@@ -31,12 +31,8 @@ export const navItems = [
     to: '/get-involved',
     icon: 'hands-helping',
     text: 'Get Involved',
-    hasDropdown: true,
-    dropdownItems: [
-      { to: '/get-involved/how-to-support', icon: 'question-circle', text: 'How to Support' },
-      { to: '/get-involved/partner-with-us', icon: 'handshake', text: 'Partner with Us' },
-      { to: '/get-involved/fund-our-programs', icon: 'donate', text: 'Fund our Programs' }
-    ]
+    hasDropdown: false,
+    dropdownItems: []
   },
   {
     to: '/media-and-resources',
@@ -49,13 +45,6 @@ export const navItems = [
     icon: 'envelope',
     text: 'Contact',
     hasDropdown: false
-  },
-  {
-    to: '/get-involved/fund-our-programs',
-    icon: 'donate',
-    text: 'Donate',
-    hasDropdown: false,
-    isDonateButton: true
   }
 ];
 

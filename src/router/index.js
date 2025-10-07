@@ -11,9 +11,9 @@ import EducationScholarship from '../pages/Our ministries/Education Scholarship.
 import SocialEnterprises from '../pages/Our ministries/Social Enterprises.vue'
 import WorkplaceEvangelism from '../pages/Our ministries/Workplace Evangelism.vue'
 import GetInvolved from '../pages/Get involved/GetInvolved.vue'
-import HowToSupport from '../pages/Get involved/HowToSupport.vue'
-import PartnerWithUs from '../pages/Get involved/PartnerWithUs.vue'
-import FundOurPrograms from '../pages/Get involved/Fundourprograms.vue'
+// import HowToSupport from '../pages/Get involved/HowToSupport.vue'
+// import PartnerWithUs from '../pages/Get involved/PartnerWithUs.vue'
+// import FundOurPrograms from '../pages/Get involved/Fundourprograms.vue'
 import MediaAndResources from '../pages/Media and Resouces/Media and resources.vue'
 import GrandLaunch from '../pages/Media and Resouces/Grand Launch.vue'
 import CETCT from '../pages/Media and Resouces/CETCT.vue'
@@ -110,21 +110,21 @@ const routes = [
     name: 'GetInvolved',
     component: GetInvolved
   },
-  {
-    path: '/get-involved/how-to-support',
-    name: 'HowToSupport',
-    component: HowToSupport
-  },
-  {
-    path: '/get-involved/partner-with-us',
-    name: 'PartnerWithUs',
-    component: PartnerWithUs
-  },
-  {
-    path: '/get-involved/fund-our-programs',
-    name: 'FundOurPrograms',
-    component: FundOurPrograms
-  },
+  // {
+  //   path: '/get-involved/how-to-support',
+  //   name: 'HowToSupport',
+  //   component: HowToSupport
+  // },
+  // {
+  //   path: '/get-involved/partner-with-us',
+  //   name: 'PartnerWithUs',
+  //   component: PartnerWithUs
+  // },
+  // {
+  //   path: '/get-involved/fund-our-programs',
+  //   name: 'FundOurPrograms',
+  //   component: FundOurPrograms
+  // },
   {
     path: '/media-and-resources',
     name: 'MediaAndResources',
