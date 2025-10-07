@@ -787,21 +787,31 @@
       </div>
 
     <!-- Ready to Partner CTA Section (Moved Outside Main Container) -->
-    <div class="bg-gradient-to-b from-gray-800 to-gray-900 text-amber-50 py-16">
-      <div class="container mx-auto text-center px-6 lg:px-8">
-        <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white">Ready to Partner?</h3>
-        <p class="text-lg mb-8 max-w-2xl mx-auto text-gray-200">
-          We believe in the power of collaboration and generous giving. Learn how you can make a tangible difference through donations or by becoming a strategic partner with us.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button @click="scrollToSection('fund-our-programs')" class="px-6 py-3 rounded-lg bg-amber-500 text-white font-semibold hover:bg-amber-600 transition-colors shadow-md">
-            Fund Our Programs
-          </button>
-          <router-link to="/contact">
-            <button class="px-6 py-3 rounded-lg bg-white text-gray-900 border border-gray-200 hover:bg-gray-100 transition-colors shadow-md">
-              Contact Us to Partner
+    <div class="bg-gradient-to-b from-gray-800 to-gray-900 text-amber-50 pt-16 pb-8 px-4 relative overflow-hidden">
+      <!-- Decorative wave divider -->
+      <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
+        <svg class="w-full h-12" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+                class="fill-current text-amber-600 opacity-20"></path>
+        </svg>
+      </div>
+      
+      <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center">
+          <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white">Ready to Partner?</h3>
+          <p class="text-lg mb-8 max-w-2xl mx-auto text-gray-200">
+            We believe in the power of collaboration and generous giving. Learn how you can make a tangible difference through donations or by becoming a strategic partner with us.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button @click="scrollToSection('fund-our-programs')" class="px-6 py-3 rounded-lg bg-amber-500 text-white font-semibold hover:bg-amber-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+              Fund Our Programs
             </button>
-          </router-link>
+            <router-link to="/contact" class="group">
+              <button class="px-6 py-3 rounded-lg bg-white text-gray-900 border border-gray-200 hover:bg-gray-100 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                Contact Us to Partner
+              </button>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
