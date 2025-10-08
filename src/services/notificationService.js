@@ -45,6 +45,14 @@ export function createNotification(notification) {
   
   notifications.unshift(newNotification); // Add to beginning
   saveNotifications(notifications);
+  
+  // Dispatch custom event for real-time notification display
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('new-notification', {
+      detail: newNotification
+    }));
+  }
+  
   return newNotification;
 }
 

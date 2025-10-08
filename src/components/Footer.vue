@@ -16,8 +16,8 @@
             <div class="relative w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center mr-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
               <img src="/images/logo.jpg" alt="Rock Bridge Ministries" class="w-12 h-12 rounded-lg object-cover border-2 border-white shadow-md" />
             </div>
-            <h3 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-white">
-              Rock Bridge<br>Ministries
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-white leading-tight">
+              Rock Bridge Ministries
             </h3>
           </div>
           <p class="text-amber-50/80 mb-6 leading-relaxed relative pl-4 border-l-2 border-amber-500/30">

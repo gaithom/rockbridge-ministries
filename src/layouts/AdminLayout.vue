@@ -104,7 +104,7 @@
         >
           <i class="fas fa-bell text-lg mb-1"></i>
           <span class="text-xs font-medium">Notifications</span>
-          <span class="absolute top-2 right-1/2 transform translate-x-2 h-2 w-2 bg-amber-500 rounded-full"></span>
+          <span v-if="unreadCount > 0" class="absolute top-2 right-1/2 transform translate-x-2 h-2 w-2 bg-amber-500 rounded-full"></span>
         </router-link>
         
         <router-link 
@@ -119,7 +119,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="lg:pl-64 pb-20 lg:pb-0">
+    <div class="lg:pl-64 pb-20 lg:pb-0 flex flex-col min-h-screen">
       <!-- Top Navigation -->
       <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="flex items-center justify-between h-16 px-4 sm:px-6">
@@ -143,7 +143,7 @@
           <div class="flex items-center space-x-4">
             <button class="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-700 focus:outline-none transition-colors duration-200 relative">
               <i class="fas fa-bell text-lg"></i>
-              <span class="absolute top-1 right-1 h-2.5 w-2.5 bg-amber-500 rounded-full border-2 border-white"></span>
+              <span v-if="unreadCount > 0" class="absolute top-1 right-1 h-2.5 w-2.5 bg-amber-500 rounded-full border-2 border-white"></span>
             </button>
             <div class="h-8 w-px bg-gray-200"></div>
             <div class="flex items-center">
@@ -160,18 +160,28 @@
       </header>
 
       <!-- Page Content -->
-      <main class="p-4 sm:p-6">
+      <main class="flex-1 p-4 sm:p-6">
         <router-view />
       </main>
+
+      <!-- Footer -->
+      <Footer />
     </div>
+
+    <!-- Notification Toast -->
+    <NotificationToast />
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
+import Footer from '../components/Footer.vue';
+import NotificationToast from '../components/admin/NotificationToast.vue';
+import { getUnreadCount } from '../services/notificationService';
 
 const route = useRoute();
+const unreadCount = ref(0);
 
 // Mobile menu state
 const isMobileMenuOpen = ref(false);
@@ -200,13 +210,26 @@ const handleResize = () => {
   checkMobile();
 };
 
+// Update unread count
+const updateUnreadCount = () => {
+  unreadCount.value = getUnreadCount();
+};
+
+// Listen for new notifications
+const handleNewNotification = () => {
+  updateUnreadCount();
+};
+
 onMounted(() => {
   checkMobile();
+  updateUnreadCount();
   window.addEventListener('resize', handleResize);
+  window.addEventListener('new-notification', handleNewNotification);
 });
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
+  window.removeEventListener('new-notification', handleNewNotification);
 });
 
 const user = {
