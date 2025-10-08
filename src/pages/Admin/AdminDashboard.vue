@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-gray-50">
+  <div class="min-h-full flex flex-col bg-gray-50">
     <!-- Add padding-top to account for fixed navbar -->
     <div class="flex-1 pt-0">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -48,9 +48,42 @@
           </div>
         </div>
 
-    <!-- Notification Demo Card -->
+    <!-- Quick Actions -->
     <section class="mb-8">
-      <NotificationDemo />
+      <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-1">Quick Actions</h3>
+            <p class="text-sm text-gray-600">Test notification system or perform quick tasks</p>
+          </div>
+          <div class="flex space-x-2">
+            <button 
+              @click="testNotification('user')"
+              class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 transition-colors"
+              title="Test User Registration Notification"
+            >
+              <i class="fas fa-user-plus mr-2"></i>
+              Test User
+            </button>
+            <button 
+              @click="testNotification('login')"
+              class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 transition-colors"
+              title="Test Failed Login Notification"
+            >
+              <i class="fas fa-exclamation-triangle mr-2"></i>
+              Test Login
+            </button>
+            <button 
+              @click="testNotification('system')"
+              class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+              title="Test System Notification"
+            >
+              <i class="fas fa-cog mr-2"></i>
+              Test System
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Cards Grid -->
@@ -647,7 +680,7 @@ import {
   deleteMedia,
   toggleMediaPublished
 } from '../../services/mediaService'
-import NotificationDemo from '../../components/admin/NotificationDemo.vue'
+import { notifyUserRegistration, notifyFailedLogin, notifySystem } from '../../services/notificationService'
 
 const router = useRouter()
 
@@ -844,6 +877,56 @@ async function onImport(e) {
   const res = await importJSON(text)
   if (!res.ok) alert('Import failed: ' + (res.error || 'Unknown error'))
   refreshAll()
+}
+
+// Test notification functions
+const sampleUsers = [
+  { name: 'Alice Johnson', email: 'alice.johnson@example.com' },
+  { name: 'Bob Smith', email: 'bob.smith@example.com' },
+  { name: 'Carol Davis', email: 'carol.davis@example.com' },
+  { name: 'David Wilson', email: 'david.wilson@example.com' },
+  { name: 'Emma Brown', email: 'emma.brown@example.com' }
+]
+
+const sampleIPs = [
+  '192.168.1.100',
+  '10.0.0.50',
+  '172.16.0.25',
+  '203.0.113.42',
+  '198.51.100.15'
+]
+
+const systemMessages = [
+  'Database backup completed successfully',
+  'System performance optimization finished',
+  'Security scan completed - no issues found',
+  'New feature deployment completed',
+  'Maintenance window scheduled for tonight'
+]
+
+function getRandomItem(array) {
+  return array[Math.floor(Math.random() * array.length)]
+}
+
+function testNotification(type) {
+  switch (type) {
+    case 'user':
+      const user = getRandomItem(sampleUsers)
+      notifyUserRegistration(user)
+      break
+    case 'login':
+      const ip = getRandomItem(sampleIPs)
+      notifyFailedLogin({
+        ip: ip,
+        userAgent: navigator.userAgent,
+        timestamp: new Date().toISOString()
+      })
+      break
+    case 'system':
+      const message = getRandomItem(systemMessages)
+      notifySystem(message)
+      break
+  }
 }
 
 onMounted(refreshAll)
